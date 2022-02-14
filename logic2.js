@@ -1,15 +1,27 @@
+// console.log("in logic js");
+
+
+//window is loading
+window.addEventListener('load', function() {
+    console.log('All assets are loaded')
+
 //autmation on filters
 let type_index = 0, lang_index = 0, sess_index = 0, duration_index = 0, cource_index = 0, name_index = 0;
 
-let thead = document.getElementsByTagName('thead');
-let head_tr = thead[0].getElementsByTagName('tr')[0];
-let length_column = head_tr.querySelectorAll('th').length;
+
+// let first_tr = document.getElementsByTagName('tr')[0].getElementsByTagName('td').length;
+let first_tr = document.getElementsByTagName('tr')[0];
+let length_column = first_tr.getElementsByTagName('td').length;
+// console.log(length_column);
+// let thead = document.getElementsByTagName('thead');
+// let head_tr = thead[0].getElementsByTagName('tr')[0];
+// let length_column = head_tr.querySelectorAll('th').length;
 
 
 for (let i = 0; i < length_column; i++) {
 
-    let each_column_name = head_tr.getElementsByTagName('th')[i].innerHTML.toUpperCase();
-    console.log(each_column_name);
+    let each_column_name = document.getElementsByTagName('tr')[0].getElementsByTagName('td')[i].innerHTML.toUpperCase();
+    // console.log(each_column_name);
 
     if (each_column_name == 'COURSE TYPE') {
         type_index = i;
@@ -23,21 +35,21 @@ for (let i = 0; i < length_column; i++) {
     else if (each_column_name == 'DURATION') {
         duration_index = i;
     }
-    
-    else if (each_column_name == 'UNIVERSITY NAME') {
+
+    else if (each_column_name == '_UNIVERSITY NAME') {
         name_index = i;
     }
-    
+
     else if (each_column_name == 'COURSE NAME') {
         cource_index= i;
     }
-    
-    // console.log(type_index);
-    // console.log(lang_index);
-    // console.log(sess_index);
-    // console.log(duration_index);
-    // console.log(name_index);
-    // console.log(cource_index);
+
+// console.log(type_index);
+// console.log(lang_index);
+// console.log(sess_index);
+// console.log(duration_index);
+// console.log(name_index);
+// console.log(cource_index);
 }
 
 
@@ -45,6 +57,11 @@ for (let i = 0; i < length_column; i++) {
 
 
 //dropdown filter
+
+
+
+
+
 let input_type = 'NULL';
 let input_lang = 'NULL';
 let input_session = 'NULL';
@@ -56,12 +73,8 @@ let input_name = 'NULL';
 let tr = document.getElementsByTagName('tr');
 
 
+// multifilter function
 function multifilter(t, l, s, d, c, n) {
-
-    //  console.log(t);
-    //  console.log(l);
-    //  console.log(s);
-    //  console.log(d);
 
 
     for (let i = 1; i < tr.length; i++) {
@@ -70,9 +83,11 @@ function multifilter(t, l, s, d, c, n) {
         td_lang = tr[i].getElementsByTagName("td")[lang_index].innerHTML.toUpperCase();
         td_session = tr[i].getElementsByTagName("td")[sess_index].innerHTML.toUpperCase();
         td_duration = tr[i].getElementsByTagName("td")[duration_index].innerHTML.toUpperCase();
+    
+
 
         td_cource = tr[i].getElementsByTagName("td")[cource_index].innerHTML.toUpperCase();
-        td_name = tr[i].getElementsByTagName('td')[name_index].getElementsByTagName('a')[0].innerText.toUpperCase()
+        td_name = tr[i].getElementsByTagName('td')[name_index].innerText.toUpperCase()
 
         if ((t == 'NULL' || td_type.slice(0, 6) == t.slice(0, 6) || t == "") && (l == 'NULL' || (td_lang.indexOf(l) > -1))
             && (s == 'NULL' || (td_session.indexOf(s) > -1)) && (d == 'NULL' || (td_duration.indexOf(d) > -1))
@@ -80,10 +95,7 @@ function multifilter(t, l, s, d, c, n) {
             // console.log("working");
             tr[i].style.display = '';
         }
-        // else if(t==""){
-        //     tr[i].style.display = '';
-
-        // }
+     
 
         else {
             // console.log("hmmm")
@@ -92,71 +104,77 @@ function multifilter(t, l, s, d, c, n) {
     }
 }
 
-
-
-
 //---------------------dropdown----------------------------------
 //onchange course type
-function courseType() {
+var activities = document.getElementById("Course_type");
 
-    input_type = document.getElementById("Course_type").value.toUpperCase();
-    // console.log('----------')
-    // console.log(input_type)
-    multifilter(input_type, input_lang, input_session, input_duration, input_cource, input_name);
+activities.addEventListener("change", function() {
 
-}
+    //   console.log("hy everyone");
+     input_type = document.getElementById("Course_type").value.toUpperCase();
+     multifilter(input_type, input_lang, input_session, input_duration, input_cource, input_name);
+
+
+});
 
 
 //onchange teaching language
-function language() {
+var activities_lang = document.getElementById("Teaching_language");
+activities_lang.addEventListener("change", function() {
+
     input_lang = document.getElementById("Teaching_language").value.toUpperCase();
     multifilter(input_type, input_lang, input_session, input_duration, input_cource, input_name);
 
+});
 
-}
+
 
 //onchange Beginning Semester
-function session() {
+var activities_sem = document.getElementById("Beginning_semester");
+activities_sem.addEventListener("change", function() {
+
     // console.log('u can do anything');
     input_session = document.getElementById("Beginning_semester").value.toUpperCase();
     multifilter(input_type, input_lang, input_session, input_duration, input_cource, input_name);
 
-}
+
+});
+
+
 
 //onchange of duration
-function duration() {
+var activities_duration = document.getElementById("Duration");
+activities_duration.addEventListener("change", function() {
 
     input_duration = document.getElementById("Duration").value.toUpperCase();
     multifilter(input_type, input_lang, input_session, input_duration, input_cource, input_name);
 
-
-}
+});
 
 
 
 //------random search----------
-function searchFunc1() {
-    input_cource = document.getElementById('search_course').value.toUpperCase();
-    // console.log(input_name);
+// Cource Name
+var activities_cource = document.getElementById("search_course");
+activities_cource.addEventListener("keyup", function() {
 
+    input_cource = document.getElementById('search_course').value.toUpperCase();
     multifilter(input_type, input_lang, input_session, input_duration, input_cource, input_name);
 
-}
 
-function searchFunc2() {
+});
+
+var activities_name = document.getElementById("search_name");
+activities_name.addEventListener("keyup", function() {
+   
     input_name = document.getElementById('search_name').value.toUpperCase();
     // console.log(input_name);
-
     multifilter(input_type, input_lang, input_session, input_duration, input_cource, input_name);
-
-}
-
+});
 
 
 
-
-
-
+})
 
 
 

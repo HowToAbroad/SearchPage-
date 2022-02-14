@@ -64,98 +64,33 @@
 
             <table id=" searchTable">
 
-                <thead>
-                    <tr class="row-1 odd">
-                        <th class="column-1">World Ranking</th>
-                        <th class="column-2">Germany Ranking</th>
-                        <th class="column-3">University Name</th>
-                        <th class="column-4">Course Type</th>
-                        <th class="column-5">Course Name</th>
-                        <th class="column-6">Teaching language</th>
-                        <th class="column-7">Tution Fee (Per semester)</th>
-                        <th class="column-8">Beginning Semester</th>
-                        <th class="column-9">Duration</th>
-                    </tr>
-                </thead>
-                <tbody class="row-hover">
-                    <tr class="row-2 even">
-                        <td class="column-1">3531</td>
-                        <td class="column-2">143</td>
-                        <td class="column-3"><a href="https://howtoabroad.com/augsburg-university-of-applied-sciences/"
-                                title="Augsburg University of Applied Sciences" target="_blank" rel="noopener">Augsburg
-                                University of Applied Sciences</a></td>
-                        <td class="column-4">Master&#8217;s degree</td>
-                        <td class="column-5">Master of International Business and Finance</td>
-                        <td class="column-6">English</td>
-                        <td class="column-7">none</td>
-                        <td class="column-8">Winter</td>
-                        <td class="column-9">3 semesters</td>
-                    </tr>
-                    <tr class="row-3 odd">
-                        <td class="column-1">3531</td>
-                        <td class="column-2">143</td>
-                        <td class="column-3"><a href="https://howtoabroad.com/augsburg-university-of-applied-sciences/"
-                                title="Augsburg University of Applied Sciences" target="_blank" rel="noopener">Augsburg
-                                University of Applied Sciences</a></td>
-                        <td class="column-4">Master&#8217;s degree</td>
-                        <td class="column-5">Industrial Security</td>
-                        <td class="column-6">German,English</td>
-                        <td class="column-7">none</td>
-                        <td class="column-8">Summer</td>
-                        <td class="column-9">3 semesters</td>
-                    </tr>
-                    <tr class="row-4 even">
-                        <td class="column-1">3531</td>
-                        <td class="column-2">143</td>
-                        <td class="column-3"><a href="https://howtoabroad.com/augsburg-university-of-applied-sciences/"
-                                title="Augsburg University of Applied Sciences" target="_blank" rel="noopener">Augsburg
-                                University of Applied Sciences</a></td>
-                        <td class="column-4">Bachelor&#8217;s degree</td>
-                        <td class="column-5">International Information Systems</td>
-                        <td class="column-6">German,English</td>
-                        <td class="column-7">none</td>
-                        <td class="column-8">Winter</td>
-                        <td class="column-9">7 semesters</td>
-                    </tr>
-                    <tr class="row-5 odd">
-                        <td class="column-1">3531</td>
-                        <td class="column-2">143</td>
-                        <td class="column-3"><a href="https://howtoabroad.com/augsburg-university-of-applied-sciences/"
-                                title="Augsburg University of Applied Sciences" target="_blank" rel="noopener">Augsburg
-                                University of Applied Sciences</a></td>
-                        <td class="column-4">Master&#8217;s degree</td>
-                        <td class="column-5">Interactive Media Systems</td>
-                        <td class="column-6">English</td>
-                        <td class="column-7">none</td>
-                        <td class="column-8">Winter, Summer</td>
-                        <td class="column-9">3 semesters</td>
-                    </tr>
-                    <tr class="row-6 even">
-                        <td class="column-1">7574</td>
-                        <td class="column-2">290</td>
-                        <td class="column-3"><a href="https://howtoabroad.com/bard-college-berlin/"
-                                title="Bard College Berlin, a Liberal Arts University" target="_blank"
-                                rel="noopener">Bard
-                                College Berlin, a Liberal Arts University</a></td>
-                        <td class="column-4">Bachelor&#8217;s degree</td>
-                        <td class="column-5">BA in Economics, Politics, and Social Thought</td>
-                        <td class="column-6">English</td>
-                        <td class="column-7"></td>
-                        <td class="column-8">Winter</td>
-                        <td class="column-9">8 semesters</td>
-                    </tr>
-                     
-
-
-
-                </tbody>
            </table>
     </div>
-        <!-- <script src="logic.js"></script> -->
-        <script src="logic2.js"></script>
-        <script src="read.js"></script>
-        <!-- <script  src="dist/xlsx.full.min.js"></script> -->
-        <script type="javascript" src="dist/xlsx.full.min.js"></script>
+    <script src="filter_table.js"></script>
+    <script src="logic2.js"></script>
+    
+    <!-- render from data.csv -->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="d3.min.js?v=3.2.8"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+        d3.text("data.csv", function (data) {
+            var parsedCSV = d3.csv.parseRows(data);
+
+            var container = d3.select("table")
+                .append("table")
+
+                .selectAll("tr")
+                .data(parsedCSV).enter()
+                .append("tr")
+                
+                .selectAll("td")
+                .data(function (d) { return d; }).enter()
+                .append("td")
+                .text(function (d) { return d; });
+            });
+       
+    </script>
 </body>
 
 </html>
