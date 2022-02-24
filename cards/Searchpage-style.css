@@ -1,0 +1,333 @@
+.sidenav {
+    height: 100%;
+    width: 180px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  * {box-sizing: border-box;}
+
+body { 
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+  margin-left: 150px;
+  box-shadow: var(--box-shadow);
+  padding: 1rem 7%;
+}
+
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.header-right {
+  float: center;
+  margin-left: 150px;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .header-right {
+    float: none;
+  }
+}
+:root{
+    --green:#27ae60;
+    --black:#192a56;
+    --light-color:#666;
+    --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.1);
+}
+
+.box{
+    border-radius: 1.5rem;
+    /* border: .1rem solid rgba(0,0,0,.2); */
+    box-shadow: var(--box-shadow);
+    position: relative;
+    text-align: center;
+}
+.box .fa-heart{
+    position: absolute;
+    top:.7rem;
+    background:#eee;
+    border-radius: 50%;
+    height: 2rem;
+    width:2rem;
+    font-size: 1.4rem;
+    color:var(--black);
+    line-height: 2.4rem;
+    margin-left: 60px;
+    text-decoration: none;
+}
+.box .fa-heart:hover{
+    background: var(--green);
+    color:#fff;
+}
+a:hover{
+  color: black;
+}
+/* .sidenav #number{
+    margin-top: 200px;
+    margin-left:30px;
+    background-color: dodgerblue;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border-radius: 1rem;
+} */
+
+.sidenav #course{
+    margin-top: 50px;
+    margin-left:30px;
+    background-color: dodgerblue;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border-radius: 1rem;
+}
+.sidenav #language{
+    margin-top: 50px;
+    margin-left:30px;
+    background-color: dodgerblue;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border-radius: 1rem;
+}
+.sidenav #Duration{
+    margin-top: 50px;
+    margin-left:30px;
+    background-color: dodgerblue;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border-radius: 1rem;
+}
+.sidenav #Begining-Semester{
+    margin-top: 50px;
+    margin-left:30px;
+    background-color: dodgerblue;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border-radius: 1rem;
+}
+/* CSS */
+.button-33 {
+  /* background-color: #c2fbd7; */
+  border-radius: 100px;
+  background: #c2d1fb;
+  box-shadow: rgba(44, 118, 187, 0.452) 0 -25px 18px -14px inset;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-33:hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.sidenav #number{
+    margin-top: 200px;
+    margin-left:10px;
+    background-color: #c2d1fb;
+    border-radius: 100px;
+    box-shadow: rgba(44, 118, 187, 0.452) 0 -25px 18px -14px inset;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 140px;
+    height: 40px;
+  }
+  
+  .button-33:hover {
+    box-shadow: rgba(30, 133, 192, 0.35) 0 -25px 18px -14px inset,rgba(44, 106, 187, 0.25) 0 1px 2px,rgba(44, 130, 187, 0.25) 0 2px 4px,rgba(44, 89, 187, 0.25) 0 4px 8px,rgba(44, 130, 187, 0.25) 0 8px 16px,rgba(44, 106, 187, 0.25) 0 16px 32px;
+    transform: scale(1.05) rotate(-1deg);
+  }
+
+  .box:hover {
+    box-shadow: rgba(30, 133, 192, 0.35) 0 -25px 18px -14px inset,rgba(44, 106, 187, 0.25) 0 1px 2px,rgba(44, 130, 187, 0.25) 0 2px 4px,rgba(44, 89, 187, 0.25) 0 4px 8px,rgba(44, 130, 187, 0.25) 0 8px 16px,rgba(44, 106, 187, 0.25) 0 16px 32px;
+    transform: scale(1.05) rotate(-1deg);
+  }
+
+  .sidenav #language{
+    margin-top: 50px;
+    margin-left:10px;
+    background-color: #c2d1fb;
+    border-radius: 100px;
+    box-shadow: rgba(44, 118, 187, 0.452) 0 -25px 18px -14px inset;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 140px;
+    height: 40px;
+  }
+  .sidenav #course{
+    margin-top: 50px;
+    margin-left:10px;
+    background-color: #c2d1fb;
+    border-radius: 100px;
+    box-shadow: rgba(44, 118, 187, 0.452) 0 -25px 18px -14px inset;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 140px;
+    height: 40px;
+  }
+  .sidenav #Begining-Semester{
+    margin-top: 50px;
+    margin-left:10px;
+    background-color: #c2d1fb;
+    border-radius: 100px;
+    box-shadow: rgba(44, 118, 187, 0.452) 0 -25px 18px -14px inset;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 140px;
+    height: 40px;
+  }
+  .sidenav #Duration{
+    margin-top: 50px;
+    margin-left:10px;
+    background-color: #c2d1fb;
+    border-radius: 100px;
+    box-shadow: rgba(44, 118, 187, 0.452) 0 -25px 18px -14px inset;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 140px;
+    height: 40px;
+  }
+.bottom a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+  }
+  
+.bottom a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+.bottom .previous {
+    background-color: #f1f1f1;
+    color: black;
+  }
+  
+.bottom .next {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+.bottom .round {
+    border-radius: 50%;
+  }
+  
