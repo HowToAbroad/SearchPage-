@@ -55,19 +55,36 @@ async function getData() {
     
      console.log(table);
      let num = 0;
-     table.forEach(row => {
-        const columns = row.split(';');
-      
-        console.log(columns);
+     
+     for (var i =0; i<table.length; i++)
+     {
+    
+        const columns = table[i].split(';');
+        console.log("row "+ i);
+        console.log(column_head[0] +":" +columns[0]);
+        console.log(column_head[1] +":" +columns[1]);
+        console.log(column_head[2] +":" +columns[2]);
+        console.log(column_head[3] +":" +columns[3]);
+        console.log(column_head[4] +":" +columns[4]);
+        console.log(column_head[5] +":" +columns[5]);
+        console.log(column_head[6] +":" +columns[6]);
 
-        cource_type_array[num] =  columns[5]; 
-        language_array[num]=columns[8];
-        duration_array[num]=columns[16];
-        university_array[num]=columns[3];
-        cource_array[num]=columns[6];
-        semester_array[num]=columns[14];
+        console.log(column_head[7] +":" +columns[7]);
+        console.log(column_head[8] +":" +columns[8]);
+        console.log(column_head[9] +":" +columns[9]);
+        console.log(column_head[10] +":" +columns[10]);
+        console.log(column_head[11] +":" +columns[11]);
+        console.log(column_head[12] +":" +columns[12]);
+      
+
+        cource_type_array[num] =    columns[5]; 
+        language_array[num]=        columns[8];
+        duration_array[num]=        columns[16];
+        university_array[num]=      columns[3];
+        cource_array[num]=          columns[6];
+        semester_array[num]=        columns[14];
        
-         num++;
+         //num++;
         
        
 
@@ -119,8 +136,8 @@ async function getData() {
 
 
 
-        // console.log(university_name, course_type, course_name, language, sesstion)
-    });
+        // console.log(university_name, course_type, course_name, language, sesstion)*/
+    }
 
 //   cource_type_array.forEach( value =>{
 //      console.log(value);
