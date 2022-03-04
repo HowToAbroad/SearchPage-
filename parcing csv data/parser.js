@@ -1,4 +1,3 @@
-
 //creating an empty matrix;
 let cource_type_array = [];
 let language_array = [];
@@ -7,31 +6,46 @@ let duration_array = [];
 let university_array = [];
 let cource_array = [];
 
+let table_body;
+let table_head;
+
+// let cource_array=[];
+
+let tableLength = 0;
 
 
 //calling the function
 getData();
-let tableLength = 0;
 
-//way to fetch data
+// way to fetch data
+// async and await make promises easier to write" async makes a function return a Promise.
+// await makes a function wait for a Promise.
 async function getData() {
     //to fetch and get response in text formate
-    const response = await fetch('minidata2.csv');
+    const response = await fetch('data.csv');
     const data = await response.text();
 
-    //creating array
+    const table = data.split('\n');
+
+    table_head = table[0].split(',');
+    table_body = data.split('\n').slice(1);
+
+    // console.log(table_head);
+    // console.log(table_body);
+
+
+
     const Needed_header = ["university_name", "Course Type", "Course Name", "Teaching language", "Beginning Semester"];
 
-    //this is for rendering the table header part
-    const table_head = data.split('\n');
-    const column_head = table_head[0].split(';');
-    console.log(column_head);
+
     var div_head = document.createElement('div');
     div_head.className = 'header';
 
-    column_head.forEach(row => {
+
+    table_head.forEach(row => {
+
+
         Needed_header.forEach(x => {
-            // console.log(x);
 
             if (x == row) {
                 var h1_head = document.createElement('h1');
@@ -43,50 +57,29 @@ async function getData() {
         // console.log(row);
     })
 
-    // console.log(column_head[0]);
-    // console.log(column_head);
 
 
-    //this is for rendering the table body part
-    //slicing out the head part and getting the data in console in tabular formate
-     const table = data.split('\n').slice(1);
-     tableLength = table.length;
-     tableData = table;
-    
-     console.log(table);
-     let num = 0;
-     
-     for (var i =0; i<table.length; i++)
-     {
-    
-        const columns = table[i].split(';');
-        console.log("row "+ i);
-        console.log(column_head[0] +":" +columns[0]);
-        console.log(column_head[1] +":" +columns[1]);
-        console.log(column_head[2] +":" +columns[2]);
-        console.log(column_head[3] +":" +columns[3]);
-        console.log(column_head[4] +":" +columns[4]);
-        console.log(column_head[5] +":" +columns[5]);
-        console.log(column_head[6] +":" +columns[6]);
+    tableLength = table_body.length;
+    tableData = table_body;
 
-        console.log(column_head[7] +":" +columns[7]);
-        console.log(column_head[8] +":" +columns[8]);
-        console.log(column_head[9] +":" +columns[9]);
-        console.log(column_head[10] +":" +columns[10]);
-        console.log(column_head[11] +":" +columns[11]);
-        console.log(column_head[12] +":" +columns[12]);
-      
 
-        cource_type_array[num] =    columns[5]; 
-        language_array[num]=        columns[8];
-        duration_array[num]=        columns[16];
-        university_array[num]=      columns[3];
-        cource_array[num]=          columns[6];
-        semester_array[num]=        columns[14];
-       
-         //num++;
-        
-       
+    let num = 0;
+    table_body.forEach(row => {
+        const columns = row.split(',');
+
+
+
+        cource_type_array[num] = columns[5];
+        language_array[num] = columns[8];
+        duration_array[num] = columns[16];
+        university_array[num] = columns[3];
+        cource_array[num] = columns[6];
+        semester_array[num] = columns[14];
+
+        num++;
+
+
+
 
 
         const university_name = columns[3];
@@ -136,12 +129,32 @@ async function getData() {
 
 
 
-        // console.log(university_name, course_type, course_name, language, sesstion)*/
-    }
+        // console.log(university_name, course_type, course_name, language, sesstion)
+    });
 
-//   cource_type_array.forEach( value =>{
-//      console.log(value);
-//   })
+
+    //idea is to make matrix
+    //first one storeArrays (store the filter needed columns)
+    //second one uniqueListArray (store the unique values in filter need columns)
+    let reference = [];
+    let uniqueListArray = [];
+    let storeArrays = [cource_type_array, language_array, duration_array, semester_array]
+    let indx=0; 
+    storeArrays.forEach(column => {
+        reference = column;
+        uniqueList = reference.filter(function (x, i, a) { 
+            
+        if(x!="" && x!='-')
+             return a.indexOf(x) === i; 
+        });
+        uniqueListArray[indx] = uniqueList;
+        indx++;
+     
+    })
+
+   uniqueListArray.forEach(uniqueColumn=>{
+      console.log(uniqueColumn);
+   })
 }
 
 
