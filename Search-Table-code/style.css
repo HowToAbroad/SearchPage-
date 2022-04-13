@@ -65,20 +65,38 @@ body {
     height: 50px;
     width: 171px;
     border-radius: 5px;
-    /* border: none; */
-    font-size: 15px;
+    
     border: 2px solid #0C53A6;
     color: #0C53A6;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 600;
     margin: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+   
+}
+.button_section{
+    margin-top: 15px;
+}
+.button_section a{
+    font-size: inherit;
+    color: #0C53A6;
+ 
+    /* text-align: center; */
 }
 
-.right_card_part button:hover {
-    background-color: #0C53A6;
+button a:hover {
+    text-decoration: none;
     color: white;
-    cursor: pointer;
 }
+button:hover {
+    color: black;
+    background-color: #0C53A6;
+    border-color: #0C53A6;
+    transition: 0.35s;
+}
+/* .right_card_part button :hover {
+    cursor: pointer;
+} */
 
 .university_name {
     color: #0C53A6;
@@ -131,8 +149,13 @@ h1 {
 
 .side_block {
     /* border: 2px solid black; */
-    height: 40rem;
-    width: 50rem;
+    /* background-color: gray;
+    color: white;
+    position: fixed; */
+   
+
+    /* height: 40rem; */
+    /* width: 50rem; */
     /* margin-top: 228px; */
     margin-top: 30px;
     display: flex;
@@ -144,29 +167,102 @@ h1 {
     
   
 }
+.menu{
+    height: 30px;
+    position: fixed;
+    top: 42px;
+    left: 8px;
+    display: none;
+}
+
+
 
 .side_block select {
-    width: 70%;
-    height: 10%;
+    width: 350px;
+    height: 60px;
+
     background-color: #101010;
     border-radius: 3px;
     border-radius: 10px;
-    margin: 10px;
+   
     color: white;
     background-color: #0C53A6;
     font-size: 16px;
     text-align: center;
+    margin: 15px 130px 0px 130px;
 }
 
 .side_block input {
     border-radius: 4px;
-    width: 70%;
-    margin-bottom: 12px;
-    height: 48px;
+    width: 350px;
+    height: 60px;
     text-align: center;
     border-radius: 12px;
     font-size: 16px;
-
+    margin: 15px 130px 0px 130px;
     border: 2px solid #e1dede;
 
+}
+
+@media only screen and (max-width: 900px) {
+   .side_block{
+    background-color: #08162578;
+    color: white;
+    position: fixed; 
+    top: 0px;
+    left: 0px;
+    border-radius: 20px;
+   }
+   .menu{
+       display: block;
+   }
+   .side_block select{
+     width: 200px !important;
+     height: 40px !important;
+     display: flex;
+     margin: 10px 5px 10px 5px !important;
+    }
+    .side_block input{
+        width: 200px !important;
+        display: flex;
+        height: 40px !important;
+       
+        margin: 10px 5px 10px 5px !important;
+   }
+   #search_name{
+       margin-top: 65px !important;
+   }
+
+   .block{
+       display: block;
+       width: unset;
+   }
+   .university_name h2 a {
+    font-weight: 200;
+    font-size: 20px;
+} 
+  .right_card_part {
+  
+    margin: 0px;
+    font-size: 10px;
+    width: -webkit-fill-available;
+  }
+  .left_card_part {
+    width: unset; 
+ }
+  .right_card_part button {
+    
+    height: 30px;
+    width: 100px;   
+    font-size: 10px; 
+    font-weight: unset;
+   
+}
+.left_card_part img {
+
+    width: -webkit-fill-available;
+}
+.button_section a{
+    font-size: 11px;
+}
 }

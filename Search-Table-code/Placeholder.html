@@ -17,7 +17,7 @@
     overflow-y: scroll;  
  -->
     <!-- <div class="side_block"> -->
-    <div class="side_block">
+    <div class="side_block" id="side_box">
         <input type="text" placeholder="University Name" id="search_name">
         <input type="text" placeholder="Cource Name" id="search_course">
 
@@ -63,6 +63,8 @@
 
 
     </div>
+    
+    <img onclick="hide()" class="menu" src="./whitemenu.png" alt="">
 
 
 
@@ -123,6 +125,18 @@
 <script src="parser.js" async></script>
 <!-- <script src="rendering.js" defer></script> -->
 <script src="multifiltering.js"></script>
+<script>
+    if(window.innerWidth<=900){
+    side_box.style.display = 'none'
+   }
+    function hide() {
+        if (side_box.style.display != 'none') {
+            side_box.style.display = 'none'
+        }
+        else
+            side_box.style.display = 'block'
+    }
 
+</script>
 
 </html>
