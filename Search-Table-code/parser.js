@@ -15,21 +15,33 @@ let table_head;
 
 let tableLength = 0;
 
+async function Execute()
+{
+    const data= await GetData();
+    DataParser(data);
+   
+  
 
+
+}
 //calling the function
-getData();
+Execute();
 
 // way to fetch data
 // async and await make promises easier to write" async makes a function return a Promise.
 // await makes a function wait for a Promise.
-async function getData() {
-    //to fetch and get response in text formate
-   
-    //to check the time perios of parcing
-    var start1 = window.performance.now();
 
+async function GetData()
+{
     const response = await fetch('data.csv');
     const data = await response.text();
+    //console.log(data);
+    
+    return data;
+}
+  
+async function DataParser(data) {
+
 
     const table = data.split('\n');
 
@@ -40,7 +52,7 @@ async function getData() {
     //time 
 
     var end1 = window.performance.now();
-    console.log(`Execution time of parcing: ${end1 - start1} ms`);
+    //console.log(`Execution time of parcing: ${end1 - start1} ms`);
 
 
 
