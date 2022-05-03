@@ -1,4 +1,4 @@
-const URL_TO_Check = "new.csv";
+const URL_TO_Check = "./Search-Table-Code/new.csv";
 
 let CollegeList = [];
 class College {
