@@ -116,6 +116,10 @@ function DataParser(data) {
 }
 
 function Rendering(dataList) {
+  
+  var display_number= document.getElementById("Display_number");
+  display_number.innerHTML="Displaying "+ dataList.length+ " Universities/Hochshule";
+  
   if(dataList==null)
   {
     var container = document.getElementById("List_of_University");
@@ -125,7 +129,7 @@ function Rendering(dataList) {
     
     container.append(e_0);
   }
-  
+  let l = dataList.length;
   //console.log(CollegeList.length);
   for (let i = 0; i < dataList.length; i++) {
     var container = document.getElementById("List_of_University");
@@ -470,7 +474,7 @@ function Filter(name){
 
                                         
                                     );
-      console.log(result);
+      //console.log(result);
       if(result!=null){
         Rendering(result);
       }
