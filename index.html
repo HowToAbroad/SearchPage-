@@ -18,7 +18,7 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="UniSearch.css" />
 
    
 
@@ -27,9 +27,61 @@
   </head>
 
   <body>
-   
+   <div class="container d-flex mt-5 ">
+     
+    <div class="col-2 d-flex flex-column mt-5" id="side_box">
+      <input class="mt-2"type="text" placeholder="University Name" id="search_name">
+        <input class="mt-2" type="text" placeholder="Course Name" id="search_course">
 
-    <div id="Unis"></div>
-    <div id="div1">The text above has been created dynamically.</div>
+      <!-- <select class="mt-2" id="size">
+          <option value="">--- Size ---</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="100">200</option>
+      </select>
+
+      <button class="accordion">Course Type</button> -->
+
+      <select  class="mt-2" id="Course_type">
+
+          <option value="">--- Course Type ---</option>
+          <!-- <option value="Master's degree">Master's degree</option>
+          <option value="Bachelor's degree">Bachelor's degree</option>
+          <option value="PhD/Doctorate">PhD/Doctorate</option>
+          <option value="Short course">Short course</option> -->
+      </select>
+
+
+
+      <!-- <button class="accordion">Teaching Language</button> -->
+      <select class="mt-2" id="Teaching_language">
+
+          <option value="">--- Teaching language ---</option>
+      </select>
+      <!-- <button class="accordion">Beginning Semester</button> -->
+      <select class="mt-2"  id="Beginning_semester">
+
+          <option value="">--- Beginning Semester ---</option>
+
+      </select>
+      <!-- <button class="accordion">Duration</button> -->
+      <select class="mt-2" id="Duration">
+
+          <option value="">--- Duration ---</option>
+
+      </select>
+
+      <select class="mt-2" id="Tution_fee">
+
+        <option value="">--- Tution Fee---</option>
+
+    </select>
+
+
+  </div>
+    <div id="List_of_University"></div>
+    
+  </div>
   </body>
 </html>

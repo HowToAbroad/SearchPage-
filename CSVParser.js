@@ -52,10 +52,13 @@ class College {
 }
 Execute();
 
+
+
 async function Execute() {
   const data = await GetData();
   DataParser(data);
-  Rendering();
+  Fill_Value();
+  Rendering(CollegeList);
 }
 
 async function GetData() {
@@ -112,11 +115,17 @@ function DataParser(data) {
   //console.log(CollegeList[2]);
 }
 
-function Rendering() {
+function Rendering(dataList) {
+  if(dataList==null)
+  {
+    var container = document.getElementById("List_of_University");
+    var e_0 = document.createElement("div");
+    container.append(e_0);
+  }
   
-  console.log(CollegeList.length);
-  for (let i = 0; i < CollegeList.length; i++) {
-    var container = document.getElementById("Unis");
+  //console.log(CollegeList.length);
+  for (let i = 0; i < dataList.length; i++) {
+    var container = document.getElementById("List_of_University");
     var e_0 = document.createElement("div");
     var e_1 = document.createElement("div");
     e_1.setAttribute("class", "container mt-5 mb-5");
@@ -147,13 +156,13 @@ function Rendering() {
     e_7.setAttribute("bis_skin_checked", "1");
     var e_8 = document.createElement("a");
     // URL for HTA
-    e_8.setAttribute("href", CollegeList[i].HTA_Uni_Link);
+    e_8.setAttribute("href", dataList[i].HTA_Uni_Link);
     e_8.setAttribute("target", "_blank");
     var e_9 = document.createElement("h5");
     e_9.setAttribute("style", "color: black;");
     // Name of the university 
     e_9.appendChild(
-      document.createTextNode(CollegeList[i].University_Name)
+      document.createTextNode(dataList[i].University_Name)
     );
     e_8.appendChild(e_9);
     e_7.appendChild(e_8);
@@ -180,28 +189,28 @@ function Rendering() {
     var e_17 = document.createElement("h6");
     e_17.setAttribute("class", "text-primary");
     // world ranking and germany ranking
-    e_17.appendChild(document.createTextNode("World Ranking : "+CollegeList[i]. World_Ranking));
+    e_17.appendChild(document.createTextNode("World Ranking : "+dataList[i]. World_Ranking));
     var e_18 = document.createElement("br");
     e_17.appendChild(e_18);
-    e_17.appendChild(document.createTextNode("\nGermany Ranking : "+CollegeList[i].German_Ranking));
+    e_17.appendChild(document.createTextNode("\nGermany Ranking : "+dataList[i].German_Ranking));
     e_16.appendChild(e_17);
     var e_19 = document.createElement("hr");
     e_16.appendChild(e_19);
     var e_20 = document.createElement("h6");
     e_20.setAttribute("class", "text-dark");
     //course type
-    e_20.appendChild(document.createTextNode("Course Type : "+ CollegeList[i].Course_Type));
+    e_20.appendChild(document.createTextNode("Course Type : "+ dataList[i].Course_Type));
     e_16.appendChild(e_20);
     var e_21 = document.createElement("h6");
     e_21.setAttribute("class", "text-dark");
     // course name
     e_21.appendChild(
-      document.createTextNode("Course Name : "+ CollegeList[i].Course_Name)
+      document.createTextNode("Course Name : "+ dataList[i].Course_Name)
     );
     e_16.appendChild(e_21);
     var e_22 = document.createElement("b");
     // Semeter when it starts
-    e_22.appendChild(document.createTextNode("Semester Start : "+ CollegeList[i].Semester_Start));
+    e_22.appendChild(document.createTextNode("Semester Start : "+ dataList[i].Semester_Start));
     e_16.appendChild(e_22);
     var e_23 = document.createElement("br");
     e_16.appendChild(e_23);
@@ -218,7 +227,7 @@ function Rendering() {
     var e_27 = document.createElement("span");
     var e_28 = document.createElement("b");
     //course ranking in germany
-    e_28.appendChild(document.createTextNode("Course Germany Ranking : "+ CollegeList[i].Course_Ranking));
+    e_28.appendChild(document.createTextNode("Course Germany Ranking : "+ dataList[i].Course_Ranking));
     e_27.appendChild(e_28);
     e_25.appendChild(e_27);
     var e_29 = document.createElement("span");
@@ -231,7 +240,7 @@ function Rendering() {
     var e_31 = document.createElement("span");
     var e_32 = document.createElement("b");
     //city 
-    e_32.appendChild(document.createTextNode("City : "+ CollegeList[i].City));
+    e_32.appendChild(document.createTextNode("City : "+ dataList[i].City));
     e_31.appendChild(e_32);
     var e_33 = document.createElement("br");
     e_31.appendChild(e_33);
@@ -246,7 +255,7 @@ function Rendering() {
     var e_36 = document.createElement("h6");
     e_36.setAttribute("class", "text-success");
     // Duration 
-    e_36.appendChild(document.createTextNode("Duration : "+CollegeList[i].Duration));
+    e_36.appendChild(document.createTextNode("Duration : "+dataList[i].Duration));
     e_7.appendChild(e_36);
     var e_37 = document.createElement("p");
     e_7.appendChild(e_37);
@@ -264,14 +273,14 @@ function Rendering() {
     e_40.setAttribute("class", "text-primary ");
     var e_41 = document.createElement("h6");
     //tution fee
-    e_41.appendChild(document.createTextNode("Tution Fee : "+ CollegeList[i].Tuition_Fee));
+    e_41.appendChild(document.createTextNode("Tution Fee : "+ dataList[i].Tuition_Fee));
     e_40.appendChild(e_41);
     var e_42 = document.createElement("br");
     e_40.appendChild(e_42);
     var e_43 = document.createElement("h6");
     e_43.setAttribute("class", "text-success");
     //tution language
-    e_43.appendChild(document.createTextNode("Teaching Language : "+ CollegeList[i].Teaching_Language));
+    e_43.appendChild(document.createTextNode("Teaching Language : "+ dataList[i].Teaching_Language));
     e_40.appendChild(e_43);
     e_39.appendChild(e_40);
     e_38.appendChild(e_39);
@@ -282,11 +291,11 @@ function Rendering() {
     var e_53 = document.createElement("h6");
     e_44.setAttribute("class", "text-danger");
       //application deadline
-    e_44.appendChild(document.createTextNode("Appication Deadline Summer: "+ CollegeList[i].Ap));
-    e_50.appendChild(document.createTextNode("Appication Deadline Winter: "+ CollegeList[i].Application_Deadline_Winter));
-    e_51.appendChild(document.createTextNode("IELTS/TOFL : "+ CollegeList[i].Admission_IELTS_TOFEL));
-    e_52.appendChild(document.createTextNode("Language Requirement : "+ CollegeList[i].Language_Requirement));
-    e_53.appendChild(document.createTextNode("German Grade Requirement : "+ CollegeList[i].Required_German_Grade));
+    e_44.appendChild(document.createTextNode("Appication Deadline Summer: "+ dataList[i].Application_Deadline_Summer));
+    e_50.appendChild(document.createTextNode("Appication Deadline Winter: "+ dataList[i].Application_Deadline_Winter));
+    e_51.appendChild(document.createTextNode("IELTS/TOFL : "+ dataList[i].Admission_IELTS_TOFEL));
+    e_52.appendChild(document.createTextNode("Language Requirement : "+ dataList[i].Language_Requirement));
+    e_53.appendChild(document.createTextNode("German Grade Requirement : "+ dataList[i].Required_German_Grade));
     e_38.appendChild(e_53);
     e_38.appendChild(e_52);
     e_38.appendChild(e_51);
@@ -299,7 +308,7 @@ function Rendering() {
    // Course website link
     e_46.setAttribute(
       "href",
-      CollegeList[i].Course_Link
+      dataList[i].Course_Link
     );
     e_46.setAttribute("target", "_blank");
     e_46.setAttribute("rel", "nofollow");
@@ -313,7 +322,7 @@ function Rendering() {
     //portal link
     e_47.setAttribute(
       "href",
-      CollegeList[i].Application_Link
+      dataList[i].Application_Link
     );
     e_47.setAttribute("class", "btn btn-outline-info btn-sm mt-2 flex-row");
     e_47.setAttribute("type", "button");
@@ -327,5 +336,146 @@ function Rendering() {
     e_0.appendChild(e_1);
     container.append(e_0);
   }
-  console.log(CollegeList[0]);
+  //console.log(CollegeList[0]);
 }
+
+// https://stackoverflow.com/questions/1909441/how-to-delay-the-keyup-handler-until-the-user-stops-typing
+const delayKeyUp = (() => {
+  let timer = null;
+  const delay = (func, ms) => {
+      timer ? clearTimeout(timer): null
+      timer = setTimeout(func, ms)
+  }
+  return delay
+})();
+
+
+//fill the data with unique value 
+
+function Fill_Value()
+{
+  let uniqueListArray = [];
+  let course_type_array= [];
+  let language_array =[];
+  let duration_array = [];
+  let semester_array =[];
+  let tuition_fees =[];
+  CollegeList.forEach(Element=> {
+    course_type_array.push(Element.Course_Type);
+    language_array.push(Element.Teaching_Language);
+    duration_array.push(Element.Duration);
+    semester_array.push(Element.Semester_Start);
+    tuition_fees.push(Element.Tuition_Fee);
+  });
+  
+ 
+  let storeArrays = [course_type_array, language_array, duration_array, semester_array,tuition_fees]
+
+
+  let indx = 0;
+    storeArrays.forEach(column => {
+        reference = column;
+        uniqueList = reference.filter(function (x, i, a) {
+
+            if (x != "" && x != '-' && x != "00\"")
+                return a.indexOf(x) === i;
+        });
+        uniqueListArray[indx] = uniqueList;
+       
+        indx++;
+
+    })
+  let select_ids = ["Course_type", "Teaching_language", "Duration", "Beginning_semester","Tution_fee"];
+
+    for (let i = 0; i < select_ids.length; i++) {
+        //creating select by taking select ids
+        let select = document.getElementById(select_ids[i]);
+        //creating options
+        var options = [];
+        var option = document.createElement('option');
+
+        //fethcing unique list from uniqueListarray
+        uniqueListArray[i].forEach(ele => {
+
+            //var data = '<option value="' + escapeHTML(i) +'">" + escapeHTML(i) + "</option>';
+            option.text = option.value = ele;
+            options.push(option.outerHTML);
+
+        })
+
+        //inserting in the select (id given already)
+        select.insertAdjacentHTML('beforeEnd', options.join('\n'));
+}
+}
+//7 parameter for filtering 
+var Search_Name_Uni = document.getElementById("search_name");
+var Search_Name_Course = document.getElementById("search_course");
+var Search_Course_type=document.getElementById("Course_type");
+var Search_Language_teaching=document.getElementById("Teaching_language");
+var Search_Start_semeter=document.getElementById("Beginning_semester");
+var Search_Duration= document.getElementById("Duration");
+var Tuition= document.getElementById("Tution_fee");
+
+Search_Name_Uni.addEventListener("keyup",e=>{Search_Uni_Course()});
+Search_Name_Course.addEventListener("keyup",e=>{Search_Uni_Course()});
+Search_Course_type.addEventListener("change",e=>{Search_Uni_Course()});
+Search_Language_teaching.addEventListener("change",e=>{Search_Uni_Course()});
+Search_Start_semeter.addEventListener("change",e=>{Search_Uni_Course()});
+Search_Duration.addEventListener("change",e=>{Search_Uni_Course()});
+Tuition.addEventListener("change",e=>{Search_Uni_Course()});
+
+
+
+function Search_Uni_Course() {
+    
+  var _Uni_name=Search_Name_Uni.value.toLowerCase();
+  var _course_name=Search_Name_Course.value.toLowerCase();
+  var _course_type=Search_Course_type.value.toLowerCase();
+  var _teaching_Language=Search_Language_teaching.value.toLowerCase();
+  var _start_semester=Search_Start_semeter.value.toLowerCase();
+  var _duration=Search_Duration.value.toLowerCase();
+  var _fee=Tuition.value.toLowerCase();
+  //input_type = document.getElementById("search_name").value.toLowerCase();
+  
+  
+  console.log(name);
+   //Filter(name);
+   MultiFilter(_Uni_name, _course_name, _course_type, _teaching_Language, _start_semester, _duration,_fee);
+  
+  
+};
+
+
+
+function Filter(name){
+  var container = document.getElementById("List_of_University");
+  container.innerHTML="";
+  const result=CollegeList.filter(p=> p.University_Name.toLowerCase().includes(name) ||  p.Course_Name.toLowerCase().includes(name) );
+  //console.log(result);
+  if(result!=null){
+    Rendering(result);
+  }
+
+}
+  function MultiFilter(university_name,course_name,course_type,teaching_language,start_semester,duration, range) {
+    var container = document.getElementById("List_of_University");
+    container.innerHTML="";
+    const result=CollegeList.filter(p=> p.University_Name.toLowerCase().includes(university_name) &&
+                                        p.Course_Name.toLowerCase().includes(course_name) &&
+                                        p.Course_Type.toLowerCase().includes(course_type) &&
+                                        p.Teaching_Language.toLowerCase().includes(teaching_language) &&
+                                        p.Semester_Start.toLowerCase().includes(start_semester) &&
+                                        p.Duration.toLowerCase().includes(duration) &&
+                                        p.Tuition_Fee.toLowerCase().includes(range)
+
+                                        
+                                    );
+      console.log(result);
+      if(result!=null){
+        Rendering(result);
+      }
+      
+}
+
+  
+  
