@@ -119,7 +119,10 @@ function Rendering(dataList) {
   if(dataList==null)
   {
     var container = document.getElementById("List_of_University");
+   
     var e_0 = document.createElement("div");
+    e_0.innerHTML="Data Not Available, Please choose other options from the filter";
+    
     container.append(e_0);
   }
   
@@ -416,13 +419,13 @@ var Search_Start_semeter=document.getElementById("Beginning_semester");
 var Search_Duration= document.getElementById("Duration");
 var Tuition= document.getElementById("Tution_fee");
 
-Search_Name_Uni.addEventListener("keyup",e=>{Search_Uni_Course()});
-Search_Name_Course.addEventListener("keyup",e=>{Search_Uni_Course()});
-Search_Course_type.addEventListener("change",e=>{Search_Uni_Course()});
-Search_Language_teaching.addEventListener("change",e=>{Search_Uni_Course()});
-Search_Start_semeter.addEventListener("change",e=>{Search_Uni_Course()});
-Search_Duration.addEventListener("change",e=>{Search_Uni_Course()});
-Tuition.addEventListener("change",e=>{Search_Uni_Course()});
+Search_Name_Uni.addEventListener("keyup",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
+Search_Name_Course.addEventListener("keyup",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
+Search_Course_type.addEventListener("change",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
+Search_Language_teaching.addEventListener("change",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
+Search_Start_semeter.addEventListener("change",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
+Search_Duration.addEventListener("change",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
+Tuition.addEventListener("change",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
 
 
 
@@ -436,9 +439,6 @@ function Search_Uni_Course() {
   var _duration=Search_Duration.value.toLowerCase();
   var _fee=Tuition.value.toLowerCase();
   //input_type = document.getElementById("search_name").value.toLowerCase();
-  
-  
-  console.log(name);
    //Filter(name);
    MultiFilter(_Uni_name, _course_name, _course_type, _teaching_Language, _start_semester, _duration,_fee);
   
