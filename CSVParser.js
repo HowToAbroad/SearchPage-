@@ -388,7 +388,7 @@ function Fill_Value()
         indx++;
 
     })
-  let select_ids = ["Course_type", "Teaching_language", "Duration", "Beginning_semester","Tution_fee"];
+  let select_ids = ["Course_type", "Teaching_language", "Duration", "Beginning_semester","Tuition_fee"];
 
     for (let i = 0; i < select_ids.length; i++) {
         //creating select by taking select ids
@@ -417,7 +417,7 @@ var Search_Course_type=document.getElementById("Course_type");
 var Search_Language_teaching=document.getElementById("Teaching_language");
 var Search_Start_semeter=document.getElementById("Beginning_semester");
 var Search_Duration= document.getElementById("Duration");
-var Tuition= document.getElementById("Tution_fee");
+var Tuition= document.getElementById("Tuition_fee");
 
 Search_Name_Uni.addEventListener("keyup",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
 Search_Name_Course.addEventListener("keyup",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
