@@ -376,7 +376,7 @@ function Fill_Value()
   });
   
  
-  let storeArrays = [course_type_array, language_array, duration_array, semester_array,tuition_fees]
+  let storeArrays = [course_type_array.sort(), language_array.sort(), duration_array.sort(), semester_array.sort(),tuition_fees.sort()]
 
 
   let indx = 0;
