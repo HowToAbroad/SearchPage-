@@ -20,19 +20,16 @@
     ></script>
     <link rel="stylesheet" href="UniSearch.css" />
 
-   
-
-   <script src="CSVParser.js" async></script> 
-
+    <script src="CSVParser.js" async></script>
   </head>
 
   <body>
-
-    <div   class="row" id="Show_University">
-       </div> 
-      <div class="center">
-        <h6 class="col-md-8 mx-auto" id="Display_number">Displaying Some Value</h6>
-        <div class="pagination" id="pagination">
+    <div class="row" id="Show_University"></div>
+    <div class="center">
+      <h6 class="col-md-8 mx-auto" id="Display_number">
+        Displaying Some Value
+      </h6>
+      <div class="pagination" id="pagination">
         <a href="#">&laquo;</a>
         <a href="#">1</a>
         <a href="#" class="active">2</a>
@@ -41,63 +38,57 @@
         <a href="#">5</a>
         <a href="#">6</a>
         <a href="#">&raquo;</a>
-        </div>
       </div>
-   <div class="container d-flex mt-5 ">
-     
-    <div class="col-2 d-flex flex-column mt-5" id="side_box">
-      <input class="input-group-addon mt-2"type="text" placeholder="University Name" id="search_name">
-        <input class="mt-2" type="text" placeholder="Course Name" id="search_course">
+    </div>
+    <div class="container d-flex mt-5">
+      <div class="col-2 d-flex flex-column mt-5" id="side_box">
+        <input
+          class="input-group-addon mt-2"
+          type="text"
+          placeholder="University Name"
+          id="search_name"
+        />
+        <input
+          class="mt-2"
+          type="text"
+          placeholder="Course Name"
+          id="search_course"
+        />
 
-       <select class="mt-2" id="display_size">
+        <select class="mt-2" id="display_size">
           <option value="">--- Size ---</option>
           <option value="20">20</option>
           <option value="50">50</option>
           <option value="100">100</option>
-      </select>
+        </select>
 
-     
-
-      <select  class="mt-2" id="Course_type">
-
+        <select class="mt-2" id="Course_type">
           <option value="">--- Course Type ---</option>
           <!-- <option value="Master's degree">Master's degree</option>
           <option value="Bachelor's degree">Bachelor's degree</option>
           <option value="PhD/Doctorate">PhD/Doctorate</option>
           <option value="Short course">Short course</option> -->
-      </select>
+        </select>
 
-
-
-      <!-- <button class="accordion">Teaching Language</button> -->
-      <select class="mt-2" id="Teaching_language">
-
+        <!-- <button class="accordion">Teaching Language</button> -->
+        <select class="mt-2" id="Teaching_language">
           <option value="">--- Teaching language ---</option>
-      </select>
-      <!-- <button class="accordion">Beginning Semester</button> -->
-      <select class="mt-2"  id="Beginning_semester">
-
+        </select>
+        <!-- <button class="accordion">Beginning Semester</button> -->
+        <select class="mt-2" id="Beginning_semester">
           <option value="">--- Beginning Semester ---</option>
-
-      </select>
-      <!-- <button class="accordion">Duration</button> -->
-      <select class="mt-2" id="Duration">
-
+        </select>
+        <!-- <button class="accordion">Duration</button> -->
+        <select class="mt-2" id="Duration">
           <option value="">--- Duration ---</option>
+        </select>
 
-      </select>
+        <select class="mt-2" id="Tuition_fee">
+          <option value="">--- Tuition Fee---</option>
+        </select>
+      </div>
 
-      <select class="mt-2" id="Tuition_fee">
-
-        <option value="">--- Tuition Fee---</option>
-
-    </select>
-    
-
-  </div>
- 
-  <div class="mt-2" id="List_of_University"></div> 
-  
-  </div>
+      <div class="mt-2" id="List_of_University"></div>
+    </div>
   </body>
 </html>
