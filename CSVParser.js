@@ -128,7 +128,7 @@ function Rendering(dataList, data_to_process) {
     dataList.length * Current_Index +
     " Universities/Hochshule out of " +
     data_to_process.length;
-  console.log("this is data list " + dataList);
+  //console.log("this is data list " + dataList);
   if (dataList == "") {
     display_number.innerHTML =
       "Data Not Available, Please choose other options from the filter";
@@ -555,7 +555,7 @@ function MultiFilter(
   } else {
     Items_To_Show = 20;
   }
-  console.log("showing items:" + Items_To_Show);
+  //console.log("showing items:" + Items_To_Show);
   var container = document.getElementById("List_of_University");
   container.innerHTML = "";
   const result = CollegeList.filter(
@@ -594,7 +594,7 @@ function Pagination(data, size) {
   perv.appendChild(document.createTextNode("<<"));
   container.appendChild(perv);
 
-  console.log("THis is running");
+  //console.log("THis is running");
   for (let i = 0; i < PageSize; i++) {
     var e_1 = document.createElement("a");
     e_1.addEventListener("click", () => {
@@ -627,18 +627,18 @@ function Pagination(data, size) {
 
 function Previous(data) {
   PageID(Math.max(1, Current_Index - 1), data);
-  console.log("previous");
+  //console.log("previous");
 }
 
 function Next(data) {
   PageID(Math.min(Current_Index + 1, PageSize), data);
-  console.log("next");
+  //console.log("next");
 }
 
 // this function represents which page is seleted and what data needs to be shown.
 function PageID(index, data) {
   Current_Index = index;
-  console.log(index);
+  //console.log(index);
 
   ShowPage(Current_Index, data);
 }
@@ -656,11 +656,11 @@ function ShowPage(Page_ID, Data) {
     //problem idenfied to solve.
 
     num = (Page_ID - 1) * Items_To_Show + i;
-    console.log("This is oage size" + Math.ceil(Data.length % Items_To_Show));
+    //console.log("This is oage size" + Math.ceil(Data.length % Items_To_Show));
     //console.log(Data[num]);
     newdata.push(Data[num]);
   }
-  console.log(Data);
+  //console.log(Data);
   var container = document.getElementById("List_of_University");
   container.innerHTML = "";
   Rendering(newdata, Data);
