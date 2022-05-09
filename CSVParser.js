@@ -1,6 +1,9 @@
 const URL_TO_Check = "./new.csv";
-
+let Current_Index=0;
+let PageSize=1;
 let CollegeList = [];
+let Items_To_Show=20;
+let prev_page_id=1;
 class College {
   constructor(
     World_Ranking,
@@ -58,7 +61,8 @@ async function Execute() {
   const data = await GetData();
   DataParser(data);
   Fill_Value();
-  Rendering(CollegeList);
+  //Rendering(CollegeList);
+  Pagination(CollegeList,Items_To_Show);
 }
 
 async function GetData() {
@@ -115,10 +119,10 @@ function DataParser(data) {
   //console.log(CollegeList[2]);
 }
 
-function Rendering(dataList) {
+function Rendering(dataList,data_to_process) {
   
   var display_number= document.getElementById("Display_number");
-  display_number.innerHTML="Displaying "+ dataList.length+ " Universities/Hochshule";
+  display_number.innerHTML="Displaying "+ ((dataList.length*(Current_Index-1))+1) + "-"+dataList.length*Current_Index+ " Universities/Hochshule out of "+ data_to_process.length;
   
   if(dataList==null)
   {
@@ -131,7 +135,7 @@ function Rendering(dataList) {
   }
   let l = dataList.length;
   //console.log(CollegeList.length);
-  for (let i = 0; i < dataList.length; i++) {
+  for (let i = 0; i < l; i++) {
     var container = document.getElementById("List_of_University");
     var e_0 = document.createElement("div");
     var e_1 = document.createElement("div");
@@ -415,6 +419,7 @@ function Fill_Value()
 }
 }
 //7 parameter for filtering 
+
 var Search_Name_Uni = document.getElementById("search_name");
 var Search_Name_Course = document.getElementById("search_course");
 var Search_Course_type=document.getElementById("Course_type");
@@ -422,6 +427,8 @@ var Search_Language_teaching=document.getElementById("Teaching_language");
 var Search_Start_semeter=document.getElementById("Beginning_semester");
 var Search_Duration= document.getElementById("Duration");
 var Tuition= document.getElementById("Tuition_fee");
+var Display_Search= document.getElementById("display_size");
+
 
 Search_Name_Uni.addEventListener("keyup",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
 Search_Name_Course.addEventListener("keyup",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
@@ -430,6 +437,7 @@ Search_Language_teaching.addEventListener("change",e=>{delayKeyUp(() => {Search_
 Search_Start_semeter.addEventListener("change",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
 Search_Duration.addEventListener("change",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
 Tuition.addEventListener("change",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
+Display_Search.addEventListener("change",e=>{delayKeyUp(() => {Search_Uni_Course()}, 400);});
 
 
 
@@ -451,7 +459,7 @@ function Search_Uni_Course() {
 
 
 
-function Filter(name){
+/*function Filter(name){
   var container = document.getElementById("List_of_University");
   container.innerHTML="";
   const result=CollegeList.filter(p=> p.University_Name.toLowerCase().includes(name) ||  p.Course_Name.toLowerCase().includes(name) );
@@ -460,8 +468,16 @@ function Filter(name){
     Rendering(result);
   }
 
-}
+}*/
   function MultiFilter(university_name,course_name,course_type,teaching_language,start_semester,duration, range) {
+    if(Display_Search.value!=""){
+      Items_To_Show= Display_Search.value;
+    }
+    else{
+
+      Items_To_Show=20;
+    }
+    console.log("showing items:"+Items_To_Show);
     var container = document.getElementById("List_of_University");
     container.innerHTML="";
     const result=CollegeList.filter(p=> p.University_Name.toLowerCase().includes(university_name) &&
@@ -476,10 +492,114 @@ function Filter(name){
                                     );
       //console.log(result);
       if(result!=null){
-        Rendering(result);
+        //Rendering(result);
+        Pagination(result,Items_To_Show);
       }
+      
       
 }
 
+
+// takes the data and size.
+function Pagination(data,size)
+{
+Current_Index=1;
+PageSize=1;
+var container =document.getElementById("pagination");
+container.innerHTML="";
+PageSize= Math.ceil(data.length/size);
+// previous
+var perv = document.createElement("a");
+perv.addEventListener("click", ()=>{Previous(data);});
+perv.setAttribute("id", "previous");
+perv.appendChild(document.createTextNode("<<"));
+container.appendChild(perv);
+
+console.log("THis is running");
+for( let i =0; i<PageSize; i++) 
+{
+var e_1 = document.createElement("a");
+e_1.addEventListener("click", ()=>{PageID(i+1,data)});
+if(i>5){
+  e_1.setAttribute("class", "show");
+}
+e_1.setAttribute("id", i+1);
+//e_1.setAttribute("href", "#"+(i+1));
+e_1.appendChild(document.createTextNode(i+1));
+container.appendChild(e_1);
+}
+
+//next
+
+var next = document.createElement("a");
+next.addEventListener("click", ()=>{Next(data);});
+next.setAttribute("id", "next");
+next.appendChild(document.createTextNode(">>"));
+container.appendChild(next);
+
+//activate the page
+var yo= document.getElementById(1);
+yo.setAttribute("class","active");
+ShowPage(1,data);
+
+
+}
+
+
+function Previous(data){
+
+
+  PageID(Math.max(1,Current_Index-1),data);
+  console.log("previous");
+}
+
+
+function Next(data){
+
+ 
+  PageID( Math.min(Current_Index+1,PageSize),data);
+  console.log("next");
+}
+
+function PageID(index,data)
+{
+  Current_Index=index;
+  console.log(index);
+
+  ShowPage(Current_Index, data);
+}
+
+function ShowPage(Page_ID, Data){
+  //set page number active.
+  Active_Deactive(Page_ID);
+  
+  let newdata=[]
+  showItems=Items_To_Show;
+  if(Page_ID==PageSize)
+  {
+   showItems= Math.min(Items_To_Show,Math.ceil(Data.length%Items_To_Show))
+  }
+  for( let i =0; i<showItems;i++){ //problem idenfied to solve.
+    
+    num=((Page_ID-1)*Items_To_Show)+i;
+    console.log("This is oage size"+Math.ceil(Data.length%Items_To_Show));
+    //console.log(Data[num]);
+    newdata.push(Data[num]);
+  }
+  console.log(Data);
+  var container = document.getElementById("List_of_University");
+  container.innerHTML="";
+  Rendering(newdata,Data);
+  
+}
+
+function Active_Deactive(Page_ID)
+{
   
   
+  var deactive_class= document.getElementById(prev_page_id);
+  deactive_class.removeAttribute("class");  
+  prev_page_id=Page_ID;
+  var active_class= document.getElementById(prev_page_id);
+  active_class.setAttribute("class","active");
+}
