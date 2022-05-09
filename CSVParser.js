@@ -123,15 +123,14 @@ function Rendering(dataList,data_to_process) {
   
   var display_number= document.getElementById("Display_number");
   display_number.innerHTML="Displaying "+ ((dataList.length*(Current_Index-1))+1) + "-"+dataList.length*Current_Index+ " Universities/Hochshule out of "+ data_to_process.length;
-  
-  if(dataList==null)
+  console.log("this is data list "+ dataList);
+  if(dataList=="")
   {
-    var container = document.getElementById("List_of_University");
-   
-    var e_0 = document.createElement("div");
-    e_0.innerHTML="Data Not Available, Please choose other options from the filter";
     
-    container.append(e_0);
+    display_number.innerHTML="Data Not Available, Please choose other options from the filter";
+    var container =document.getElementById("pagination");
+    container.innerHTML="";
+    return;
   }
   let l = dataList.length;
   //console.log(CollegeList.length);
@@ -491,9 +490,14 @@ function Search_Uni_Course() {
                                         
                                     );
       //console.log(result);
-      if(result!=null){
+      if(result!=""){
         //Rendering(result);
+        
         Pagination(result,Items_To_Show);
+      }
+      else
+      {
+        Rendering("","");
       }
       
       
@@ -561,6 +565,7 @@ function Next(data){
   console.log("next");
 }
 
+// this function represents which page is seleted and what data needs to be shown.
 function PageID(index,data)
 {
   Current_Index=index;
