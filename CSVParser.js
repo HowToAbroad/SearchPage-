@@ -1,4 +1,5 @@
 const URL_TO_Check = "./new.csv";
+const URL_Search_Parameter=new URLSearchParams(location.search);
 let Current_Index = 0;
 let PageSize = 1;
 let CollegeList = [];
@@ -62,8 +63,20 @@ async function Execute() {
   const data = await GetData();
   DataParser(data);
   Fill_Value();
+  // after data is loaded
+  if(URL_Search_Parameter!=null)
+  {
+    if(URL_Search_Parameter!=null){
+      Search_Name_Uni.value=URL_Search_Parameter.get('uniName');
+      Search_Name_Course.value=URL_Search_Parameter.get('course');
+      console.log(URL_Search_Parameter.get('course'));
+    }
+    Search_Uni_Course();
+  }else{
+    Pagination(CollegeList, Items_To_Show);
+  }
   //Rendering(CollegeList);
-  Pagination(CollegeList, Items_To_Show);
+  
 }
 
 async function GetData() {
@@ -510,6 +523,7 @@ Display_Search.addEventListener("change", (e) => {
   }, 400);
 });
 
+
 function Search_Uni_Course() {
   var _Uni_name = Search_Name_Uni.value.toLowerCase();
   var _course_name = Search_Name_Course.value.toLowerCase();
@@ -568,7 +582,7 @@ function MultiFilter(
       p.Duration.toLowerCase().includes(duration) &&
       p.Tuition_Fee.toLowerCase().includes(range)
   );
-  //console.log(result);
+
   if (result != "") {
     //Rendering(result);
 
