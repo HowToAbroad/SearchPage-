@@ -1,4 +1,4 @@
-const URL_TO_Check = "./new.csv";
+const URL_TO_Check = "https://howtoabroad.github.io/SearchPage/new.csv";
 const URL_Search_Parameter=new URLSearchParams(location.search);
 let Current_Index = 0;
 let PageSize = 1;
@@ -133,7 +133,7 @@ function DataParser(data) {
     num++;
   });
 
-  //console.log(CollegeList[2]);
+  console.log(CollegeList[2]);
 }
 
 function Rendering(dataList, data_to_process) {
