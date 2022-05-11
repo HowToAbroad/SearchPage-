@@ -27,7 +27,8 @@ class College {
     Duration,
     Course_Link,
     Application_Link,
-    Logo
+    Logo,
+    Updated
   ) {
     this.World_Ranking = World_Ranking == "" ? "NA" : World_Ranking;
     this.German_Ranking = German_Ranking == "" ? "NA" : German_Ranking;
@@ -55,6 +56,7 @@ class College {
     this.Course_Link = Course_Link == "" ? "NA" : Course_Link;
     this.Application_Link = Application_Link == "" ? "none" : Application_Link;
     this.Logo = Logo;
+    this.Updated = Updated;
   }
 }
 Execute();
@@ -69,7 +71,7 @@ async function Execute() {
     if(URL_Search_Parameter!=null){
       Search_Name_Uni.value=URL_Search_Parameter.get('uniName');
       Search_Name_Course.value=URL_Search_Parameter.get('course');
-      console.log(URL_Search_Parameter.get('course'));
+      //console.log(URL_Search_Parameter.get('course'));
     }
     Search_Uni_Course();
   }else{
@@ -123,13 +125,15 @@ function DataParser(data) {
       rows[17],
       rows[18],
       rows[19],
-      rows[20]
+      rows[20],
+      rows[21],
+      rows[24]
     );
 
     num++;
   });
 
-  //console.log(CollegeList[2]);
+  console.log(CollegeList[2]);
 }
 
 function Rendering(dataList, data_to_process) {
@@ -174,7 +178,7 @@ function Rendering(dataList, data_to_process) {
     //logo
     e_6.setAttribute(
       "src",
-      "https://i0.wp.com/howtoabroad.com/wp-content/uploads/2022/04/SRH-Berlin-School-of-Management.png"
+      dataList[i].Logo
     );
     e_5.appendChild(e_6);
     e_4.appendChild(e_5);
