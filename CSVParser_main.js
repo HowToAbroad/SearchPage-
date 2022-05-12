@@ -201,7 +201,7 @@ function Rendering(dataList, data_to_process) {
     var e_11 = document.createElement("div");
     e_11.setAttribute("class", "ratings mr-2");
     e_11.setAttribute("bis_skin_checked", "1");
-    var e_12 = document.createElement("i");
+    /*var e_12 = document.createElement("i");
     e_12.setAttribute("class", "fa fa-star");
     e_11.appendChild(e_12);
     var e_13 = document.createElement("i");
@@ -212,7 +212,7 @@ function Rendering(dataList, data_to_process) {
     e_11.appendChild(e_14);
     var e_15 = document.createElement("i");
     e_15.setAttribute("class", "fa fa-star");
-    e_11.appendChild(e_15);
+    e_11.appendChild(e_15);*/
     e_10.appendChild(e_11);
     var e_16 = document.createElement("span");
     var e_17 = document.createElement("h6");
