@@ -133,7 +133,7 @@ function DataParser(data) {
     num++;
   });
 
-  //console.log(CollegeList[2]);
+  console.log(CollegeList[2]);
 }
 
 function Rendering(dataList, data_to_process) {
