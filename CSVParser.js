@@ -344,12 +344,12 @@ function Rendering(dataList, data_to_process) {
     //application deadline
     e_44.appendChild(
       document.createTextNode(
-        "Appication Deadline Summer: " + dataList[i].Application_Deadline_Summer
+        "Application Deadline Summer: " + dataList[i].Application_Deadline_Summer
       )
     );
     e_50.appendChild(
       document.createTextNode(
-        "Appication Deadline Winter: " + dataList[i].Application_Deadline_Winter
+        "Application Deadline Winter: " + dataList[i].Application_Deadline_Winter
       )
     );
     e_51.appendChild(
