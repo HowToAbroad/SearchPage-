@@ -485,6 +485,8 @@ var Search_Start_semeter = document.getElementById("Beginning_semester");
 var Search_Duration = document.getElementById("Duration");
 var Tuition = document.getElementById("Tuition_fee");
 var Display_Search = document.getElementById("display_size");
+var Reset_Search = document.getElementById("reset");
+Reset_Search.addEventListener("click",Reset);
 
 Search_Name_Uni.addEventListener("keyup", (e) => {
   delayKeyUp(() => {
@@ -527,6 +529,10 @@ Display_Search.addEventListener("change", (e) => {
   }, 400);
 });
 
+function Reset()
+{
+  document.location.reload(true);
+}
 
 function Search_Uni_Course() {
   var _Uni_name = Search_Name_Uni.value.toLowerCase();
