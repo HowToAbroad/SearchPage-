@@ -33,9 +33,12 @@
       <div class="pagination" id="pagination">
         
       </div>
-    </div>
+    </div >
+    
       <div class="container d-flex mt-5 " >
-      <div class="col-2 d-flex flex-column mt-5" id="side_box">
+        <div class= 'w-25'>
+      <div class="col-2 d-flex flex-column mt-5 position-fixed" id="side_box">
+        
         <button type="button" class="btn btn-dark"id="reset"style="font-size:10px">Reset Filters <i class="fa fa-refresh"></i></button>
         <input
           class="input-group-text mt-2"
@@ -68,6 +71,7 @@
         <!-- <button class="accordion">Teaching Language</button> -->
         <select class="btn btn-secondary dropdown-toggle mt-2" id="Teaching_language">
           <option value="">--- Teaching language ---</option>
+
         </select>
         <!-- <button class="accordion">Beginning Semester</button> -->
         <select class="btn btn-secondary dropdown-toggle mt-2" id="Beginning_semester">
@@ -81,9 +85,28 @@
         <select class="btn btn-secondary dropdown-toggle mt-2" id="Tuition_fee">
           <option value="">--- Tuition Fee---</option>
         </select>
-      </div>
 
-      <div class="mt-2" id="List_of_University"></div>
+        
+
+        
+      </div>
+    </div>
+      <div class="Ranking">
+          <select  class="btn btn-secondary dropdown-toggle mt-2 " id="Sort_by_Ranking">
+            <option value="0">---Sort by Ranking---</option>
+            <option value="1">World Ranking</option>
+            <option value="2">German Ranking</option>
+          </select>
+         </div>
+       
+        
+        <div  onload="return randomColor()" class="mt-2 "  id="List_of_University"></div>
+
+        
+      </div>
+      
+        
+      </div>
     </div>
   </body>
 </html>

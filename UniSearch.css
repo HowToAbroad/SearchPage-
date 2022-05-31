@@ -37,6 +37,8 @@
 }
 
 
+
+
 .center {
     text-align: center;
   }
@@ -65,4 +67,10 @@
   .show{
       
       display: none;
+  }
+
+  .Ranking{
+      top: 9;
+      right: 159px;
+      position: absolute;
   }

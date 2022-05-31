@@ -1,5 +1,5 @@
 const URL_TO_Check = "./new.csv";
-const URL_Search_Parameter=new URLSearchParams(location.search);
+const URL_Search_Parameter = new URLSearchParams(location.search);
 let Current_Index = 0;
 let PageSize = 1;
 let CollegeList = [];
@@ -66,19 +66,17 @@ async function Execute() {
   DataParser(data);
   Fill_Value();
   // after data is loaded
-  if(URL_Search_Parameter!=null)
-  {
-    if(URL_Search_Parameter!=null){
-      Search_Name_Uni.value=URL_Search_Parameter.get('uniName');
-      Search_Name_Course.value=URL_Search_Parameter.get('course');
+  if (URL_Search_Parameter != null) {
+    if (URL_Search_Parameter != null) {
+      Search_Name_Uni.value = URL_Search_Parameter.get("uniName");
+      Search_Name_Course.value = URL_Search_Parameter.get("course");
       //console.log(URL_Search_Parameter.get('course'));
     }
     Search_Uni_Course();
-  }else{
+  } else {
     Pagination(CollegeList, Items_To_Show);
   }
   //Rendering(CollegeList);
-  
 }
 
 async function GetData() {
@@ -133,10 +131,13 @@ function DataParser(data) {
     num++;
   });
 
-  console.log(CollegeList[2]);
+  console.log(CollegeList);
 }
-
+//datalist - whole data
+//
 function Rendering(dataList, data_to_process) {
+  // console.log(dataList);
+  // console.log(data_to_process);
   var display_number = document.getElementById("Display_number");
   display_number.innerHTML =
     "Displaying " +
@@ -156,9 +157,12 @@ function Rendering(dataList, data_to_process) {
   let l = dataList.length;
   //console.log(CollegeList.length);
   for (let i = 0; i < l; i++) {
+    
     var container = document.getElementById("List_of_University");
     var e_0 = document.createElement("div");
+
     var e_1 = document.createElement("div");
+    // e_0.setAttribute("float right");
     e_1.setAttribute("class", "container mt-5 mb-5");
     e_1.setAttribute("bis_skin_checked", "1");
     var e_2 = document.createElement("div");
@@ -176,10 +180,7 @@ function Rendering(dataList, data_to_process) {
     var e_6 = document.createElement("img");
     e_6.setAttribute("class", "img-fluid img-responsive rounded product-image");
     //logo
-    e_6.setAttribute(
-      "src",
-      dataList[i].Logo
-    );
+    e_6.setAttribute("src", dataList[i].Logo);
     e_5.appendChild(e_6);
     e_4.appendChild(e_5);
     var e_7 = document.createElement("div");
@@ -201,7 +202,7 @@ function Rendering(dataList, data_to_process) {
     var e_11 = document.createElement("div");
     e_11.setAttribute("class", "ratings mr-2");
     e_11.setAttribute("bis_skin_checked", "1");
-   /* var e_12 = document.createElement("i");
+    /* var e_12 = document.createElement("i");
     e_12.setAttribute("class", "fa fa-star");
     e_11.appendChild(e_12);
     var e_13 = document.createElement("i");
@@ -344,12 +345,14 @@ function Rendering(dataList, data_to_process) {
     //application deadline
     e_44.appendChild(
       document.createTextNode(
-        "Application Deadline Summer: " + dataList[i].Application_Deadline_Summer
+        "Application Deadline Summer: " +
+          dataList[i].Application_Deadline_Summer
       )
     );
     e_50.appendChild(
       document.createTextNode(
-        "Application Deadline Winter: " + dataList[i].Application_Deadline_Winter
+        "Application Deadline Winter: " +
+          dataList[i].Application_Deadline_Winter
       )
     );
     e_51.appendChild(
@@ -485,8 +488,9 @@ var Search_Start_semeter = document.getElementById("Beginning_semester");
 var Search_Duration = document.getElementById("Duration");
 var Tuition = document.getElementById("Tuition_fee");
 var Display_Search = document.getElementById("display_size");
+var Search_sortByRanking = document.getElementById("Sort_by_Ranking");
 var Reset_Search = document.getElementById("reset");
-Reset_Search.addEventListener("click",Reset);
+Reset_Search.addEventListener("click", Reset);
 
 Search_Name_Uni.addEventListener("keyup", (e) => {
   delayKeyUp(() => {
@@ -528,12 +532,17 @@ Display_Search.addEventListener("change", (e) => {
     Search_Uni_Course();
   }, 400);
 });
+Search_sortByRanking.addEventListener("change", (e) => {
+  console.log(e.target.value);
+  delayKeyUp(() => {
+    sortbyRanking(e.target.value);
+  }, 400);
+});
 
-function Reset()
-{
+function Reset() {
   document.location.reload(true);
 }
-
+//////
 function Search_Uni_Course() {
   var _Uni_name = Search_Name_Uni.value.toLowerCase();
   var _course_name = Search_Name_Course.value.toLowerCase();
@@ -542,6 +551,8 @@ function Search_Uni_Course() {
   var _start_semester = Search_Start_semeter.value.toLowerCase();
   var _duration = Search_Duration.value.toLowerCase();
   var _fee = Tuition.value.toLowerCase();
+  var _sortbyRanking = Sort_by_Ranking.value;
+  // var _rank = Search_rank.toLowerCase();
   //input_type = document.getElementById("search_name").value.toLowerCase();
   //Filter(name);
   MultiFilter(
@@ -551,7 +562,8 @@ function Search_Uni_Course() {
     _teaching_Language,
     _start_semester,
     _duration,
-    _fee
+    _fee,
+    _sortbyRanking
   );
 }
 
@@ -565,6 +577,8 @@ function Search_Uni_Course() {
   }
 
 }*/
+let resultarr = [];
+
 function MultiFilter(
   university_name,
   course_name,
@@ -582,26 +596,45 @@ function MultiFilter(
   //console.log("showing items:" + Items_To_Show);
   var container = document.getElementById("List_of_University");
   container.innerHTML = "";
-  const result = CollegeList.filter(
-    (p) =>
-      p.University_Name.toLowerCase().includes(university_name) &&
-      p.Course_Name.toLowerCase().includes(course_name) &&
-      p.Course_Type.toLowerCase().includes(course_type) &&
-      p.Teaching_Language.toLowerCase().includes(teaching_language) &&
-      p.Semester_Start.toLowerCase().includes(start_semester) &&
-      p.Duration.toLowerCase().includes(duration) &&
-      p.Tuition_Fee.toLowerCase().includes(range)
-  );
-
+  let result;
+  console.log(resultarr);
+  if(resultarr.length == 0){
+    result = CollegeList.filter(
+      (p) =>
+        p.University_Name.toLowerCase().includes(university_name) &&
+        p.Course_Name.toLowerCase().includes(course_name) &&
+        p.Course_Type.toLowerCase().includes(course_type) &&
+        p.Teaching_Language.toLowerCase().includes(teaching_language) &&
+        p.Semester_Start.toLowerCase().includes(start_semester) &&
+        p.Duration.toLowerCase().includes(duration) &&
+        p.Tuition_Fee.toLowerCase().includes(range)
+    );
+     
+  resultarr = result;
+  }
+  else{
+    result = resultarr.filter(
+      (p) =>
+        p.University_Name.toLowerCase().includes(university_name) &&
+        p.Course_Name.toLowerCase().includes(course_name) &&
+        p.Course_Type.toLowerCase().includes(course_type) &&
+        p.Teaching_Language.toLowerCase().includes(teaching_language) &&
+        p.Semester_Start.toLowerCase().includes(start_semester) &&
+        p.Duration.toLowerCase().includes(duration) &&
+        p.Tuition_Fee.toLowerCase().includes(range)
+    );
+  }
   if (result != "") {
     //Rendering(result);
-
+    // console.log(result);
     Pagination(result, Items_To_Show);
+
   } else {
+    console.log(result);
     Rendering("", "");
   }
+  // console.log(resultarr);
 }
-
 // takes the data and size.
 function Pagination(data, size) {
   Current_Index = 1;
@@ -632,9 +665,7 @@ function Pagination(data, size) {
     e_1.appendChild(document.createTextNode(i + 1));
     container.appendChild(e_1);
   }
-
   //next
-
   var next = document.createElement("a");
   next.addEventListener("click", () => {
     Next(data);
@@ -663,14 +694,11 @@ function Next(data) {
 function PageID(index, data) {
   Current_Index = index;
   //console.log(index);
-
   ShowPage(Current_Index, data);
 }
-
 function ShowPage(Page_ID, Data) {
   //set page number active.
   Active_Deactive(Page_ID);
-
   let newdata = [];
   showItems = Items_To_Show;
   if (Page_ID == PageSize) {
@@ -678,7 +706,6 @@ function ShowPage(Page_ID, Data) {
   }
   for (let i = 0; i < showItems; i++) {
     //problem idenfied to solve.
-
     num = (Page_ID - 1) * Items_To_Show + i;
     //console.log("This is oage size" + Math.ceil(Data.length % Items_To_Show));
     //console.log(Data[num]);
@@ -696,4 +723,119 @@ function Active_Deactive(Page_ID) {
   prev_page_id = Page_ID;
   var active_class = document.getElementById(prev_page_id);
   active_class.setAttribute("class", "active");
+}
+
+////Sorting via Ranking
+function sortbyRanking(value) {
+  let temparr = [];
+  let temparr2 = [];
+  if(value==0){
+    Pagination(CollegeList,Items_To_Show);
+  }
+  if (value == 1) {
+    for (let index in resultarr) {
+      if (resultarr[index].World_Ranking == "NA") {
+        temparr.push(resultarr[index]);
+      } else {
+        temparr2.push(resultarr[index]);
+      }
+    }
+    temparr2.sort((a, b) => a.World_Ranking - b.World_Ranking);
+    let arr = [];
+    for (let i = 0; i < Items_To_Show; i++) {
+      arr.push(temparr2[i]);
+    }
+    let temparr3 = temparr2.concat(temparr);
+    resultarr = temparr3;
+    sortbyWorldRanking(arr, temparr3); 
+  }
+
+  if(value==2){
+    for (let index in resultarr) {
+      if (resultarr[index].German_Ranking == "NA") {
+        temparr.push(resultarr[index]);
+      } else {
+        temparr2.push(resultarr[index]);
+      }
+    }
+    temparr2.sort((a, b) => a.German_Ranking - b.German_Ranking);
+    let arr = [];
+    for (let i = 0; i < Items_To_Show; i++) {
+      arr.push(temparr2[i]);
+    }
+
+    let temparr3 = temparr2.concat(temparr);
+    resultarr = temparr3;
+    sortbyGermanRanking(arr, temparr3);
+  }
+}
+
+function sortbyWorldRanking(dataList, tempList) {
+  Pagination(tempList, Items_To_Show);
+  // console.log(tempList)
+
+  Rendering(dataList, tempList);
+}
+
+function sortbyGermanRanking(dataList, tempList) {
+  Pagination(tempList, Items_To_Show);
+  Rendering(dataList, tempList);
+}
+
+// var expanded = false;
+
+// function showCheckboxes() {
+//   var checkboxes = document.getElementById("checkboxes");
+//   if (!expanded) {
+//     checkboxes.style.display = "block";
+//     expanded = true;
+//   } else {
+//     checkboxes.style.display = "none";
+//     expanded = false;
+//   }
+// }
+
+function teaching_language(dataList) {
+  let temparr = [];
+  if (dataList[i].Teaching_Language == "English") {
+    temparr.push(dataList[i]);
+    Pagination(temparr, Items_To_Show);
+    Rendering(dataList, temparr);
+  }
+  if (dataList[i].Teaching_Language == "Chinese") {
+    temparr.push(dataList[i]);
+    Pagination(temparr, Items_To_Show);
+    Rendering(dataList, temparr);
+  }
+  if (dataList[i].Teaching_Language == "French") {
+    temparr.push(dataList[i]);
+    Pagination(temparr, Items_To_Show);
+    Rendering(dataList, temparr);
+  }
+  if (dataList[i].Teaching_Language == "German") {
+    temparr.push(dataList[i]);
+    Pagination(temparr, Items_To_Show);
+    Rendering(dataList, temparr);
+  }
+  if (dataList[i].Teaching_Language == "Russian") {
+    temparr.push(dataList[i]);
+    Pagination(temparr, Items_To_Show);
+    Rendering(dataList, temparr);
+  }
+}
+
+// function changeColor(){
+//   var bgcolorlist=new Array("silver", "#BAF3C3", "#c3baf3")
+
+// $(".three").css("background-color",bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)]);
+// }
+
+
+function randomColor() {
+  var color = '#';
+  var colorCode = ['ffaf40','2A9BFB','ff5967','7870cc','33ccbf']; // colors
+   
+  color += colorCode[Math.floor(Math.random() * colorCode.length)];
+
+  document.getElementsById("List_of_University").style.backgroundColor; // id name to random color
 }
