@@ -171,9 +171,15 @@ function Rendering(dataList, data_to_process) {
     var e_3 = document.createElement("div");
     e_3.setAttribute("class", "col-md-10");
     e_3.setAttribute("bis_skin_checked", "1");
+    // e_3.setAttribute("style","backgroundColor", randomColor());
+    e_3.setAttribute("style", `background-color : ${randomColor()} `);
+
+  
+          
     var e_4 = document.createElement("div");
-    e_4.setAttribute("class", "row p-2 bg-white border rounded");
+    e_4.setAttribute("class", "row p-2  border rounded");
     e_4.setAttribute("bis_skin_checked", "1");
+    
     var e_5 = document.createElement("div");
     e_5.setAttribute("class", "col-md-3 mt-1");
     e_5.setAttribute("bis_skin_checked", "1");
@@ -597,7 +603,7 @@ function MultiFilter(
   var container = document.getElementById("List_of_University");
   container.innerHTML = "";
   let result;
-  console.log(resultarr);
+  // console.log(resultarr);
   if(resultarr.length == 0){
     result = CollegeList.filter(
       (p) =>
@@ -795,47 +801,37 @@ function sortbyGermanRanking(dataList, tempList) {
 //   }
 // }
 
-function teaching_language(dataList) {
-  let temparr = [];
-  if (dataList[i].Teaching_Language == "English") {
-    temparr.push(dataList[i]);
-    Pagination(temparr, Items_To_Show);
-    Rendering(dataList, temparr);
-  }
-  if (dataList[i].Teaching_Language == "Chinese") {
-    temparr.push(dataList[i]);
-    Pagination(temparr, Items_To_Show);
-    Rendering(dataList, temparr);
-  }
-  if (dataList[i].Teaching_Language == "French") {
-    temparr.push(dataList[i]);
-    Pagination(temparr, Items_To_Show);
-    Rendering(dataList, temparr);
-  }
-  if (dataList[i].Teaching_Language == "German") {
-    temparr.push(dataList[i]);
-    Pagination(temparr, Items_To_Show);
-    Rendering(dataList, temparr);
-  }
-  if (dataList[i].Teaching_Language == "Russian") {
-    temparr.push(dataList[i]);
-    Pagination(temparr, Items_To_Show);
-    Rendering(dataList, temparr);
-  }
-}
-
-// function changeColor(){
-//   var bgcolorlist=new Array("silver", "#BAF3C3", "#c3baf3")
-
-// $(".three").css("background-color",bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)]);
+// function teaching_language(dataList) {
+//   let temparr = [];
+//   if (dataList[i].Teaching_Language == "English") {
+//     temparr.push(dataList[i]);
+//     Pagination(temparr, Items_To_Show);
+//     Rendering(dataList, temparr);
+//   }
+//   if (dataList[i].Teaching_Language == "Chinese") {
+//     temparr.push(dataList[i]);
+//     Pagination(temparr, Items_To_Show);
+//     Rendering(dataList, temparr);
+//   }
+//   if (dataList[i].Teaching_Language == "French") {
+//     temparr.push(dataList[i]);
+//     Pagination(temparr, Items_To_Show);
+//     Rendering(dataList, temparr);
+//   }
+//   if (dataList[i].Teaching_Language == "German") {
+//     temparr.push(dataList[i]);
+//     Pagination(temparr, Items_To_Show);
+//     Rendering(dataList, temparr);
+//   }
+//   if (dataList[i].Teaching_Language == "Russian") {
+//     temparr.push(dataList[i]);
+//     Pagination(temparr, Items_To_Show);
+//     Rendering(dataList, temparr);
+//   }
 // }
-
-
 function randomColor() {
   var color = '#';
-  var colorCode = ['ffaf40','2A9BFB','ff5967','7870cc','33ccbf']; // colors
-   
+  var colorCode = ['D5F9F9','E7DDFA','DCE2FC','E4FCDC','F9FCDC','FCF2DC','FCE0DC']; // colors
   color += colorCode[Math.floor(Math.random() * colorCode.length)];
-
-  document.getElementsById("List_of_University").style.backgroundColor; // id name to random color
+  return color;
 }
