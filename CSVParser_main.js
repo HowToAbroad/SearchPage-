@@ -697,3 +697,5 @@ function Active_Deactive(Page_ID) {
   var active_class = document.getElementById(prev_page_id);
   active_class.setAttribute("class", "active");
 }
+
+

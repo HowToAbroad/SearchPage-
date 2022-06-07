@@ -697,3 +697,14 @@ function Active_Deactive(Page_ID) {
   var active_class = document.getElementById(prev_page_id);
   active_class.setAttribute("class", "active");
 }
+
+/* toggle between showing and hiding the navigation menu links when the user clicks 
+on the hamburger menu */
+function myFunction() {
+  var x = document.getElementById("myLinks");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
