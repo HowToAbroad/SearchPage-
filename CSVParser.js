@@ -697,3 +697,26 @@ function Active_Deactive(Page_ID) {
   var active_class = document.getElementById(prev_page_id);
   active_class.setAttribute("class", "active");
 }
+
+/* toggle between showing and hiding the navigation menu links when the user clicks 
+on the hamburger menu */
+function myFunction() {
+  var x = document.getElementById("side_box");
+  
+  console.log(x.style.display);
+  if (x.style.display === "block") {
+    console.log("i am here ");
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+  console.log("Second time "+x.style.display);
+}
+
+
+// const hamburger = document.getElementById('hamburger');
+// const resetButton = document.getElementById('reset');
+
+// hamburger.addEventListener('click', () => {
+//   resetButton.btn-dark.toggle('show');
+// }) 
