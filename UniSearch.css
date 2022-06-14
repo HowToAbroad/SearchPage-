@@ -232,10 +232,7 @@ input[type="range"]::-ms-thumb {
       width: 240px;
     }
   @media screen and (max-width: 980px) {
-  
-      
-     
-      
+
       .menu-wrap .hamburger {
         position: absolute;
         top: 0;
@@ -360,19 +357,7 @@ input[type="range"]::-ms-thumb {
         text-decoration: none;
         transition: color 0.4s ease;
       }
-      
-      select{
-          width: 240px;
-      }
-      #reset{
-        width: 240px;
-      }
-      #search_name{
-        width: 240px;
-      }
-      #search_course{
-        width: 240px;
-      }
+    
     
   }
   
@@ -380,7 +365,5 @@ input[type="range"]::-ms-thumb {
     .menu-wrap .toggler:checked{
         visibility: hidden;
     }
-      
-  
-  
+
 }

@@ -825,78 +825,63 @@ function randomColor() {
 }
 
 
-function sliders() 
-{
-  const parent = document.querySelector('.range-slider');
+// function sliders() 
+// {
+//   const parent = document.querySelector('.range-slider');
 
-  if (!parent) {
-      return;
-  }
+//   if (!parent) {
+//       return;
+//   }
 
-  const rangeS = parent.querySelectorAll('input[type="range"]'),
-        numberS = parent.querySelectorAll('input[type="number"]');
+//   const rangeS = parent.querySelectorAll('input[type="range"]'),
+//         numberS = parent.querySelectorAll('input[type="number"]');
 
-  rangeS.forEach((el) => {
-      el.oninput = () => {
-          let slide1 = parseFloat(rangeS[0].value),
-              slide2 = parseFloat(rangeS[1].value);
+//   rangeS.forEach((el) => {
+//       el.oninput = () => {
+//           let slide1 = parseFloat(rangeS[0].value),
+//               slide2 = parseFloat(rangeS[1].value);
 
-          if (slide1 > slide2) {
-              [slide1, slide2] = [slide2, slide1];
-          }
+//           if (slide1 > slide2) {
+//               [slide1, slide2] = [slide2, slide1];
+//           }
 
-          numberS[0].value = slide1;
-          numberS[1].value = slide2;
-      }
-  });
+//           numberS[0].value = slide1;
+//           numberS[1].value = slide2;
+//       }
+//   });
 
-  numberS.forEach((el) => {
-      el.oninput = () => {
-          let number1 = parseFloat(numberS[0].value),
-              number2 = parseFloat(numberS[1].value);
+//   numberS.forEach((el) => {
+//       el.oninput = () => {
+//           let number1 = parseFloat(numberS[0].value),
+//               number2 = parseFloat(numberS[1].value);
 
-          if (number1 > number2) {
-              let tmp = number1;
-              numberS[0].value = number2;
-              numberS[1].value = tmp;
-          }
+//           if (number1 > number2) {
+//               let tmp = number1;
+//               numberS[0].value = number2;
+//               numberS[1].value = tmp;
+//           }
 
-          rangeS[0].value = number1;
-          rangeS[1].value = number2;
-      }
-  });
-}
+//           rangeS[0].value = number1;
+//           rangeS[1].value = number2;
+//       }
+//   });
+// }
 
-function tuition_Fee(){
-  console.log(CollegeList);
- let Minfee  = document.getElementById("mintutionfee");
- let  Maxfee  = document.getElementById("maxtutionfee");
- let array = [];
- for(index in CollegeList){
-  if(Minfee.value == 0 && Maxfee.value == 0){
-    if(CollegeList[index].Tuition_Fee == 'None'){
-      array.push(CollegeList[index]);
-    }
-    Pagination(array,Items_To_Show);
+// function tuition_Fee(){
+//   console.log(CollegeList);
+//  let Minfee  = document.getElementById("mintutionfee");
+//  let  Maxfee  = document.getElementById("maxtutionfee");
+//  let array = [];
+//  for(index in CollegeList){
+//   if(Minfee.value == 0 && Maxfee.value == 0){
+//     if(CollegeList[index].Tuition_Fee == 'None'){
+//       array.push(CollegeList[index]);
+//     }
+//     Pagination(array,Items_To_Show);
     
-    console.log(CollegeList);
+//     console.log(CollegeList);
     
-  }
- }
+//   }
+//  }
  
-}
-
-
-
-
-const menuBtn = document.getElementById('side_box');
-let menuOpen = false;
-menuBtn.addEventListener('click', () => {
-  if(!menuOpen) {
-    menuBtn.classList.add('open');
-    menuOpen = true;
-  } else {
-    menuBtn.classList.remove('open');
-    menuOpen = false;
-  }
-});
+// }
