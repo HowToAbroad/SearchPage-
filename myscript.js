@@ -1,4 +1,4 @@
-const URL_TO_Check = "./Sheetnew2.csv";
+const URL_TO_Check = "./sheetnew2.csv";
 const URL_Search_Parameter = new URLSearchParams(location.search);
 let Current_Index = 0;
 let PageSize = 1;
@@ -47,7 +47,6 @@ class College {
       Required_German_Grade == "" ? "Not Available" : Required_German_Grade;
     this.GRE = GRE == "" ? "NA" : GRE;
     this.Tuition_Fee = Tuition_Fee == "" ? "Not Available" : Tuition_Fee;
-    this.Tuition_Fee = Tuition_Fee == "None" ? 0 : Tuition_Fee;
     this.Semester_Start = Semester_Start == "" ? "NA" : Semester_Start;
     this.Application_Deadline_Winter =
       Application_Deadline_Winter == "" ? "NA" : Application_Deadline_Winter;
@@ -558,7 +557,7 @@ function Search_Uni_Course() {
   var _start_semester = Search_Start_semeter.value.toLowerCase();
   var _duration = Search_Duration.value.toLowerCase();
   var _fee = Tuition.value.toLowerCase();
-  // var _sortbyRanking = Sort_by_Ranking.value;
+  var _sortbyRanking = Sort_by_Ranking.value;
   // var _rank = Search_rank.toLowerCase();
   //input_type = document.getElementById("search_name").value.toLowerCase();
   //Filter(name);
@@ -570,7 +569,7 @@ function Search_Uni_Course() {
     _start_semester,
     _duration,
     _fee,
-    // _sortbyRanking
+    _sortbyRanking
   );
 }
 
@@ -586,7 +585,7 @@ function Search_Uni_Course() {
 }*/
 
 let resultarr = [];
-let x=1;
+let value = '';
 function MultiFilter(
   university_name,
   course_name,
@@ -607,7 +606,7 @@ function MultiFilter(
   container.innerHTML = "";
   let result = [] ;
 
-  if(x == 1){
+  if(resultarr.length == 0){
     result = CollegeList.filter(
       (p) =>
       p.University_Name.toLowerCase().includes(university_name) &&
@@ -615,11 +614,10 @@ function MultiFilter(
       p.Course_Type.toLowerCase().includes(course_type) &&
       p.Teaching_Language.toLowerCase().includes(teaching_language) &&
       p.Semester_Start.toLowerCase().includes(start_semester) &&
-      p.Duration.toLowerCase().includes(duration) 
-      // p.Tuition_Fee.toLowerCase().includes(range) 
-      
-  )
-  resultarr = result;
+      p.Duration.toLowerCase().includes(duration) &&
+      p.Tuition_Fee.toLowerCase().includes(range) 
+      // p.Sort_by_Ranking.includes(value)
+  );
   
   }
   else{
@@ -630,20 +628,26 @@ function MultiFilter(
         p.Course_Type.toLowerCase().includes(course_type) &&
         p.Teaching_Language.toLowerCase().includes(teaching_language) &&
         p.Semester_Start.toLowerCase().includes(start_semester) &&
-        p.Duration.toLowerCase().includes(duration) 
-        // p.Tuition_Fee.toLowerCase().includes(range)
+        p.Duration.toLowerCase().includes(duration) &&
+        p.Tuition_Fee.toLowerCase().includes(range)
     );
   }
-  
   if (result != "") {
     //Rendering(result);
     // console.log(result);
-   if(x==0){
-    resultarr = result;
-   }
-    Pagination(result, Items_To_Show);
-  } 
-  else {
+    sortbyRanking();
+    if(value==0){
+        Pagination(result, Items_To_Show);
+    }
+    else if (value==1){
+        resultarr = result;
+        sortbyWorldRanking(resultarr);
+    }
+    else if (value==2){
+        resultarr = result;
+        sortbyGermanRanking(resultarr);
+    }
+  } else {
     // console.log(result);
     Rendering("", "");
   }
@@ -741,17 +745,8 @@ function Active_Deactive(Page_ID) {
 
 ////Sorting via Ranking
 
-function sortbyRanking(value) {
-  x=0;
-  if(value==0){
-    Pagination(CollegeList,Items_To_Show);
-  }
-  else if (value == 1) {
-    sortbyWorldRanking(resultarr); 
-  }
-  else if (value == 2) {
-    sortbyGermanRanking(resultarr); 
-  } 
+function sortbyRanking() {
+  return value;
   }
 
 
@@ -824,79 +819,20 @@ function randomColor() {
   return color;
 }
 
-
-function sliders() 
-{
-  const parent = document.querySelector('.range-slider');
-
-  if (!parent) {
-      return;
-  }
-
-  const rangeS = parent.querySelectorAll('input[type="range"]'),
-        numberS = parent.querySelectorAll('input[type="number"]');
-
-  rangeS.forEach((el) => {
-      el.oninput = () => {
-          let slide1 = parseFloat(rangeS[0].value),
-              slide2 = parseFloat(rangeS[1].value);
-
-          if (slide1 > slide2) {
-              [slide1, slide2] = [slide2, slide1];
-          }
-
-          numberS[0].value = slide1;
-          numberS[1].value = slide2;
-      }
-  });
-
-  numberS.forEach((el) => {
-      el.oninput = () => {
-          let number1 = parseFloat(numberS[0].value),
-              number2 = parseFloat(numberS[1].value);
-
-          if (number1 > number2) {
-              let tmp = number1;
-              numberS[0].value = number2;
-              numberS[1].value = tmp;
-          }
-
-          rangeS[0].value = number1;
-          rangeS[1].value = number2;
-      }
-  });
-}
-
-function tuition_Fee(){
-  console.log(CollegeList);
- let Minfee  = document.getElementById("mintutionfee");
- let  Maxfee  = document.getElementById("maxtutionfee");
- let array = [];
- for(index in CollegeList){
-  if(Minfee.value == 0 && Maxfee.value == 0){
-    if(CollegeList[index].Tuition_Fee == 'None'){
-      array.push(CollegeList[index]);
+function tuitionfee(){
+  for(index in resultarr){
+    if(resultarr[index].Tuition_Fee == 'None'){
+      resultarr[index].Tuition_Fee = 0;
     }
-    Pagination(array,Items_To_Show);
-    
-    console.log(CollegeList);
-    
+    else if(resultarr[index].Tuition_Fee == 'Varied'){
+      resultarr[index].Tuition_Fee = '\u20AC100000';
+    }
+    else if(resultarr[index].Tuition_Fee >= '\u20AC1000' && resultarr[index].Tuition_Fee <= '\u20AC1500' ){
+      resultarr[index].Tuition_Fee = 0;
+    }
+    else if(resultarr[index].Tuition_Fee == 'None'){
+      resultarr[index].Tuition_Fee = 0;
+    }
   }
- }
  
 }
-
-
-
-
-const menuBtn = document.getElementById('side_box');
-let menuOpen = false;
-menuBtn.addEventListener('click', () => {
-  if(!menuOpen) {
-    menuBtn.classList.add('open');
-    menuOpen = true;
-  } else {
-    menuBtn.classList.remove('open');
-    menuOpen = false;
-  }
-});
