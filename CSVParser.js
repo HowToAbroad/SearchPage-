@@ -1,4 +1,4 @@
-const URL_TO_Check = "./Sheetnew2.csv";
+const URL_TO_Check = "./sheetnew2.csv";
 const URL_Search_Parameter = new URLSearchParams(location.search);
 let Current_Index = 0;
 let PageSize = 1;
