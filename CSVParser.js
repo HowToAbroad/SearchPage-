@@ -47,7 +47,7 @@ class College {
       Required_German_Grade == "" ? "Not Available" : Required_German_Grade;
     this.GRE = GRE == "" ? "NA" : GRE;
     this.Tuition_Fee = Tuition_Fee == "" ? "Not Available" : Tuition_Fee;
-    this.Tuition_Fee = Tuition_Fee == "None" ? 0 : Tuition_Fee;
+    // this.Tuition_Fee = Tuition_Fee == "None" ? 0 : Tuition_Fee;
     this.Semester_Start = Semester_Start == "" ? "NA" : Semester_Start;
     this.Application_Deadline_Winter =
       Application_Deadline_Winter == "" ? "NA" : Application_Deadline_Winter;
@@ -615,8 +615,8 @@ function MultiFilter(
       p.Course_Type.toLowerCase().includes(course_type) &&
       p.Teaching_Language.toLowerCase().includes(teaching_language) &&
       p.Semester_Start.toLowerCase().includes(start_semester) &&
-      p.Duration.toLowerCase().includes(duration) 
-      // p.Tuition_Fee.toLowerCase().includes(range) 
+      p.Duration.toLowerCase().includes(duration) &&
+      p.Tuition_Fee.toLowerCase().includes(range) 
       
   )
   resultarr = result;
@@ -630,8 +630,8 @@ function MultiFilter(
         p.Course_Type.toLowerCase().includes(course_type) &&
         p.Teaching_Language.toLowerCase().includes(teaching_language) &&
         p.Semester_Start.toLowerCase().includes(start_semester) &&
-        p.Duration.toLowerCase().includes(duration) 
-        // p.Tuition_Fee.toLowerCase().includes(range)
+        p.Duration.toLowerCase().includes(duration) &&
+        p.Tuition_Fee.toLowerCase().includes(range)
     );
   }
   
@@ -776,18 +776,13 @@ function sortbyGermanRanking(tempList) {
   Pagination(tempList, Items_To_Show);
 }
 
-// var expanded = false;
+function randomColor() {
+  var color = '#';
+  var colorCode = ['D5F9F9','E7DDFA','DCE2FC','E4FCDC','F9FCDC','FCF2DC','FCE0DC']; // colors
+  color += colorCode[Math.floor(Math.random() * colorCode.length)];
+  return color;
+}
 
-// function showCheckboxes() {
-//   var checkboxes = document.getElementById("checkboxes");
-//   if (!expanded) {
-//     checkboxes.style.display = "block";
-//     expanded = true;
-//   } else {
-//     checkboxes.style.display = "none";
-//     expanded = false;
-//   }
-// }
 
 // function teaching_language(dataList) {
 //   let temparr = [];
@@ -817,12 +812,7 @@ function sortbyGermanRanking(tempList) {
 //     Rendering(dataList, temparr);
 //   }
 // }
-function randomColor() {
-  var color = '#';
-  var colorCode = ['D5F9F9','E7DDFA','DCE2FC','E4FCDC','F9FCDC','FCF2DC','FCE0DC']; // colors
-  color += colorCode[Math.floor(Math.random() * colorCode.length)];
-  return color;
-}
+
 
 
 // function sliders() 
@@ -866,22 +856,20 @@ function randomColor() {
 //       }
 //   });
 // }
-
-// function tuition_Fee(){
+// let newarr = [];
+// function tution_Fee(){
 //   console.log(CollegeList);
+//   console.log("CLICK HUA");
 //  let Minfee  = document.getElementById("mintutionfee");
 //  let  Maxfee  = document.getElementById("maxtutionfee");
-//  let array = [];
 //  for(index in CollegeList){
-//   if(Minfee.value == 0 && Maxfee.value == 0){
-//     if(CollegeList[index].Tuition_Fee == 'None'){
-//       array.push(CollegeList[index]);
-//     }
-//     Pagination(array,Items_To_Show);
-    
-//     console.log(CollegeList);
-    
+//   if((Minfee.value == 0 && Maxfee.value == 0) && CollegeList[index].Tuition_Fee == 'None'){
+//     newarr.push(CollegeList[index]);
 //   }
+//   else if((Minfee.value > 0 && Maxfee.value < 1000) && (CollegeList[index].Tuition_Fee > 0&& CollegeList[index].Tuition_Fee < 1000)){
+//     newarr.push(CollegeList[index]);
+//   }
+//   Pagination(newarr,Items_To_Show);
 //  }
- 
+
 // }
