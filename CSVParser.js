@@ -28,10 +28,16 @@ class College {
     Course_Link,
     Application_Link,
     Logo,
-    Updated
+    Updated,
+    Rank_sort_world,
+    Rank_sort_germany
   ) {
     this.World_Ranking = World_Ranking == "" ? "NA" : World_Ranking;
+
+    this.Rank_sort_world=World_Ranking==""? 10000:World_Ranking;
     this.German_Ranking = German_Ranking == "" ? "NA" : German_Ranking;
+    
+    this.Rank_sort_germany=German_Ranking==""? 10000:German_Ranking;
     this.University_Name = University_Name == "" ? "NA" : University_Name;
     this.HTA_Uni_Link = HTA_Uni_Link == "" ? "none" : HTA_Uni_Link;
     this.Course_Type = Course_Type == "" ? "NA" : Course_Type;
@@ -742,24 +748,15 @@ function sortbyRanking(value) {
 
 function sortbyWorldRanking() {
   Sort_world_Ranking= [].concat(resultarr);
-  for (let index in Sort_world_Ranking) {
-    if (Sort_world_Ranking[index].World_Ranking == "NA") {
-      Sort_world_Ranking[index].World_Ranking = 100000
-  }
-} 
   
-  Sort_world_Ranking.sort((a, b) => a.World_Ranking - b.World_Ranking);
+  Sort_world_Ranking.sort((a, b) => a.Rank_sort_world - b.Rank_sort_world);
   Pagination(Sort_world_Ranking, Items_To_Show);
 }
 
 function sortbyGermanRanking() {
   Sort_germany_Ranking= [].concat(resultarr);
-  for (let index in Sort_germany_Ranking) {
-    if (Sort_germany_Ranking[index].German_Ranking == "NA") {
-      Sort_germany_Ranking[index].German_Ranking = 100000
-  }
-}
-  Sort_germany_Ranking.sort((a, b) => a.German_Ranking - b.German_Ranking);
+
+  Sort_germany_Ranking.sort((a, b) => a.Rank_sort_germany - b.Rank_sort_germany);
   Pagination(Sort_germany_Ranking, Items_To_Show);
 }
 
