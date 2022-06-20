@@ -132,14 +132,16 @@ function DataParser(data) {
     num++;
   });
 
-  console.log(CollegeList);
+  //console.log(CollegeList);
 }
 //datalist - whole data
-//
+//current index-> page number 
 function Rendering(dataList, data_to_process) {
   // console.log(dataList);
   // console.log(data_to_process);
   var display_number = document.getElementById("Display_number");
+  console.log("length : "+dataList.length );
+  console.log("Current Index : "+Current_Index );
   display_number.innerHTML =
     "Displaying " +
     (dataList.length * (Current_Index - 1) + 1) +
@@ -558,6 +560,7 @@ function Search_Uni_Course() {
   var _start_semester = Search_Start_semeter.value.toLowerCase();
   var _duration = Search_Duration.value.toLowerCase();
   var _fee = Tuition.value.toLowerCase();
+  var _sortbyRanking= Search_sortByRanking.value;
   // var _sortbyRanking = Sort_by_Ranking.value;
   // var _rank = Search_rank.toLowerCase();
   //input_type = document.getElementById("search_name").value.toLowerCase();
@@ -570,8 +573,9 @@ function Search_Uni_Course() {
     _start_semester,
     _duration,
     _fee,
-    // _sortbyRanking
+   _sortbyRanking
   );
+
 }
 
 /*function Filter(name){
@@ -586,7 +590,7 @@ function Search_Uni_Course() {
 }*/
 
 let resultarr = [];
-let x=1;
+let rank_category=1;
 function MultiFilter(
   university_name,
   course_name,
@@ -595,7 +599,7 @@ function MultiFilter(
   start_semester,
   duration,
   range,
-  // sortbyRanking
+  _sortbyRanking
 ) {
   if (Display_Search.value != "") {
     Items_To_Show = Display_Search.value;
@@ -607,8 +611,7 @@ function MultiFilter(
   container.innerHTML = "";
   let result = [] ;
 
-  if(x == 1){
-    result = CollegeList.filter(
+  result = CollegeList.filter(
       (p) =>
       p.University_Name.toLowerCase().includes(university_name) &&
       p.Course_Name.toLowerCase().includes(course_name) &&
@@ -621,30 +624,11 @@ function MultiFilter(
   )
   resultarr = result;
   
-  }
-  else{
-    result = resultarr.filter(
-      (p) =>
-        p.University_Name.toLowerCase().includes(university_name) &&
-        p.Course_Name.toLowerCase().includes(course_name) &&
-        p.Course_Type.toLowerCase().includes(course_type) &&
-        p.Teaching_Language.toLowerCase().includes(teaching_language) &&
-        p.Semester_Start.toLowerCase().includes(start_semester) &&
-        p.Duration.toLowerCase().includes(duration) &&
-        p.Tuition_Fee.toLowerCase().includes(range)
-    );
-  }
   
   if (result != "") {
-    //Rendering(result);
-    // console.log(result);
-   if(x==0){
-    resultarr = result;
-   }
-    Pagination(result, Items_To_Show);
+    sortbyRanking(_sortbyRanking);
   } 
   else {
-    // console.log(result);
     Rendering("", "");
   }
   // console.log(resultarr);
@@ -742,38 +726,41 @@ function Active_Deactive(Page_ID) {
 ////Sorting via Ranking
 
 function sortbyRanking(value) {
-  x=0;
+  
   if(value==0){
-    Pagination(CollegeList,Items_To_Show);
+    Pagination(resultarr,Items_To_Show);
   }
   else if (value == 1) {
-    sortbyWorldRanking(resultarr); 
+    sortbyWorldRanking(); 
   }
   else if (value == 2) {
-    sortbyGermanRanking(resultarr); 
+    sortbyGermanRanking(); 
   } 
   }
 
 
 
-function sortbyWorldRanking( tempList) {
-  for (let index in resultarr) {
-    if (resultarr[index].World_Ranking == "NA") {
-      resultarr[index].World_Ranking = 100000
+function sortbyWorldRanking() {
+  Sort_world_Ranking= [].concat(resultarr);
+  for (let index in Sort_world_Ranking) {
+    if (Sort_world_Ranking[index].World_Ranking == "NA") {
+      Sort_world_Ranking[index].World_Ranking = 100000
   }
 } 
-  resultarr.sort((a, b) => a.World_Ranking - b.World_Ranking);
-  Pagination(tempList, Items_To_Show);
+  
+  Sort_world_Ranking.sort((a, b) => a.World_Ranking - b.World_Ranking);
+  Pagination(Sort_world_Ranking, Items_To_Show);
 }
 
-function sortbyGermanRanking(tempList) {
-  for (let index in resultarr) {
-    if (resultarr[index].German_Ranking == "NA") {
-      resultarr[index].German_Ranking = 100000
+function sortbyGermanRanking() {
+  Sort_germany_Ranking= [].concat(resultarr);
+  for (let index in Sort_germany_Ranking) {
+    if (Sort_germany_Ranking[index].German_Ranking == "NA") {
+      Sort_germany_Ranking[index].German_Ranking = 100000
   }
 }
-  resultarr.sort((a, b) => a.German_Ranking - b.German_Ranking);
-  Pagination(tempList, Items_To_Show);
+  Sort_germany_Ranking.sort((a, b) => a.German_Ranking - b.German_Ranking);
+  Pagination(Sort_germany_Ranking, Items_To_Show);
 }
 
 function randomColor() {
