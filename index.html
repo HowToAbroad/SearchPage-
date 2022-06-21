@@ -94,18 +94,22 @@
              
                      <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Tuition_fee">
                        <option value="">--- Tuition Fee---</option>
-                       <!-- <span class=" mt-10" >
+                       <span class=" mt-10" >
+                        
+                         
                          <span>
-                           <input type="number" value="0" min="0" max="80000" step="50" id="mintutionfee" oninput="sliders()"  > 
-                           &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Min to Max Value in Euro
-                           <input type="number" value="500" min="0" max="80000" step="50"  id="maxtutionfee" oninput="sliders()" >
+                           <input value="0" type="number"  id="mintutionfee"  > 
+                           
+                           <input value = "99999" type="number" id="maxtutionfee"  >
                          </span>
-                         <input value="0" min="0" max="10000" step="50" type="range" id="Minrange">
-                         <input value="500" min="0" max="80000" step="50" type="range" id="Maxrange">
+                         <span>
+                          <input type="range" min="0" max="100000" value="0" id="minrangeslider">
+                           <input type="range" min="0" max="100000" value="100000" id="maxrangeslider">
+                         </span>
              
-                         <button type="button" class="btn btn-primary mt-2" onsubmit="tution_Fee()">Submit</button>
-                       </span> -->
-             
+                         <!-- <button type="button" class="btn btn-primary mt-2" onsubmit="tution_Fee()">Submit</button> -->
+                       </span>
+                       
                      </select></li>
              
                      </ul>
