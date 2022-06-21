@@ -146,21 +146,11 @@ function DataParser(data) {
 //datalist - whole data
 //current index-> page number 
 function Rendering(dataList, data_to_process) {
-  // console.log(dataList);
-  // console.log(data_to_process);
+ 
   var display_number = document.getElementById("Display_number");
-  // console.log("length : "+dataList.length );
-  // console.log("Current Index : "+Current_Index );
-  dataList.length = Items_To_Show;
-  console.log(dataList);
-  display_number.innerHTML =
-    "Displaying " +
-    (dataList.length * (Current_Index - 1) + 1) +
-    "-" +
-    dataList.length * Current_Index +
-    " Universities/Hochshule out of " +
-    data_to_process.length;
-  //console.log("this is data list " + dataList);
+
+  Display_Pagedata(data_to_process,Current_Index,display_number);
+  
   if (dataList == "") {
     display_number.innerHTML =
       "Data Not Available, Please choose other options from the filter";
@@ -806,36 +796,6 @@ function randomColor() {
   return color;
 }
 
-
-// function teaching_language(dataList) {
-//   let temparr = [];
-//   if (dataList[i].Teaching_Language == "English") {
-//     temparr.push(dataList[i]);
-//     Pagination(temparr, Items_To_Show);
-//     Rendering(dataList, temparr);
-//   }
-//   if (dataList[i].Teaching_Language == "Chinese") {
-//     temparr.push(dataList[i]);
-//     Pagination(temparr, Items_To_Show);
-//     Rendering(dataList, temparr);
-//   }
-//   if (dataList[i].Teaching_Language == "French") {
-//     temparr.push(dataList[i]);
-//     Pagination(temparr, Items_To_Show);
-//     Rendering(dataList, temparr);
-//   }
-//   if (dataList[i].Teaching_Language == "German") {
-//     temparr.push(dataList[i]);
-//     Pagination(temparr, Items_To_Show);
-//     Rendering(dataList, temparr);
-//   }
-//   if (dataList[i].Teaching_Language == "Russian") {
-//     temparr.push(dataList[i]);
-//     Pagination(temparr, Items_To_Show);
-//     Rendering(dataList, temparr);
-//   }
-// }
-
 var lowerSlider = document.querySelector('#minrangeslider');
 var  upperSlider = document.querySelector('#maxrangeslider');
 
@@ -895,5 +855,30 @@ function setcurrency(Tuition_Fee){
   }
   else{
     return changecurrency(Tuition_Fee);
+  }
+}
+
+
+function Display_Pagedata(data_to_process,Current_Index,display_number){
+  var CheckCurrent_Index = (parseInt(data_to_process.length / Items_To_Show)+1);
+ 
+  if(Current_Index == CheckCurrent_Index){
+        display_number.innerHTML =
+    "Displaying " +
+    (Items_To_Show * (Current_Index - 1) + 1) +
+    "-" +
+    (data_to_process.length) +
+    " Universities/Hochshule out of " +
+    data_to_process.length;
+  }
+  else{
+    
+    display_number.innerHTML =
+    "Displaying " +
+    (Items_To_Show * (Current_Index - 1) + 1) +
+    "-" +
+    Items_To_Show * Current_Index +
+    " Universities/Hochshule out of " +
+    data_to_process.length;
   }
 }
