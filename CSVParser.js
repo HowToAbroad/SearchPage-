@@ -430,38 +430,31 @@ const delayKeyUp = (() => {
 //fill the data with unique value
 
 function Fill_Value() {
-  let uniqueListArray = [];
   let course_type_array = [];
   let language_array = [];
   let duration_array = [];
   let semester_array = [];
-  let tuition_fees = [];
+  //let tuition_fees = [];
   CollegeList.forEach((Element) => {
     course_type_array.push(Element.Course_Type);
     language_array.push(Element.Teaching_Language);
     duration_array.push(Element.Duration);
     semester_array.push(Element.Semester_Start);
-    tuition_fees.push(Element.Tuition_Fee);
+    //tuition_fees.push(Element.Tuition_Fee);
   });
 
-  let storeArrays = [
-    course_type_array.sort(),
-    language_array.sort(),
-    duration_array.sort(),
-    semester_array.sort(),
-    tuition_fees.sort(),
+  // changing the languages 
+
+
+  let uniqueListArray = [
+    Double_check_Unique(course_type_array.sort()),
+    Double_check_Unique(language_array.sort()),
+    Double_check_Unique(duration_array.sort()),
+    Double_check_Unique(semester_array.sort()),
+    //tuition_fees.sort(),
   ];
 
-  let indx = 0;
-  storeArrays.forEach((column) => {
-    reference = column;
-    uniqueList = reference.filter(function (x, i, a) {
-      if (x != "" && x != "-" && x != '00"') return a.indexOf(x) === i;
-    });
-    uniqueListArray[indx] = uniqueList;
-
-    indx++;
-  });
+  
   let select_ids = [
     "Course_type",
     "Teaching_language",
@@ -476,7 +469,7 @@ function Fill_Value() {
     //creating options
     var options = [];
     var option = document.createElement("option");
-
+  
     //fethcing unique list from uniqueListarray
     uniqueListArray[i].forEach((ele) => {
       //var data = '<option value="' + escapeHTML(i) +'">" + escapeHTML(i) + "</option>';
@@ -488,6 +481,17 @@ function Fill_Value() {
     select.insertAdjacentHTML("beforeEnd", options.join("\n"));
   }
 }
+
+// to get unique values again 
+function Double_check_Unique(list){
+  let temp_string=list.join();
+  list= temp_string.split(",");
+  list =   list.filter((x, i, a) => a.indexOf(x) === i);
+
+  return list;
+
+}
+
 //7 parameter for filtering
 
 var Search_Name_Uni = document.getElementById("search_name");
@@ -496,7 +500,7 @@ var Search_Course_type = document.getElementById("Course_type");
 var Search_Language_teaching = document.getElementById("Teaching_language");
 var Search_Start_semeter = document.getElementById("Beginning_semester");
 var Search_Duration = document.getElementById("Duration");
-var Tuition = document.getElementById("Tuition_fee");
+//var Tuition = document.getElementById("Tuition_fee");
 var Display_Search = document.getElementById("display_size");
 var Search_sortByRanking = document.getElementById("Sort_by_Ranking");
 var Min_Tuition_fee = document.getElementById("mintutionfee");
@@ -505,7 +509,8 @@ var Min_TuitionSlider_fee = document.getElementById("minrangeslider");
 var Max_TuitionSlider_fee = document.getElementById("maxrangeslider");
 var Reset_Search = document.getElementById("reset");
 Reset_Search.addEventListener("click", Reset);
-
+let selected_lang=[];
+let start_sem=[];
 Search_Name_Uni.addEventListener("keyup", (e) => {
   delayKeyUp(() => {
     Search_Uni_Course();
@@ -523,24 +528,29 @@ Search_Course_type.addEventListener("change", (e) => {
 });
 Search_Language_teaching.addEventListener("change", (e) => {
   delayKeyUp(() => {
+    
+    selected_lang=check_Selected_Languages();
+
     Search_Uni_Course();
   }, 400);
 });
 Search_Start_semeter.addEventListener("change", (e) => {
   delayKeyUp(() => {
+    start_sem = check_Start_sem();
     Search_Uni_Course();
   }, 400);
 });
 Search_Duration.addEventListener("change", (e) => {
   delayKeyUp(() => {
+    
     Search_Uni_Course();
   }, 400);
 });
-Tuition.addEventListener("change", (e) => {
-  delayKeyUp(() => {
-    Search_Uni_Course();
-  }, 400);
-});
+// Tuition.addEventListener("change", (e) => {
+//   delayKeyUp(() => {
+//     Search_Uni_Course();
+//   }, 400);
+// });
 Min_Tuition_fee.addEventListener("change", (e) => {
   delayKeyUp(() => {
     Search_Uni_Course();
@@ -573,6 +583,29 @@ Search_sortByRanking.addEventListener("change", (e) => {
   }, 400);
 });
 
+function check_Start_sem(){
+
+  let start_sem=[];
+  for (var option of Search_Start_semeter)
+  {
+      if (option.selected) {
+        start_sem.push(option.value);
+      }
+  }
+  return start_sem;
+
+}
+function check_Selected_Languages(){
+  let lang=[]
+  for (var option of Search_Language_teaching .options)
+  {
+      if (option.selected) {
+        lang.push(option.value);
+      }
+  }
+  return lang;
+
+}
 function Reset() {
   document.location.reload(true);
 }
@@ -581,8 +614,10 @@ function Search_Uni_Course() {
   var _Uni_name = Search_Name_Uni.value.toLowerCase();
   var _course_name = Search_Name_Course.value.toLowerCase();
   var _course_type = Search_Course_type.value.toLowerCase();
-  var _teaching_Language = Search_Language_teaching.value.toLowerCase();
-  var _start_semester = Search_Start_semeter.value.toLowerCase();
+
+  var _teaching_Language = selected_lang.join(",").toLocaleLowerCase();
+  var _start_semester = start_sem.join(",").toLocaleLowerCase();
+  //Search_Start_semeter.value.toLowerCase();
   var _duration = Search_Duration.value.toLowerCase();
   // var _fee = Tuition.value.toLowerCase();
   var _sortbyRanking= Search_sortByRanking.value;
