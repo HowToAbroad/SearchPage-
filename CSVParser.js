@@ -122,7 +122,7 @@ function DataParser(data) {
       rows[6],
       rows[7],
       rows[8],
-      rows[9],
+      rows[9].replace(/ /g,''),
       rows[10],
       rows[11],
       rows[12],
@@ -484,7 +484,8 @@ function Fill_Value() {
 
 // to get unique values again 
 function Double_check_Unique(list){
-  let temp_string=list.join();
+  let temp_string=list.join().replace(/ /g,'');
+  
   list= temp_string.split(",");
   list =   list.filter((x, i, a) => a.indexOf(x) === i);
 
@@ -497,6 +498,7 @@ function Double_check_Unique(list){
 var Search_Name_Uni = document.getElementById("search_name");
 var Search_Name_Course = document.getElementById("search_course");
 var Search_Course_type = document.getElementById("Course_type");
+var Germany_Ranking_Finder = document.getElementById("germany_ranking_finder");
 var Search_Language_teaching = document.getElementById("Teaching_language");
 var Search_Start_semeter = document.getElementById("Beginning_semester");
 var Search_Duration = document.getElementById("Duration");
@@ -522,6 +524,11 @@ Search_Name_Course.addEventListener("keyup", (e) => {
   }, 400);
 });
 Search_Course_type.addEventListener("change", (e) => {
+  delayKeyUp(() => {
+    Search_Uni_Course();
+  }, 400);
+});
+Germany_Ranking_Finder.addEventListener("keyup", (e) => {
   delayKeyUp(() => {
     Search_Uni_Course();
   }, 400);
@@ -603,6 +610,7 @@ function check_Selected_Languages(){
         lang.push(option.value);
       }
   }
+  console.log(lang);
   return lang;
 
 }
@@ -614,7 +622,7 @@ function Search_Uni_Course() {
   var _Uni_name = Search_Name_Uni.value.toLowerCase();
   var _course_name = Search_Name_Course.value.toLowerCase();
   var _course_type = Search_Course_type.value.toLowerCase();
-
+  var _germany_ranking= Germany_Ranking_Finder.value.toLocaleLowerCase();
   var _teaching_Language = selected_lang.join(",").toLocaleLowerCase();
   var _start_semester = start_sem.join(",").toLocaleLowerCase();
   //Search_Start_semeter.value.toLowerCase();
@@ -633,6 +641,7 @@ function Search_Uni_Course() {
     _Uni_name,
     _course_name,
     _course_type,
+    _germany_ranking,
     _teaching_Language,
     _start_semester,
     _duration,
@@ -660,6 +669,7 @@ function MultiFilter(
   university_name,
   course_name,
   course_type,
+  _germany_ranking,
   teaching_language,
   start_semester,
   duration,
@@ -678,12 +688,13 @@ function MultiFilter(
   var container = document.getElementById("List_of_University");
   container.innerHTML = "";
   let result = [] ;
-
+  console.log("rank:"+_germany_ranking )
   result = CollegeList.filter(
       (p) =>
       p.University_Name.toLowerCase().includes(university_name) &&
       p.Course_Name.toLowerCase().includes(course_name) &&
       p.Course_Type.toLowerCase().includes(course_type) &&
+      (_germany_ranking=="" ?  true:p.Rank_sort_germany===_germany_ranking) &&
       p.Teaching_Language.toLowerCase().includes(teaching_language) &&
       p.Semester_Start.toLowerCase().includes(start_semester) &&
       p.Duration.toLowerCase().includes(duration)&&
@@ -694,9 +705,7 @@ function MultiFilter(
  
   
   if (result != "") {
-    sortbyRanking(_sortbyRanking);
-    // tution_Fee(_mintuitionfee,_maxtuitionfee);
-    
+    sortbyRanking(_sortbyRanking);    
   } 
   else {
     Rendering("", "");
