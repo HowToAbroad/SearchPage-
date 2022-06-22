@@ -84,6 +84,9 @@
       right: 159px;
       position: absolute;
   }
+  .inline{
+    display: inline;
+  }
 
   .range-slider {
     width: 480px;

@@ -882,3 +882,7 @@ function Display_Pagedata(data_to_process,Current_Index,display_number){
     data_to_process.length;
   }
 }
+
+// $(document).ready(function(){
+//   $('.languages').selectpicker();
+// })
