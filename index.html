@@ -14,11 +14,15 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
     <link rel="stylesheet" href="UniSearch.css" />
 
     <script src="CSVParser.js" async></script>
@@ -46,26 +50,33 @@
                 <div class="col-2 d-flex flex-column mt-5 position-fixed" id="side_box">
                   <ul>
                     <ul>
-                      <li> <button type="button" class="btn btn-dark"id="reset"style="font-size:10px">Reset Filters <i class="fa fa-refresh"></i></button>
-                     <input
+                      <li> <button type="button" class="btn btn-dark"id="reset"style="font-size:10px">Reset Filters <i class="fa fa-refresh"></i></button></li>
+                      <li><select class="btn btn-secondary dropdown-toggle mt-2" id="display_size">
+                        <option value="">---No. of Items---</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select></li>
+                      <li><input
                        class="input-group-text mt-2"
                        type="text"
                        placeholder="University Name"
                        id="search_name"
-                     />
-                     <input
+                     /></li>
+                     <li><input
                        class="input-group-text mt-2"
                        type="text"
                        placeholder="Course Name"
                        id="search_course"
+                     /></li>
+                     <li><input
+                       class="input-group-text mt-2"
+                       type="text"
+                       placeholder="Germany Ranking"
+                       id="germany_ranking_finder"
                      />
                      </li>
-                     <li><select class="btn btn-secondary dropdown-toggle mt-2" id="display_size">
-                       <option value="">--- Size ---</option>
-                       <option value="20">20</option>
-                       <option value="50">50</option>
-                       <option value="100">100</option>
-                     </select></li>
+                    
              
                      <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Course_type">
                        <option value="">--- Course Type ---</option>
@@ -77,40 +88,35 @@
              
                      <!-- <button class="accordion">Teaching Language</button> -->
                      
-                       <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Teaching_language">
-                         <option value="">--- Teaching language ---</option>
+                       <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Teaching_language"  multiple >
+                         <option class="anchor"value="">--- Teaching language ---</option>
+                         
+                         <!-- <option value="" type="checkbox">English</option> -->
                
                    
-             
+      
                      </select></li>
                      <!-- <button class="accordion">Beginning Semester</button> -->
-                     <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Beginning_semester">
+                     <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Beginning_semester" multiple>
                        <option value="">--- Beginning Semester ---</option>
                      </select></li>
                      <!-- <button class="accordion">Duration</button> -->
                      <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Duration">
                        <option value="">--- Duration ---</option>
                      </select></li>
+                     <hr/>
              
-                     <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Tuition_fee">
-                       <option value="">--- Tuition Fee---</option>
-                       <span class=" mt-10" >
-                        
-                         
-                         <span>
-                           <input value="0" type="number"  id="mintutionfee"  > 
-                           
-                           <input value = "99999" type="number" id="maxtutionfee"  >
-                         </span>
-                         <span>
-                          <input type="range" min="0" max="100000" value="0" id="minrangeslider">
-                           <input type="range" min="0" max="100000" value="100000" id="maxrangeslider">
-                         </span>
-             
-                         <!-- <button type="button" class="btn btn-primary mt-2" onsubmit="tution_Fee()">Submit</button> -->
-                       </span>
                        
-                     </select></li>
+                       
+                     <li> 
+                      <h6 style="align-content:stretch;">Tuition Fee</h6>
+                      <div class="min-max-slider" data-legendnum="2">
+                      <label for="min">Minimum price</label>
+                      <input id="min" class="min" name="min" type="range" step="1" min="0" max="100000" />
+                      <label for="max">Maximum price</label>
+                      <input id="max" class="max" name="max" type="range" step="1" min="0" max="100000" />
+                  </div>
+                </li>
              
                      </ul>
                   </ul>
