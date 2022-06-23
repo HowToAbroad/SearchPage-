@@ -238,6 +238,7 @@ input[type="range"]::-ms-thumb {
     #search_course{
       width: 240px;
     }
+    
 
     .inline{
       display: inline-block;
@@ -414,4 +415,5 @@ span.value.upper::before {content: "- €"; display: inline-block; margin-left: 
 
 #Teaching_language,#Beginning_semester,#Course_type,#Duration,#display_size {
   overflow: auto;
+  width: 240;
 }
