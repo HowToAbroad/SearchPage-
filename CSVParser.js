@@ -818,40 +818,6 @@ function randomColor() {
   return color;
 }
 
-// var lowerSlider = document.querySelector('#minrangeslider');
-// var  upperSlider = document.querySelector('#maxrangeslider');
-
-// document.querySelector('#maxtutionfee').value=upperSlider.value;
-// document.querySelector('#mintutionfee').value=lowerSlider.value;
-
-// var  minrangesliderVal = parseInt(lowerSlider.value);
-// var maxrangesliderVal = parseInt(upperSlider.value);
-
-// upperSlider.oninput = function () {
-//     minrangesliderVal = parseInt(lowerSlider.value);
-//     maxrangesliderVal = parseInt(upperSlider.value);
-
-//     if (maxrangesliderVal < minrangesliderVal ) {
-//         lowerSlider.value = maxrangesliderVal ;
-//         if (minrangesliderVal == lowerSlider.min) {
-//         upperSlider.value = 0;
-//         }
-//     }
-//     document.querySelector('#maxtutionfee').value=this.value
-// };
-
-// lowerSlider.oninput = function () {
-//     minrangesliderVal = parseInt(lowerSlider.value);
-//     maxrangesliderVal = parseInt(upperSlider.value);
-//     if (minrangesliderVal > maxrangesliderVal ) {
-//         upperSlider.value = minrangesliderVal ;
-//         if (maxrangesliderVal == upperSlider.max) {
-//             lowerSlider.value = parseInt(upperSlider.max) ;
-//         }
-//     }
-//     document.querySelector('#mintutionfee').value=this.value
-// }; 
-
 
 
 function changecurrency(currency){
