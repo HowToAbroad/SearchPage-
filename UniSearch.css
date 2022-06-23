@@ -229,11 +229,13 @@ input[type="range"]::-ms-thumb {
     select,#germany_ranking_finder{
         width: 240px;
     }
-    #reset{
+    #reset,#display_size,#Course_type, #Duration{
       width: 240px;
+      height: 40px;
     }
     #search_name{
       width: 240px;
+
     }
     #search_course{
       width: 240px;
@@ -243,7 +245,7 @@ input[type="range"]::-ms-thumb {
     .inline{
       display: inline-block;
     }
-
+    
     
   @media screen and (max-width: 980px) {
 
@@ -415,5 +417,6 @@ span.value.upper::before {content: "- €"; display: inline-block; margin-left: 
 
 #Teaching_language,#Beginning_semester,#Course_type,#Duration,#display_size {
   overflow: auto;
-  width: 240;
+  width: 240px;
+  
 }
