@@ -215,16 +215,7 @@ input[type="range"]::-ms-thumb {
     z-index: 1;
   }
  
-  .search_menu-wrap .filter_toggler {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    opacity: 0;
-  }
+
 
 
     select,#germany_ranking_finder{
@@ -262,7 +253,16 @@ input[type="range"]::-ms-thumb {
     h4{
       color:white;
     }
-  
+    .search_menu-wrap .filter_toggler {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      opacity: 0;
+    }
       .search_menu-wrap .search_uni_hamburger {
         position: absolute;
         top: 0;
@@ -292,7 +292,7 @@ input[type="range"]::-ms-thumb {
       }
       
       /* Hamburger Lines - Top & Bottom */
-      /* .search_menu-wrap .search_uni_hamburger > div::before,
+      .search_menu-wrap .search_uni_hamburger > div::before,
       .search_menu-wrap .search_uni_hamburger > div::after {
         content: '';
         position: absolute;
@@ -302,7 +302,7 @@ input[type="range"]::-ms-thumb {
         height: 2px;
         background: inherit;
       }
-       */
+      
       /* Moves Line Down */
       .search_menu-wrap .search_uni_hamburger > div::after {
         top: 10px;
@@ -375,14 +375,14 @@ input[type="range"]::-ms-thumb {
         transition: opacity 0.4s ease;
       }
       
-      .search_menu-wrap .search_menu > div > div > ul > li {
+      .search_menu-wrap .menu > div > div > ul > li {
         list-style: none;
         color: #fff;
         font-size: 1.5rem;
         padding: 1rem;
       }
       
-      .search_menu-wrap .search_menu > div > div > ul > li > a {
+      .search_menu-wrap .menu > div > div > ul > li > a {
         color: inherit;
         text-decoration: none;
         transition: color 0.4s ease;
