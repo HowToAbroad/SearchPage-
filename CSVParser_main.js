@@ -1,5 +1,6 @@
-const URL_TO_Check = "https://howtoabroad.github.io/SearchPage/new.csv";
-const URL_Search_Parameter=new URLSearchParams(location.search);
+const URL_TO_Check = "https://howtoabroad.github.io/SearchPage/sheetnew2.csv";
+
+const URL_Search_Parameter = new URLSearchParams(location.search);
 let Current_Index = 0;
 let PageSize = 1;
 let CollegeList = [];
@@ -29,9 +30,16 @@ class College {
     Application_Link,
     Logo,
     Updated
+    
   ) {
     this.World_Ranking = World_Ranking == "" ? "NA" : World_Ranking;
+
+    this.Rank_sort_world = World_Ranking=="NA"? 10000:World_Ranking;
+    
     this.German_Ranking = German_Ranking == "" ? "NA" : German_Ranking;
+
+    this.Rank_sort_germany=German_Ranking=="NA"? 10000:German_Ranking;
+
     this.University_Name = University_Name == "" ? "NA" : University_Name;
     this.HTA_Uni_Link = HTA_Uni_Link == "" ? "none" : HTA_Uni_Link;
     this.Course_Type = Course_Type == "" ? "NA" : Course_Type;
@@ -47,6 +55,9 @@ class College {
       Required_German_Grade == "" ? "Not Available" : Required_German_Grade;
     this.GRE = GRE == "" ? "NA" : GRE;
     this.Tuition_Fee = Tuition_Fee == "" ? "Not Available" : Tuition_Fee;
+    
+    this.new_Tuition_Fee = setcurrency(Tuition_Fee);
+
     this.Semester_Start = Semester_Start == "" ? "NA" : Semester_Start;
     this.Application_Deadline_Winter =
       Application_Deadline_Winter == "" ? "NA" : Application_Deadline_Winter;
@@ -66,19 +77,17 @@ async function Execute() {
   DataParser(data);
   Fill_Value();
   // after data is loaded
-  if(URL_Search_Parameter!=null)
-  {
-    if(URL_Search_Parameter!=null){
-      Search_Name_Uni.value=URL_Search_Parameter.get('uniName');
-      Search_Name_Course.value=URL_Search_Parameter.get('course');
+  if (URL_Search_Parameter != null) {
+    if (URL_Search_Parameter != null) {
+      Search_Name_Uni.value = URL_Search_Parameter.get("uniName");
+      Search_Name_Course.value = URL_Search_Parameter.get("course");
       //console.log(URL_Search_Parameter.get('course'));
     }
     Search_Uni_Course();
-  }else{
+  } else {
     Pagination(CollegeList, Items_To_Show);
   }
   //Rendering(CollegeList);
-  
 }
 
 async function GetData() {
@@ -114,13 +123,13 @@ function DataParser(data) {
       rows[6],
       rows[7],
       rows[8],
-      rows[9],
+      rows[9].replace(/ /g,''),
       rows[10],
       rows[11],
       rows[12],
       rows[13],
       rows[14],
-      rows[15],
+      rows[15].replace(/ /g,''),
       rows[16],
       rows[17],
       rows[18],
@@ -133,19 +142,16 @@ function DataParser(data) {
     num++;
   });
 
-  console.log(CollegeList[2]);
+  // console.log(CollegeList);
 }
-
+//datalist - whole data
+//current index-> page number 
 function Rendering(dataList, data_to_process) {
+ 
   var display_number = document.getElementById("Display_number");
-  display_number.innerHTML =
-    "Displaying " +
-    (dataList.length * (Current_Index - 1) + 1) +
-    "-" +
-    dataList.length * Current_Index +
-    " Universities/Hochshule out of " +
-    data_to_process.length;
-  //console.log("this is data list " + dataList);
+
+  Display_Pagedata(data_to_process,Current_Index,display_number);
+  
   if (dataList == "") {
     display_number.innerHTML =
       "Data Not Available, Please choose other options from the filter";
@@ -156,9 +162,12 @@ function Rendering(dataList, data_to_process) {
   let l = dataList.length;
   //console.log(CollegeList.length);
   for (let i = 0; i < l; i++) {
+    
     var container = document.getElementById("List_of_University");
     var e_0 = document.createElement("div");
+
     var e_1 = document.createElement("div");
+    // e_0.setAttribute("float right");
     e_1.setAttribute("class", "container mt-5 mb-5");
     e_1.setAttribute("bis_skin_checked", "1");
     var e_2 = document.createElement("div");
@@ -167,19 +176,22 @@ function Rendering(dataList, data_to_process) {
     var e_3 = document.createElement("div");
     e_3.setAttribute("class", "col-md-10");
     e_3.setAttribute("bis_skin_checked", "1");
+    // e_3.setAttribute("style","backgroundColor", randomColor());
+    e_3.setAttribute("style", `background-color : ${randomColor()} `);
+
+  
+          
     var e_4 = document.createElement("div");
-    e_4.setAttribute("class", "row p-2 bg-white border rounded");
+    e_4.setAttribute("class", "row p-2  border rounded");
     e_4.setAttribute("bis_skin_checked", "1");
+    
     var e_5 = document.createElement("div");
     e_5.setAttribute("class", "col-md-3 mt-1");
     e_5.setAttribute("bis_skin_checked", "1");
     var e_6 = document.createElement("img");
     e_6.setAttribute("class", "img-fluid img-responsive rounded product-image");
     //logo
-    e_6.setAttribute(
-      "src",
-      dataList[i].Logo
-    );
+    e_6.setAttribute("src", dataList[i].Logo);
     e_5.appendChild(e_6);
     e_4.appendChild(e_5);
     var e_7 = document.createElement("div");
@@ -201,7 +213,7 @@ function Rendering(dataList, data_to_process) {
     var e_11 = document.createElement("div");
     e_11.setAttribute("class", "ratings mr-2");
     e_11.setAttribute("bis_skin_checked", "1");
-    /*var e_12 = document.createElement("i");
+    /* var e_12 = document.createElement("i");
     e_12.setAttribute("class", "fa fa-star");
     e_11.appendChild(e_12);
     var e_13 = document.createElement("i");
@@ -344,12 +356,14 @@ function Rendering(dataList, data_to_process) {
     //application deadline
     e_44.appendChild(
       document.createTextNode(
-        "Application Deadline Summer: " + dataList[i].Application_Deadline_Summer
+        "Application Deadline Summer: " +
+          dataList[i].Application_Deadline_Summer
       )
     );
     e_50.appendChild(
       document.createTextNode(
-        "Application Deadline Winter: " + dataList[i].Application_Deadline_Winter
+        "Application Deadline Winter: " +
+          dataList[i].Application_Deadline_Winter
       )
     );
     e_51.appendChild(
@@ -417,44 +431,37 @@ const delayKeyUp = (() => {
 //fill the data with unique value
 
 function Fill_Value() {
-  let uniqueListArray = [];
   let course_type_array = [];
   let language_array = [];
   let duration_array = [];
   let semester_array = [];
-  let tuition_fees = [];
+  //let tuition_fees = [];
   CollegeList.forEach((Element) => {
     course_type_array.push(Element.Course_Type);
     language_array.push(Element.Teaching_Language);
     duration_array.push(Element.Duration);
     semester_array.push(Element.Semester_Start);
-    tuition_fees.push(Element.Tuition_Fee);
+    //tuition_fees.push(Element.Tuition_Fee);
   });
 
-  let storeArrays = [
-    course_type_array.sort(),
-    language_array.sort(),
-    duration_array.sort(),
-    semester_array.sort(),
-    tuition_fees.sort(),
+  // changing the languages 
+
+
+  let uniqueListArray = [
+    Double_check_Unique(course_type_array.sort()),
+    Double_check_Unique(language_array.sort()),
+    Double_check_Unique(duration_array.sort()),
+    Double_check_Unique(semester_array.sort()),
+    //tuition_fees.sort(),
   ];
 
-  let indx = 0;
-  storeArrays.forEach((column) => {
-    reference = column;
-    uniqueList = reference.filter(function (x, i, a) {
-      if (x != "" && x != "-" && x != '00"') return a.indexOf(x) === i;
-    });
-    uniqueListArray[indx] = uniqueList;
-
-    indx++;
-  });
+  
   let select_ids = [
     "Course_type",
     "Teaching_language",
     "Duration",
     "Beginning_semester",
-    "Tuition_fee",
+    // "Tuition_fee",
   ];
 
   for (let i = 0; i < select_ids.length; i++) {
@@ -463,7 +470,7 @@ function Fill_Value() {
     //creating options
     var options = [];
     var option = document.createElement("option");
-
+  
     //fethcing unique list from uniqueListarray
     uniqueListArray[i].forEach((ele) => {
       //var data = '<option value="' + escapeHTML(i) +'">" + escapeHTML(i) + "</option>';
@@ -475,19 +482,36 @@ function Fill_Value() {
     select.insertAdjacentHTML("beforeEnd", options.join("\n"));
   }
 }
+
+// to get unique values again 
+function Double_check_Unique(list){
+  let temp_string=list.join().replace(/ /g,'');
+  
+  list= temp_string.split(",");
+  list =   list.filter((x, i, a) => a.indexOf(x) === i);
+
+  return list;
+
+}
+
 //7 parameter for filtering
 
 var Search_Name_Uni = document.getElementById("search_name");
 var Search_Name_Course = document.getElementById("search_course");
 var Search_Course_type = document.getElementById("Course_type");
+var Germany_Ranking_Finder = document.getElementById("germany_ranking_finder");
 var Search_Language_teaching = document.getElementById("Teaching_language");
 var Search_Start_semeter = document.getElementById("Beginning_semester");
 var Search_Duration = document.getElementById("Duration");
-var Tuition = document.getElementById("Tuition_fee");
+//var Tuition = document.getElementById("Tuition_fee");
 var Display_Search = document.getElementById("display_size");
+var Search_sortByRanking = document.getElementById("Sort_by_Ranking");
+var Min_Tuition_fee = document.getElementById("min");
+var Max_Tuition_fee = document.getElementById("max");
 var Reset_Search = document.getElementById("reset");
-Reset_Search.addEventListener("click",Reset);
-
+Reset_Search.addEventListener("click", Reset);
+let selected_lang=[];
+let start_sem=[];
 Search_Name_Uni.addEventListener("keyup", (e) => {
   delayKeyUp(() => {
     Search_Uni_Course();
@@ -503,58 +527,114 @@ Search_Course_type.addEventListener("change", (e) => {
     Search_Uni_Course();
   }, 400);
 });
+Germany_Ranking_Finder.addEventListener("keyup", (e) => {
+  delayKeyUp(() => {
+    Search_Uni_Course();
+  }, 400);
+});
 Search_Language_teaching.addEventListener("change", (e) => {
   delayKeyUp(() => {
+    
+    selected_lang=check_Selected_Languages();
+
     Search_Uni_Course();
   }, 400);
 });
 Search_Start_semeter.addEventListener("change", (e) => {
   delayKeyUp(() => {
+    start_sem = check_Start_sem();
     Search_Uni_Course();
   }, 400);
 });
 Search_Duration.addEventListener("change", (e) => {
   delayKeyUp(() => {
+    
     Search_Uni_Course();
   }, 400);
 });
-Tuition.addEventListener("change", (e) => {
+
+Min_Tuition_fee.addEventListener("change", (e) => {
   delayKeyUp(() => {
     Search_Uni_Course();
   }, 400);
 });
+Max_Tuition_fee.addEventListener("change", (e) => {
+  delayKeyUp(() => {
+    Search_Uni_Course();
+  }, 400);
+});
+
 Display_Search.addEventListener("change", (e) => {
   delayKeyUp(() => {
     Search_Uni_Course();
   }, 400);
 });
+Search_sortByRanking.addEventListener("change", (e) => {
+  // console.log(e.target.value);
+  delayKeyUp(() => {
+    sortbyRanking(e.target.value);
+  }, 400);
+});
 
-function Reset()
-{
+function check_Start_sem(){
+
+  let start_sem=[];
+  for (var option of Search_Start_semeter)
+  {
+      if (option.selected) {
+        start_sem.push(option.value);
+      }
+  }
+  return start_sem;
+
+}
+function check_Selected_Languages(){
+  let lang=[]
+  for (var option of Search_Language_teaching .options)
+  {
+      if (option.selected) {
+        lang.push(option.value);
+      }
+  }
+  console.log(lang);
+  return lang;
+
+}
+function Reset() {
   document.location.reload(true);
 }
-
+//////
 function Search_Uni_Course() {
   var _Uni_name = Search_Name_Uni.value.toLowerCase();
   var _course_name = Search_Name_Course.value.toLowerCase();
   var _course_type = Search_Course_type.value.toLowerCase();
-  var _teaching_Language = Search_Language_teaching.value.toLowerCase();
-  var _start_semester = Search_Start_semeter.value.toLowerCase();
+  var _germany_ranking= Germany_Ranking_Finder.value.toLocaleLowerCase();
+  var _teaching_Language = selected_lang.join(",").toLocaleLowerCase();
+  var _start_semester = start_sem.join(",").toLocaleLowerCase();
+  //Search_Start_semeter.value.toLowerCase();
   var _duration = Search_Duration.value.toLowerCase();
-  var _fee = Tuition.value.toLowerCase();
+  // var _fee = Tuition.value.toLowerCase();
+  var _sortbyRanking= Search_sortByRanking.value;
+  var  _mintuitionfee = Min_Tuition_fee.value;
+  var  _maxtuitionfee = Max_Tuition_fee.value;
+  // var _sortbyRanking = Sort_by_Ranking.value;
+
+  // var _rank = Search_rank.toLowerCase();
   //input_type = document.getElementById("search_name").value.toLowerCase();
   //Filter(name);
   MultiFilter(
     _Uni_name,
     _course_name,
     _course_type,
+    _germany_ranking,
     _teaching_Language,
     _start_semester,
     _duration,
-    _fee
+   _sortbyRanking,
+   _mintuitionfee,
+   _maxtuitionfee
   );
 }
-
 /*function Filter(name){
   var container = document.getElementById("List_of_University");
   container.innerHTML="";
@@ -565,14 +645,20 @@ function Search_Uni_Course() {
   }
 
 }*/
+
+let resultarr = [];
+
 function MultiFilter(
   university_name,
   course_name,
   course_type,
+  _germany_ranking,
   teaching_language,
   start_semester,
   duration,
-  range
+  _sortbyRanking,
+  _mintuitionfee,
+  _maxtuitionfee
 ) {
   if (Display_Search.value != "") {
     Items_To_Show = Display_Search.value;
@@ -582,26 +668,29 @@ function MultiFilter(
   //console.log("showing items:" + Items_To_Show);
   var container = document.getElementById("List_of_University");
   container.innerHTML = "";
-  const result = CollegeList.filter(
-    (p) =>
+  let result = [] ;
+  result = CollegeList.filter(
+      (p) =>
       p.University_Name.toLowerCase().includes(university_name) &&
       p.Course_Name.toLowerCase().includes(course_name) &&
       p.Course_Type.toLowerCase().includes(course_type) &&
+      (_germany_ranking=="" ?  true:p.Rank_sort_germany===_germany_ranking) &&
       p.Teaching_Language.toLowerCase().includes(teaching_language) &&
       p.Semester_Start.toLowerCase().includes(start_semester) &&
-      p.Duration.toLowerCase().includes(duration) &&
-      p.Tuition_Fee.toLowerCase().includes(range)
-  );
-
+      p.Duration.toLowerCase().includes(duration)&&
+      (p.new_Tuition_Fee >= _mintuitionfee && p.new_Tuition_Fee <=_maxtuitionfee)
+  )
+  resultarr = result;
+ 
+  
   if (result != "") {
-    //Rendering(result);
-
-    Pagination(result, Items_To_Show);
-  } else {
+    sortbyRanking(_sortbyRanking);    
+  } 
+  else {
     Rendering("", "");
   }
+  // console.log(resultarr);
 }
-
 // takes the data and size.
 function Pagination(data, size) {
   Current_Index = 1;
@@ -632,9 +721,7 @@ function Pagination(data, size) {
     e_1.appendChild(document.createTextNode(i + 1));
     container.appendChild(e_1);
   }
-
   //next
-
   var next = document.createElement("a");
   next.addEventListener("click", () => {
     Next(data);
@@ -663,14 +750,11 @@ function Next(data) {
 function PageID(index, data) {
   Current_Index = index;
   //console.log(index);
-
   ShowPage(Current_Index, data);
 }
-
 function ShowPage(Page_ID, Data) {
   //set page number active.
   Active_Deactive(Page_ID);
-
   let newdata = [];
   showItems = Items_To_Show;
   if (Page_ID == PageSize) {
@@ -678,7 +762,6 @@ function ShowPage(Page_ID, Data) {
   }
   for (let i = 0; i < showItems; i++) {
     //problem idenfied to solve.
-
     num = (Page_ID - 1) * Items_To_Show + i;
     //console.log("This is oage size" + Math.ceil(Data.length % Items_To_Show));
     //console.log(Data[num]);
@@ -697,3 +780,243 @@ function Active_Deactive(Page_ID) {
   var active_class = document.getElementById(prev_page_id);
   active_class.setAttribute("class", "active");
 }
+
+////Sorting via Ranking
+
+function sortbyRanking(value) {
+  
+  if(value==0){
+    Pagination(resultarr,Items_To_Show);
+  }
+  else if (value == 1) {
+    sortbyWorldRanking(); 
+  }
+  else if (value == 2) {
+    sortbyGermanRanking(); 
+  } 
+  }
+
+
+
+function sortbyWorldRanking() {
+  Sort_world_Ranking= [].concat(resultarr);
+  
+  Sort_world_Ranking.sort((a, b) => a.Rank_sort_world - b.Rank_sort_world);
+  Pagination(Sort_world_Ranking, Items_To_Show);
+}
+
+function sortbyGermanRanking() {
+  Sort_germany_Ranking= [].concat(resultarr);
+
+  Sort_germany_Ranking.sort((a, b) => a.Rank_sort_germany - b.Rank_sort_germany);
+  Pagination(Sort_germany_Ranking, Items_To_Show);
+}
+
+function randomColor() {
+  var color = '#';
+  var colorCode = ['D5F9F9','E7DDFA','DCE2FC','E4FCDC','F9FCDC','FCF2DC','FCE0DC']; // colors
+  color += colorCode[Math.floor(Math.random() * colorCode.length)];
+  return color;
+}
+
+// var lowerSlider = document.querySelector('#minrangeslider');
+// var  upperSlider = document.querySelector('#maxrangeslider');
+
+// document.querySelector('#maxtutionfee').value=upperSlider.value;
+// document.querySelector('#mintutionfee').value=lowerSlider.value;
+
+// var  minrangesliderVal = parseInt(lowerSlider.value);
+// var maxrangesliderVal = parseInt(upperSlider.value);
+
+// upperSlider.oninput = function () {
+//     minrangesliderVal = parseInt(lowerSlider.value);
+//     maxrangesliderVal = parseInt(upperSlider.value);
+
+//     if (maxrangesliderVal < minrangesliderVal ) {
+//         lowerSlider.value = maxrangesliderVal ;
+//         if (minrangesliderVal == lowerSlider.min) {
+//         upperSlider.value = 0;
+//         }
+//     }
+//     document.querySelector('#maxtutionfee').value=this.value
+// };
+
+// lowerSlider.oninput = function () {
+//     minrangesliderVal = parseInt(lowerSlider.value);
+//     maxrangesliderVal = parseInt(upperSlider.value);
+//     if (minrangesliderVal > maxrangesliderVal ) {
+//         upperSlider.value = minrangesliderVal ;
+//         if (maxrangesliderVal == upperSlider.max) {
+//             lowerSlider.value = parseInt(upperSlider.max) ;
+//         }
+//     }
+//     document.querySelector('#mintutionfee').value=this.value
+// }; 
+
+
+
+function changecurrency(currency){
+  // console.log(currency);
+  var newcurrency = currency.split( '\u20AC')[1];
+  // console.log(typeof(newcurrency));
+  newcurrency = newcurrency.replace(",", "");
+  
+  newcurrency = parseInt(newcurrency) ;
+  // console.log(new_currency);
+  return newcurrency;
+}
+
+function setcurrency(Tuition_Fee){
+  if(Tuition_Fee == 'Not Available' || Tuition_Fee == ''){
+    return 99999;
+  }
+  else if(Tuition_Fee == 'None'){
+    return 0;
+  }
+  else if(Tuition_Fee == 'Varied'){
+    return 1;
+  }
+  else{
+    return changecurrency(Tuition_Fee);
+  }
+}
+
+
+function Display_Pagedata(data_to_process,Current_Index,display_number){
+  var CheckCurrent_Index = (parseInt(data_to_process.length / Items_To_Show)+1);
+ 
+  if(Current_Index == CheckCurrent_Index){
+        display_number.innerHTML =
+    "Displaying " +
+    (Items_To_Show * (Current_Index - 1) + 1) +
+    "-" +
+    (data_to_process.length) +
+    " Universities/Hochshule out of " +
+    data_to_process.length;
+  }
+  else{
+    
+    display_number.innerHTML =
+    "Displaying " +
+    (Items_To_Show * (Current_Index - 1) + 1) +
+    "-" +
+    Items_To_Show * Current_Index +
+    " Universities/Hochshule out of " +
+    data_to_process.length;
+  }
+}
+
+//slider js 
+
+var thumbsize = 14;
+
+function draw(slider,splitvalue) {
+
+    /* set function vars */
+    var min = slider.querySelector('.min');
+    var max = slider.querySelector('.max');
+    var lower = slider.querySelector('.lower');
+    var upper = slider.querySelector('.upper');
+    var legend = slider.querySelector('.legend');
+    var thumbsize = parseInt(slider.getAttribute('data-thumbsize'));
+    var rangewidth = parseInt(slider.getAttribute('data-rangewidth'));
+    var rangemin = parseInt(slider.getAttribute('data-rangemin'));
+    var rangemax = parseInt(slider.getAttribute('data-rangemax'));
+
+    /* set min and max attributes */
+    min.setAttribute('max',splitvalue);
+    max.setAttribute('min',splitvalue);
+
+    /* set css */
+    min.style.width = parseInt(thumbsize + ((splitvalue - rangemin)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
+    max.style.width = parseInt(thumbsize + ((rangemax - splitvalue)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
+    min.style.left = '0px';
+    max.style.left = parseInt(min.style.width)+'px';
+    min.style.top = lower.offsetHeight+'px';
+    max.style.top = lower.offsetHeight+'px';
+    legend.style.marginTop = min.offsetHeight+'px';
+    slider.style.height = (lower.offsetHeight + min.offsetHeight + legend.offsetHeight)+'px';
+    
+    /* correct for 1 off at the end */
+    if(max.value>(rangemax - 1)) max.setAttribute('data-value',rangemax);
+
+    /* write value and labels */
+    max.value = max.getAttribute('data-value'); 
+    min.value = min.getAttribute('data-value');
+    lower.innerHTML = min.getAttribute('data-value');
+    upper.innerHTML = max.getAttribute('data-value');
+
+}
+
+function init(slider) {
+    /* set function vars */
+    var min = slider.querySelector('.min');
+    var max = slider.querySelector('.max');
+    var rangemin = parseInt(min.getAttribute('min'));
+    var rangemax = parseInt(max.getAttribute('max'));
+    var avgvalue = (rangemin + rangemax)/2;
+    var legendnum = slider.getAttribute('data-legendnum');
+
+    /* set data-values */
+    min.setAttribute('data-value',rangemin);
+    max.setAttribute('data-value',rangemax);
+    
+    /* set data vars */
+    slider.setAttribute('data-rangemin',rangemin); 
+    slider.setAttribute('data-rangemax',rangemax); 
+    slider.setAttribute('data-thumbsize',thumbsize); 
+    slider.setAttribute('data-rangewidth',slider.offsetWidth);
+
+    /* write labels */
+    var lower = document.createElement('span');
+    var upper = document.createElement('span');
+    lower.classList.add('lower','value');
+    upper.classList.add('upper','value');
+    lower.appendChild(document.createTextNode(rangemin));
+    upper.appendChild(document.createTextNode(rangemax));
+    slider.insertBefore(lower,min.previousElementSibling);
+    slider.insertBefore(upper,min.previousElementSibling);
+    
+    /* write legend */
+    var legend = document.createElement('div');
+    legend.classList.add('legend');
+    var legendvalues = [];
+    for (var i = 0; i < legendnum; i++) {
+        legendvalues[i] = document.createElement('div');
+        var val = Math.round(rangemin+(i/(legendnum-1))*(rangemax - rangemin));
+        legendvalues[i].appendChild(document.createTextNode(val));
+        legend.appendChild(legendvalues[i]);
+
+    } 
+    slider.appendChild(legend);
+
+    /* draw */
+    draw(slider,avgvalue);
+
+    /* events */
+    min.addEventListener("input", function() {update(min);});
+    max.addEventListener("input", function() {update(max);});
+}
+
+function update(el){
+    /* set function vars */
+    var slider = el.parentElement;
+    var min = slider.querySelector('#min');
+    var max = slider.querySelector('#max');
+    var minvalue = Math.floor(min.value);
+    var maxvalue = Math.floor(max.value);
+    
+    /* set inactive values before draw */
+    min.setAttribute('data-value',minvalue);
+    max.setAttribute('data-value',maxvalue);
+
+    var avgvalue = (minvalue + maxvalue)/2;
+
+    /* draw */
+    draw(slider,avgvalue);
+}
+
+var sliders = document.querySelectorAll('.min-max-slider');
+sliders.forEach( function(slider) {
+    init(slider);
+});
