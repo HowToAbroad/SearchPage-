@@ -411,3 +411,7 @@ span.value.upper::before {content: "- €"; display: inline-block; margin-left: 
   border-radius: 100%;
 }
 .min-max-slider > input::-webkit-slider-runnable-track {cursor: pointer;}
+
+#Teaching_language,#Beginning_semester {
+  overflow: auto;
+}
