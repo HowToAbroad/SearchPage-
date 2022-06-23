@@ -215,7 +215,7 @@ input[type="range"]::-ms-thumb {
     z-index: 1;
   }
  
-  .search_menu-wrap .toggler {
+  .search_menu-wrap .filter_toggler {
     position: absolute;
     top: 0;
     left: 0;
@@ -308,35 +308,35 @@ input[type="range"]::-ms-thumb {
         top: 10px;
       }
       
-      /* Toggler Animation */
-      .search_menu-wrap .toggler:checked + .search_uni_hamburger > div {
+      /* filter_filter_toggler Animation */
+      .search_menu-wrap .filter_toggler:checked + .search_uni_hamburger > div {
         transform: rotate(135deg);
       }
       
       /* Turns Lines Into X */
-      .search_menu-wrap .toggler:checked + .search_uni_hamburger > div:before,
-      .search_menu-wrap .toggler:checked + .search_uni_hamburger > div:after {
+      .search_menu-wrap .filter_toggler:checked + .search_uni_hamburger > div:before,
+      .search_menu-wrap .filter_toggler:checked + .search_uni_hamburger > div:after {
         top: 0;
         transform: rotate(90deg);
       }
       
       /* Rotate On Hover When Checked */
-      .search_menu-wrap .toggler:checked:hover + .search_uni_hamburger > div {
+      .search_menu-wrap .filter_toggler:checked:hover + .search_uni_hamburger > div {
         transform: rotate(225deg);
       }
       
       /* Show Menu */
-      .search_menu-wrap .toggler:checked ~ .menu {
+      .search_menu-wrap .filter_toggler:checked ~ .menu {
           background-color:rgba(14, 13, 13, 0.912);
         visibility: visible;
       }
       
-      .search_menu-wrap .toggler:checked ~ .menu > div {
+      .search_menu-wrap .filter_toggler:checked ~ .menu > div {
         transform: scale(1);
         transition-duration: var(--menu-speed);
       }
       
-      .search_menu-wrap .toggler:checked ~ .menu > div > div {
+      .search_menu-wrap .filter_toggler:checked ~ .menu > div > div {
         opacity: 1;
         transition:  opacity 0.4s ease 0.4s;
       }
@@ -392,7 +392,7 @@ input[type="range"]::-ms-thumb {
   }
   
   @media screen and (min-width: 998px) {
-    .search_menu-wrap .toggler:checked{
+    .search_menu-wrap .filter_toggler:checked{
         visibility: hidden;
     }
 
