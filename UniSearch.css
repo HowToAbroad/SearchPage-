@@ -292,7 +292,7 @@ input[type="range"]::-ms-thumb {
       }
       
       /* Hamburger Lines - Top & Bottom */
-      .search_menu-wrap .search_uni_hamburger > div::before,
+      /* .search_menu-wrap .search_uni_hamburger > div::before,
       .search_menu-wrap .search_uni_hamburger > div::after {
         content: '';
         position: absolute;
@@ -302,7 +302,7 @@ input[type="range"]::-ms-thumb {
         height: 2px;
         background: inherit;
       }
-      
+       */
       /* Moves Line Down */
       .search_menu-wrap .search_uni_hamburger > div::after {
         top: 10px;
