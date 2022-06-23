@@ -668,7 +668,6 @@ function MultiFilter(
   var container = document.getElementById("List_of_University");
   container.innerHTML = "";
   let result = [] ;
-  console.log("rank:"+_germany_ranking )
   result = CollegeList.filter(
       (p) =>
       p.University_Name.toLowerCase().includes(university_name) &&
