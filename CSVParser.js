@@ -128,7 +128,7 @@ function DataParser(data) {
       rows[12],
       rows[13],
       rows[14],
-      rows[15],
+      rows[15].replace(/ /g,''),
       rows[16],
       rows[17],
       rows[18],

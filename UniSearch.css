@@ -200,6 +200,10 @@ input[type="range"]::-ms-thumb {
     cursor: pointer;
 }
 
+#side_box{
+  overflow-y: auto;
+  height: 500px;
+}
 
   ul li{
     list-style-type: none;
@@ -222,7 +226,7 @@ input[type="range"]::-ms-thumb {
     opacity: 0;
   }
 
-    select{
+    select,#germany_ranking_finder{
         width: 240px;
     }
     #reset{
@@ -234,6 +238,12 @@ input[type="range"]::-ms-thumb {
     #search_course{
       width: 240px;
     }
+
+    .inline{
+      display: inline-block;
+    }
+
+    
   @media screen and (max-width: 980px) {
 
       .menu-wrap .hamburger {
@@ -370,3 +380,4 @@ input[type="range"]::-ms-thumb {
     }
 
 }
+
