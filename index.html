@@ -47,7 +47,7 @@
             <div class="hamburger"><div></div></div>
             <div class="menu">
               <div>
-                <div class="col-3 d-flex flex-column mt-5 position-fixed" id="side_box">
+                <div class="col-2 d-flex flex-column mt-5 position-fixed" id="side_box">
                   <ul>
                     <ul>
                       <li> <button type="button" class="btn btn-dark"id="reset"style="font-size:10px">Reset Filters <i class="fa fa-refresh"></i></button></li>
@@ -104,28 +104,19 @@
                      <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Duration">
                        <option value="">--- Duration ---</option>
                      </select></li>
-             <hr>
-             <h6>Tuition Fee</h6>
-                     <!-- <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Tuition_fee">
-                       <option value="">--- Tuition Fee---</option>-->
-                       <div class=" mt-10" > 
-                        
-                         
-                         <div class="inline">
-                           <input value="0" type="number"  id="mintutionfee"  > 
-                           
-                           <input value = "99999" type="number" id="maxtutionfee"  >
-                         </div>
-                         <span>
-                          <input type="range" min="0" max="100000" value="0" id="minrangeslider">
-                           <input type="range" min="0" max="100000" value="100000" id="maxrangeslider">
-                         </div>
+                     <hr/>
              
-                         <!-- <button type="button" class="btn btn-primary mt-2" onsubmit="tution_Fee()">Submit</button> -->
-                       </span>
                        
-                     </select></li>
-                     
+                       
+                     <li> 
+                      <h6 style="align-content:stretch;">Tuition Fee</h6>
+                      <div class="min-max-slider" data-legendnum="2">
+                      <label for="min">Minimum price</label>
+                      <input id="min" class="min" name="min" type="range" step="1" min="0" max="100000" />
+                      <label for="max">Maximum price</label>
+                      <input id="max" class="max" name="max" type="range" step="1" min="0" max="100000" />
+                  </div>
+                </li>
              
                      </ul>
                   </ul>

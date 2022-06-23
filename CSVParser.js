@@ -505,10 +505,8 @@ var Search_Duration = document.getElementById("Duration");
 //var Tuition = document.getElementById("Tuition_fee");
 var Display_Search = document.getElementById("display_size");
 var Search_sortByRanking = document.getElementById("Sort_by_Ranking");
-var Min_Tuition_fee = document.getElementById("mintutionfee");
-var Max_Tuition_fee = document.getElementById("maxtutionfee");
-var Min_TuitionSlider_fee = document.getElementById("minrangeslider");
-var Max_TuitionSlider_fee = document.getElementById("maxrangeslider");
+var Min_Tuition_fee = document.getElementById("min");
+var Max_Tuition_fee = document.getElementById("max");
 var Reset_Search = document.getElementById("reset");
 Reset_Search.addEventListener("click", Reset);
 let selected_lang=[];
@@ -553,11 +551,7 @@ Search_Duration.addEventListener("change", (e) => {
     Search_Uni_Course();
   }, 400);
 });
-// Tuition.addEventListener("change", (e) => {
-//   delayKeyUp(() => {
-//     Search_Uni_Course();
-//   }, 400);
-// });
+
 Min_Tuition_fee.addEventListener("change", (e) => {
   delayKeyUp(() => {
     Search_Uni_Course();
@@ -568,16 +562,7 @@ Max_Tuition_fee.addEventListener("change", (e) => {
     Search_Uni_Course();
   }, 400);
 });
-Min_TuitionSlider_fee.addEventListener("change", (e) => {
-  delayKeyUp(() => {
-    Search_Uni_Course();
-  }, 400);
-});
-Max_TuitionSlider_fee.addEventListener("change", (e) => {
-  delayKeyUp(() => {
-    Search_Uni_Course();
-  }, 400);
-});
+
 Display_Search.addEventListener("change", (e) => {
   delayKeyUp(() => {
     Search_Uni_Course();
@@ -632,8 +617,7 @@ function Search_Uni_Course() {
   var  _mintuitionfee = Min_Tuition_fee.value;
   var  _maxtuitionfee = Max_Tuition_fee.value;
   // var _sortbyRanking = Sort_by_Ranking.value;
-  var  _mintuitionsliderfee = Min_TuitionSlider_fee.value;
-  var  _maxtuitionsliderfee = Max_TuitionSlider_fee.value;
+
   // var _rank = Search_rank.toLowerCase();
   //input_type = document.getElementById("search_name").value.toLowerCase();
   //Filter(name);
@@ -647,9 +631,7 @@ function Search_Uni_Course() {
     _duration,
    _sortbyRanking,
    _mintuitionfee,
-   _maxtuitionfee,
-   _mintuitionsliderfee,
-   _maxtuitionsliderfee
+   _maxtuitionfee
   );
 }
 /*function Filter(name){
@@ -675,9 +657,7 @@ function MultiFilter(
   duration,
   _sortbyRanking,
   _mintuitionfee,
-  _maxtuitionfee,
-  _mintuitionsliderfee,
-  _maxtuitionsliderfee
+  _maxtuitionfee
 ) {
   if (Display_Search.value != "") {
     Items_To_Show = Display_Search.value;
@@ -698,8 +678,7 @@ function MultiFilter(
       p.Teaching_Language.toLowerCase().includes(teaching_language) &&
       p.Semester_Start.toLowerCase().includes(start_semester) &&
       p.Duration.toLowerCase().includes(duration)&&
-      (p.new_Tuition_Fee >= _mintuitionfee && p.new_Tuition_Fee <=_maxtuitionfee) &&
-      (p.new_Tuition_Fee >= _mintuitionsliderfee && p.new_Tuition_Fee <=_maxtuitionsliderfee)
+      (p.new_Tuition_Fee >= _mintuitionfee && p.new_Tuition_Fee <=_maxtuitionfee)
   )
   resultarr = result;
  
@@ -840,39 +819,39 @@ function randomColor() {
   return color;
 }
 
-var lowerSlider = document.querySelector('#minrangeslider');
-var  upperSlider = document.querySelector('#maxrangeslider');
+// var lowerSlider = document.querySelector('#minrangeslider');
+// var  upperSlider = document.querySelector('#maxrangeslider');
 
-document.querySelector('#maxtutionfee').value=upperSlider.value;
-document.querySelector('#mintutionfee').value=lowerSlider.value;
+// document.querySelector('#maxtutionfee').value=upperSlider.value;
+// document.querySelector('#mintutionfee').value=lowerSlider.value;
 
-var  minrangesliderVal = parseInt(lowerSlider.value);
-var maxrangesliderVal = parseInt(upperSlider.value);
+// var  minrangesliderVal = parseInt(lowerSlider.value);
+// var maxrangesliderVal = parseInt(upperSlider.value);
 
-upperSlider.oninput = function () {
-    minrangesliderVal = parseInt(lowerSlider.value);
-    maxrangesliderVal = parseInt(upperSlider.value);
+// upperSlider.oninput = function () {
+//     minrangesliderVal = parseInt(lowerSlider.value);
+//     maxrangesliderVal = parseInt(upperSlider.value);
 
-    if (maxrangesliderVal < minrangesliderVal ) {
-        lowerSlider.value = maxrangesliderVal ;
-        if (minrangesliderVal == lowerSlider.min) {
-        upperSlider.value = 0;
-        }
-    }
-    document.querySelector('#maxtutionfee').value=this.value
-};
+//     if (maxrangesliderVal < minrangesliderVal ) {
+//         lowerSlider.value = maxrangesliderVal ;
+//         if (minrangesliderVal == lowerSlider.min) {
+//         upperSlider.value = 0;
+//         }
+//     }
+//     document.querySelector('#maxtutionfee').value=this.value
+// };
 
-lowerSlider.oninput = function () {
-    minrangesliderVal = parseInt(lowerSlider.value);
-    maxrangesliderVal = parseInt(upperSlider.value);
-    if (minrangesliderVal > maxrangesliderVal ) {
-        upperSlider.value = minrangesliderVal ;
-        if (maxrangesliderVal == upperSlider.max) {
-            lowerSlider.value = parseInt(upperSlider.max) ;
-        }
-    }
-    document.querySelector('#mintutionfee').value=this.value
-}; 
+// lowerSlider.oninput = function () {
+//     minrangesliderVal = parseInt(lowerSlider.value);
+//     maxrangesliderVal = parseInt(upperSlider.value);
+//     if (minrangesliderVal > maxrangesliderVal ) {
+//         upperSlider.value = minrangesliderVal ;
+//         if (maxrangesliderVal == upperSlider.max) {
+//             lowerSlider.value = parseInt(upperSlider.max) ;
+//         }
+//     }
+//     document.querySelector('#mintutionfee').value=this.value
+// }; 
 
 
 
@@ -927,6 +906,117 @@ function Display_Pagedata(data_to_process,Current_Index,display_number){
   }
 }
 
-// $(document).ready(function(){
-//   $('.languages').selectpicker();
-// })
+//slider js 
+
+var thumbsize = 14;
+
+function draw(slider,splitvalue) {
+
+    /* set function vars */
+    var min = slider.querySelector('.min');
+    var max = slider.querySelector('.max');
+    var lower = slider.querySelector('.lower');
+    var upper = slider.querySelector('.upper');
+    var legend = slider.querySelector('.legend');
+    var thumbsize = parseInt(slider.getAttribute('data-thumbsize'));
+    var rangewidth = parseInt(slider.getAttribute('data-rangewidth'));
+    var rangemin = parseInt(slider.getAttribute('data-rangemin'));
+    var rangemax = parseInt(slider.getAttribute('data-rangemax'));
+
+    /* set min and max attributes */
+    min.setAttribute('max',splitvalue);
+    max.setAttribute('min',splitvalue);
+
+    /* set css */
+    min.style.width = parseInt(thumbsize + ((splitvalue - rangemin)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
+    max.style.width = parseInt(thumbsize + ((rangemax - splitvalue)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
+    min.style.left = '0px';
+    max.style.left = parseInt(min.style.width)+'px';
+    min.style.top = lower.offsetHeight+'px';
+    max.style.top = lower.offsetHeight+'px';
+    legend.style.marginTop = min.offsetHeight+'px';
+    slider.style.height = (lower.offsetHeight + min.offsetHeight + legend.offsetHeight)+'px';
+    
+    /* correct for 1 off at the end */
+    if(max.value>(rangemax - 1)) max.setAttribute('data-value',rangemax);
+
+    /* write value and labels */
+    max.value = max.getAttribute('data-value'); 
+    min.value = min.getAttribute('data-value');
+    lower.innerHTML = min.getAttribute('data-value');
+    upper.innerHTML = max.getAttribute('data-value');
+
+}
+
+function init(slider) {
+    /* set function vars */
+    var min = slider.querySelector('.min');
+    var max = slider.querySelector('.max');
+    var rangemin = parseInt(min.getAttribute('min'));
+    var rangemax = parseInt(max.getAttribute('max'));
+    var avgvalue = (rangemin + rangemax)/2;
+    var legendnum = slider.getAttribute('data-legendnum');
+
+    /* set data-values */
+    min.setAttribute('data-value',rangemin);
+    max.setAttribute('data-value',rangemax);
+    
+    /* set data vars */
+    slider.setAttribute('data-rangemin',rangemin); 
+    slider.setAttribute('data-rangemax',rangemax); 
+    slider.setAttribute('data-thumbsize',thumbsize); 
+    slider.setAttribute('data-rangewidth',slider.offsetWidth);
+
+    /* write labels */
+    var lower = document.createElement('span');
+    var upper = document.createElement('span');
+    lower.classList.add('lower','value');
+    upper.classList.add('upper','value');
+    lower.appendChild(document.createTextNode(rangemin));
+    upper.appendChild(document.createTextNode(rangemax));
+    slider.insertBefore(lower,min.previousElementSibling);
+    slider.insertBefore(upper,min.previousElementSibling);
+    
+    /* write legend */
+    var legend = document.createElement('div');
+    legend.classList.add('legend');
+    var legendvalues = [];
+    for (var i = 0; i < legendnum; i++) {
+        legendvalues[i] = document.createElement('div');
+        var val = Math.round(rangemin+(i/(legendnum-1))*(rangemax - rangemin));
+        legendvalues[i].appendChild(document.createTextNode(val));
+        legend.appendChild(legendvalues[i]);
+
+    } 
+    slider.appendChild(legend);
+
+    /* draw */
+    draw(slider,avgvalue);
+
+    /* events */
+    min.addEventListener("input", function() {update(min);});
+    max.addEventListener("input", function() {update(max);});
+}
+
+function update(el){
+    /* set function vars */
+    var slider = el.parentElement;
+    var min = slider.querySelector('#min');
+    var max = slider.querySelector('#max');
+    var minvalue = Math.floor(min.value);
+    var maxvalue = Math.floor(max.value);
+    
+    /* set inactive values before draw */
+    min.setAttribute('data-value',minvalue);
+    max.setAttribute('data-value',maxvalue);
+
+    var avgvalue = (minvalue + maxvalue)/2;
+
+    /* draw */
+    draw(slider,avgvalue);
+}
+
+var sliders = document.querySelectorAll('.min-max-slider');
+sliders.forEach( function(slider) {
+    init(slider);
+});
