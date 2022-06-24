@@ -1,8 +1,6 @@
 const URL_TO_Check = "./sheetnew2.csv";
 const URL_Search_Parameter = new URLSearchParams(location.search);
-var check= document.getElementById("HamBox");
 
-check.addEventListener("change",function(){console.log(check.checked)});
 let Current_Index = 0;
 let PageSize = 1;
 let CollegeList = [];
