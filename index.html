@@ -38,93 +38,80 @@
       </div>
     </div >
     
-      <div class="container d-flex mt-5 " >
-        <div class= 'w-25'>
+      <div class="container d-flex justify-content-center mt-5 " >
+        
+        <ul class="search_menu">
+          <li> <button type="button" class="btn btn-dark"id="reset"style="font-size:10px">Reset Filters <i class="fa fa-refresh"></i></button></li>
+          <li><select class="btn btn-secondary dropdown-toggle mt-2" id="display_size">
+            <option value="">---No. of Items---</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select></li>
+          <li><input
+            class="input-group-text mt-2"
+            type="text"
+            placeholder="University Name"
+            id="search_name"
+          /></li>
+          <li><input
+            class="input-group-text mt-2"
+            type="text"
+            placeholder="Course Name"
+            id="search_course"
+          /></li>
+          <li><input
+            class="input-group-text mt-2"
+            type="text"
+            placeholder="Germany Ranking"
+            id="germany_ranking_finder"
+          />
+          </li>
 
-          <div class="search_menu-wrap">
-            <input type="checkbox" class="filter_toggler" >
-            <div class="search_uni_hamburger"><div></div></div>
-            <div class="search_menu">
-              <div>
-                <div class="col-2 d-flex flex-column mt-5 position-fixed" id="side_box">
-                  <ul>
-                    <ul>
-                      <li> <button type="button" class="btn btn-dark"id="reset"style="font-size:10px">Reset Filters <i class="fa fa-refresh"></i></button></li>
-                      <li><select class="btn btn-secondary dropdown-toggle mt-2" id="display_size">
-                        <option value="">---No. of Items---</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                      </select></li>
-                      <li><input
-                       class="input-group-text mt-2"
-                       type="text"
-                       placeholder="University Name"
-                       id="search_name"
-                     /></li>
-                     <li><input
-                       class="input-group-text mt-2"
-                       type="text"
-                       placeholder="Course Name"
-                       id="search_course"
-                     /></li>
-                     <li><input
-                       class="input-group-text mt-2"
-                       type="text"
-                       placeholder="Germany Ranking"
-                       id="germany_ranking_finder"
-                     />
-                     </li>
-                    
-             
-                     <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Course_type">
-                       <option value="">--- Course Type ---</option>
-                       <!-- <option value="Master's degree">Master's degree</option>
-                       <option value="Bachelor's degree">Bachelor's degree</option>
-                       <option value="PhD/Doctorate">PhD/Doctorate</option>
-                       <option value="Short course">Short course</option> -->
-                     </select></li>
-             
-                     <!-- <button class="accordion">Teaching Language</button> -->
-                     
-                       <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Teaching_language"  multiple >
-                         <option class="anchor"value="">--- Teaching language ---</option>
-                         
-                         <!-- <option value="" type="checkbox">English</option> -->
-               
-                   
+          <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Course_type">
+            <option value="">--- Course Type ---</option>
+            <!-- <option value="Master's degree">Master's degree</option>
+            <option value="Bachelor's degree">Bachelor's degree</option>
+            <option value="PhD/Doctorate">PhD/Doctorate</option>
+            <option value="Short course">Short course</option> -->
+          </select></li>
+          <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Teaching_language"  multiple >
+            <option class="anchor"value="">--- Teaching language ---</option>
+            
+            <!-- <option value="" type="checkbox">English</option> -->
+  
       
-                     </select></li>
-                     <!-- <button class="accordion">Beginning Semester</button> -->
-                     <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Beginning_semester" multiple>
-                       <option value="">--- Beginning Semester ---</option>
-                     </select></li>
-                     <!-- <button class="accordion">Duration</button> -->
-                     <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Duration">
-                       <option value="">--- Duration ---</option>
-                     </select></li>
-                     <hr/>
-             
-                       
-                       
-                     <li class="tuitionfeelist"> 
-                      <h4>Tuition Fee</h4>
-                      <div class="min-max-slider" data-legendnum="2">
-                      <label for="min">Minimum price</label>
-                      <input id="min" class="min" name="min" type="range" step="1" min="0" max="100000" />
-                      <label for="max">Maximum price</label>
-                      <input id="max" class="max" name="max" type="range" step="1" min="0" max="100000" />
-                  </div>
-                </li>
-             
-                     </ul>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-   
-    </div>
+
+        </select></li>
+        <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Beginning_semester" multiple>
+          <option value="">--- Beginning Semester ---</option>
+        </select></li>
+        <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Duration">
+          <option value="">--- Duration ---</option>
+        </select></li>
+        <hr/>
+        <li class="tuitionfeelist"> 
+          <h4>Tuition Fee</h4>
+          <div class="min-max-slider" data-legendnum="2">
+          <label for="min">Minimum price</label>
+          <input id="min" class="min" name="min" type="range" step="1" min="0" max="100000" />
+          <label for="max">Maximum price</label>
+          <input id="max" class="max" name="max" type="range" step="1" min="0" max="100000" />
+      </div>
+    </li>
+ 
+        
+          <!-- <li><a class="menuItem" href="#">About</a></li>
+          <li><a class="menuItem" href="#">Contacts</a></li> -->
+        </ul>
+    
+        <button id="hambutton" class="hamburger">
+          <!-- material icons https://material.io/resources/icons/ -->
+          <i class="menuIcon material-icons">Filters</i>
+          <i class="closeIcon material-icons">Close</i>
+        </button>
+
+         
       <div class="Ranking">
           <select  class="btn btn-secondary dropdown-toggle mt-2 " id="Sort_by_Ranking">
             <option value="0">---Sort by Ranking---</option>

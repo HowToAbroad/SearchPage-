@@ -1,6 +1,7 @@
 const URL_TO_Check = "./sheetnew2.csv";
 const URL_Search_Parameter = new URLSearchParams(location.search);
 
+
 let Current_Index = 0;
 let PageSize = 1;
 let CollegeList = [];
@@ -986,3 +987,24 @@ var sliders = document.querySelectorAll('.min-max-slider');
 sliders.forEach( function(slider) {
     init(slider);
 });
+
+
+const menu = document.querySelector(".search_menu");
+const menuItems = document.querySelectorAll(".menuItem");
+const hamburger= document.querySelector(".hamburger");
+const closeIcon= document.querySelector(".closeIcon");
+const menuIcon = document.querySelector(".menuIcon");
+
+function toggleMenu() {
+  if (menu.classList.contains("showMenu")) {
+    menu.classList.remove("showMenu");
+    closeIcon.style.display = "none";
+    menuIcon.style.display = "block";
+  } else {
+    menu.classList.add("showMenu");
+    closeIcon.style.display = "block";
+    menuIcon.style.display = "none";
+  }
+}
+
+hamburger.addEventListener("click", toggleMenu);
