@@ -1,6 +1,6 @@
 const URL_TO_Check = "https://howtoabroad.github.io/SearchPage/sheetnew2.csv";
-
 const URL_Search_Parameter = new URLSearchParams(location.search);
+
 
 let Current_Index = 0;
 let PageSize = 1;
@@ -820,40 +820,6 @@ function randomColor() {
   return color;
 }
 
-// var lowerSlider = document.querySelector('#minrangeslider');
-// var  upperSlider = document.querySelector('#maxrangeslider');
-
-// document.querySelector('#maxtutionfee').value=upperSlider.value;
-// document.querySelector('#mintutionfee').value=lowerSlider.value;
-
-// var  minrangesliderVal = parseInt(lowerSlider.value);
-// var maxrangesliderVal = parseInt(upperSlider.value);
-
-// upperSlider.oninput = function () {
-//     minrangesliderVal = parseInt(lowerSlider.value);
-//     maxrangesliderVal = parseInt(upperSlider.value);
-
-//     if (maxrangesliderVal < minrangesliderVal ) {
-//         lowerSlider.value = maxrangesliderVal ;
-//         if (minrangesliderVal == lowerSlider.min) {
-//         upperSlider.value = 0;
-//         }
-//     }
-//     document.querySelector('#maxtutionfee').value=this.value
-// };
-
-// lowerSlider.oninput = function () {
-//     minrangesliderVal = parseInt(lowerSlider.value);
-//     maxrangesliderVal = parseInt(upperSlider.value);
-//     if (minrangesliderVal > maxrangesliderVal ) {
-//         upperSlider.value = minrangesliderVal ;
-//         if (maxrangesliderVal == upperSlider.max) {
-//             lowerSlider.value = parseInt(upperSlider.max) ;
-//         }
-//     }
-//     document.querySelector('#mintutionfee').value=this.value
-// }; 
-
 
 
 function changecurrency(currency){
@@ -1021,3 +987,24 @@ var sliders = document.querySelectorAll('.min-max-slider');
 sliders.forEach( function(slider) {
     init(slider);
 });
+
+
+const menu = document.querySelector(".search_menu");
+const menuItems = document.querySelectorAll(".menuItem");
+const hamburger= document.querySelector(".hamburger");
+const closeIcon= document.querySelector(".closeIcon");
+const menuIcon = document.querySelector(".menuIcon");
+
+function toggleMenu() {
+  if (menu.classList.contains("showMenu")) {
+    menu.classList.remove("showMenu");
+    closeIcon.style.display = "none";
+    menuIcon.style.display = "block";
+  } else {
+    menu.classList.add("showMenu");
+    closeIcon.style.display = "block";
+    menuIcon.style.display = "none";
+  }
+}
+
+hamburger.addEventListener("click", toggleMenu);
