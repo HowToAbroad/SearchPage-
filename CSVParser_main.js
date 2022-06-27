@@ -1,4 +1,4 @@
-const URL_TO_Check = "./sheetnew2.csv";
+const URL_TO_Check = ".https://howtoabroad.github.io/SearchPage/sheetnew2.csv";
 const URL_Search_Parameter = new URLSearchParams(location.search);
 
 
