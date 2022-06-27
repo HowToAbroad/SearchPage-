@@ -991,7 +991,7 @@ sliders.forEach( function(slider) {
 
 const menu = document.querySelector(".search_menu");
 const menuItems = document.querySelectorAll(".menuItem");
-const hamburger= document.querySelector(".hamburger");
+const hamburger= document.querySelector(".search_hamburger");
 const closeIcon= document.querySelector(".closeIcon");
 const menuIcon = document.querySelector(".menuIcon");
 

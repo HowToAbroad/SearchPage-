@@ -202,8 +202,8 @@ input[type="range"]::-ms-thumb {
 
 #side_box{
 position: sticky;
-overflow-y: scroll;
-height: auto;
+/* overflow-y: scroll;
+height: auto; */
 } 
 
 ul li{
@@ -306,6 +306,7 @@ width: 240px;
 .Ranking{
   position: absolute;
   right: 10px
+ 
 }
 /* ul{
   overflow-y: auto;
@@ -349,7 +350,7 @@ h4{
 
 }
 
-.hamburger {
+.search_hamburger {
 
     position: fixed;
     z-index: 100;
