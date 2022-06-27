@@ -222,7 +222,7 @@ ul li{
   select,#germany_ranking_finder{
       width: 240px;
   }
-  #reset,#display_size,#Course_type, #Duration{
+  #reset,#display_size,#Course_type, #Duration,#Sort_by_Ranking{
     width: 240px;
     height: 40px;
   }
