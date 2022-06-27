@@ -4,6 +4,74 @@
   margin: 0;
 }
 
+
+/*CSS for different classes*/
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+.show{
+    
+    display: none;
+}
+
+.Ranking{
+    top: 9;
+    right: 159px;
+    position: absolute;
+}
+.search_menu-wrap{
+  position: fixed;
+  top: 18%;
+  left: 0;
+  z-index: 1;
+}
+.search_menu-wrap .filter_toggler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+}
+
+/*CSS for filter button*/
+.search_hamburger {
+    color:white;
+    position: absolute;
+    z-index: 100;
+    top: 9rem;
+    left:0rem;
+    padding: 4px;
+    border: rgb(6, 6, 6) solid 1px;
+    border-radius: 6px;
+    background: grey;
+    cursor: pointer;
+  }
+
 /*CSS for the slider in tuition fee*/
 .range-slider {
   width: 480px;
@@ -148,77 +216,6 @@ border-radius: 100%;
 }
 .min-max-slider > input::-webkit-slider-runnable-track {cursor: pointer;}
 
-
-
-/*CSS for different classes*/
-.center {
-  text-align: center;
-}
-
-.pagination {
-  justify-content: center;
-  display: inline-block;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-  margin: 0 4px;
-}
-
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-  border: 1px solid #4CAF50;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
-.show{
-    
-    display: none;
-}
-
-.Ranking{
-    top: 9;
-    right: 159px;
-    position: absolute;
-}
-.search_menu-wrap{
-  position: fixed;
-  top: 18%;
-  left: 0;
-  z-index: 1;
-}
-.search_menu-wrap .filter_toggler {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  opacity: 0;
-}
-
-/*CSS for filter button*/
-.search_hamburger {
-    color:white;
-    position: absolute;
-    z-index: 100;
-    top: 12rem;
-    left:0rem;
-    padding: 4px;
-    border: rgb(6, 6, 6) solid 1px;
-    border-radius: 6px;
-    background: grey;
-    cursor: pointer;
-  }
-
-
 #Teaching_language,#Beginning_semester,#Course_type,#Duration,#display_size {
 overflow: auto;
 width: 240px;
@@ -297,6 +294,9 @@ ul li{
     li{
       margin-left: 20px;
     }
+  
+  
+  
   ul{
     overflow-y: auto;
     height: 100%;
@@ -319,6 +319,7 @@ ul li{
 }
   
   .min-max-slider{color: rgb(214, 214, 40);}
+  
     .closeIcon {
       display: table;
       align-items: center;
