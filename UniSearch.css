@@ -4,51 +4,8 @@
   margin: 0;
 }
 
-@media(min-width:991px){ #mobile-filter{
-  display: none;
-}
-}
 
-@media(min-width:768px) and (max-width:991px){
-
-  #mobile-filter{
-      display: none;
-  }
-
-}
-
-
-@media(min-width:568px) and (max-width:767px){
-
-  #mobile-filter{
-      display: none;
-  }
-
-}
-
-
-
-@media(max-width:567px){
-
-  #mobile-filter{
-      padding: 10px;
-  }
-
-}
-
-/* .col-md-10{
-  display: inline-block;
-  position: relative;
-  top: 0;
-  bottom: 0;
-  left: 100px;
-  right: 0;
-  width: 60%;
-  height: 50%;
-  margin: auto;
-} */
-
-
+/*CSS for different classes*/
 .center {
   text-align: center;
 }
@@ -84,10 +41,38 @@
     right: 159px;
     position: absolute;
 }
-.inline{
-  display: inline;
+.search_menu-wrap{
+  position: fixed;
+  top: 18%;
+  left: 0;
+  z-index: 1;
+}
+.search_menu-wrap .filter_toggler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
 }
 
+/*CSS for filter button*/
+.search_hamburger {
+    color:white;
+    position: absolute;
+    z-index: 100;
+    top: 9rem;
+    left:0rem;
+    padding: 4px;
+    border: rgb(6, 6, 6) solid 1px;
+    border-radius: 6px;
+    background: grey;
+    cursor: pointer;
+  }
+
+/*CSS for the slider in tuition fee*/
 .range-slider {
   width: 480px;
 /* Match this to the SVG's x2 value */
@@ -200,59 +185,6 @@ input[type="range"]::-ms-thumb {
   cursor: pointer;
 }
 
-#side_box{
-position: sticky;
-/* overflow-y: scroll;
-height: auto; */
-} 
-
-ul li{
-  list-style-type: none;
-}
-.search_menu-wrap{
-  position: fixed;
-  top: 18%;
-  left: 0;
-  z-index: 1;
-}
-
-
-
-
-  select,#germany_ranking_finder{
-      width: 240px;
-  }
-  #reset,#display_size,#Course_type, #Duration,#Sort_by_Ranking{
-    width: 240px;
-    height: 40px;
-  }
-  #search_name{
-    width: 240px;
-
-  }
-  #search_course{
-    width: 240px;
-  }
-  
-
- li{
-  
-  display:table;
- }
-  
- .search_menu-wrap .filter_toggler {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  opacity: 0;
-}
- 
-  
-
 /* slider css*/
 .min-max-slider{color: rgb(0, 0, 0);}
 
@@ -287,78 +219,134 @@ border-radius: 100%;
 #Teaching_language,#Beginning_semester,#Course_type,#Duration,#display_size {
 overflow: auto;
 width: 240px;
+}
+
+/*CSS by targeting id*/
+#side_box{
+position: sticky;
+} 
+
+
+#reset,#display_size,#Course_type, #Duration,#Sort_by_Ranking{
+width: 240px;
+height: 40px;
+}
+#search_name,#search_course,#germany_ranking_finder{
+width: 240px;
+}
+
+/*CSS By directly targetting elements present*/
+
+select{
+  width: 240px;
+}
+
+ul li{
+  list-style-type: none;
+}
+ li{
+  display:table;
+ }
+  
+ 
+ 
+ /* CSS For Media Queries */
+@media(min-width:991px){ #mobile-filter{
+  display: none;
+}
+}
+
+@media(min-width:768px) and (max-width:991px){
+
+  #mobile-filter{
+      display: none;
+  }
 
 }
 
 
-@media screen and (min-width:1024px){
-#hambutton {
+@media(min-width:568px) and (max-width:767px){
 
-  background: transparent;
-  border: none !important;
-  font-size:0;
+  #mobile-filter{
+      display: none;
+  }
+
 }
+
+@media(max-width:567px){
+
+  #mobile-filter{
+      padding: 10px;
+  }
+
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (min-width:1025px){
+ 
+  #hambutton {
+    background: transparent;
+    border: none !important;
+    font-size:0;
+  }
+  }
+  
+  @media screen and (max-width: 1025px) {
+    li{
+      margin-left: 20px;
+    }
+  
+  
+  
+  ul{
+    overflow-y: auto;
+    height: 100%;
+  }
+  h4{
+    margin-left: 40px;
+    color:white;
+  }
+  .tuitionfeelist{
+    margin-left: 20px;
+  }
 
-
+  .search_menu hr{
+    width:240px;
+    margin-left: 20px;
+  }
 .Ranking{
   position: absolute;
-  right: 10px
- 
+  right: 10px;
 }
-/* ul{
-  overflow-y: auto;
-  height: 500px;
-} */
-h4{
-  color:white;
-}
-
-.min-max-slider{color: rgb(7, 7, 6);}
-
-  .closeIcon {
-    display: table;
+  
+  .min-max-slider{color: rgb(214, 214, 40);}
+  
+    .closeIcon {
+      display: table;
+      align-items: center;
+    }
+    .search_menu {
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      transform: translateY(-100%);
+      transition: transform 0.2s;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 99;
+      background:black;
+      color: white;
+      list-style: none;
+      padding-top: 4rem;
+      
+    }
+    .showMenu {
+      transform: translateY(0);
+    }
   }
-  .search_menu {
-    position: fixed;
-    transform: translateY(-100%);
-    transition: transform 0.2s;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99;
-    background:black;
-    color: white;
-    list-style: none;
-    padding-top: 4rem;
-    
-  }
-  .showMenu {
-    transform: translateY(0);
+  .search_menu showMenu{
+    align-items: center;
   }
 
-
-}
-
-@media screen and (min-width: 998px) {
-.search_menu-wrap .filter_toggler:checked{
-    visibility: hidden;
-}
-
-}
-
-.search_hamburger {
-
-    position: fixed;
-    z-index: 100;
-    top: 10rem;
-    left:2rem;
-    padding: 4px;
-    border: rgb(185, 45, 45) solid 1px;
-    background: white;
-    cursor: pointer;
-  }
 

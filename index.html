@@ -37,13 +37,20 @@
         
       </div>
     </div >
+
+    <button id="hambutton" class="search_hamburger">
+      <!-- material icons https://material.io/resources/icons/ -->
+      <i class="menuIcon material-icons" style="display:block;">Filters</i>
+      <i class="closeIcon material-icons" style="display:none;">Close</i>
+    </button>
     
-      <div class="container d-flex justify-content-center mt-5 " >
-        
+      <div class="container d-flex justify-content-center mt-5 ">
+        <div  id="listbox">
         <ul class="search_menu">
           <li> <button type="button" class="btn btn-dark"id="reset"style="font-size:10px">Reset Filters <i class="fa fa-refresh"></i></button></li>
           <li><select class="btn btn-secondary dropdown-toggle mt-2" id="display_size">
             <option value="">---No. of Items---</option>
+            <option value="10">10</option>
             <option value="20">20</option>
             <option value="50">50</option>
             <option value="100">100</option>
@@ -70,17 +77,9 @@
 
           <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Course_type">
             <option value="">--- Course Type ---</option>
-            <!-- <option value="Master's degree">Master's degree</option>
-            <option value="Bachelor's degree">Bachelor's degree</option>
-            <option value="PhD/Doctorate">PhD/Doctorate</option>
-            <option value="Short course">Short course</option> -->
           </select></li>
           <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Teaching_language"  multiple >
             <option class="anchor"value="">--- Teaching language ---</option>
-            
-            <!-- <option value="" type="checkbox">English</option> -->
-  
-      
 
         </select></li>
         <li><select class="btn btn-secondary dropdown-toggle mt-2" id="Beginning_semester" multiple>
@@ -99,18 +98,9 @@
           <input id="max" class="max" name="max" type="range" step="1" min="0" max="100000" />
       </div>
     </li>
- 
-        
-          <!-- <li><a class="menuItem" href="#">About</a></li>
-          <li><a class="menuItem" href="#">Contacts</a></li> -->
         </ul>
     
-        <button id="hambutton" class="search_hamburger">
-          <!-- material icons https://material.io/resources/icons/ -->
-          <i class="menuIcon material-icons">Filters</i>
-          <i class="closeIcon material-icons">Close</i>
-        </button>
-
+      </div>
          
       <div class="Ranking">
           <select  class="btn btn-secondary dropdown-toggle mt-2 " id="Sort_by_Ranking">

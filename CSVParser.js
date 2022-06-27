@@ -5,7 +5,7 @@ const URL_Search_Parameter = new URLSearchParams(location.search);
 let Current_Index = 0;
 let PageSize = 1;
 let CollegeList = [];
-let Items_To_Show = 20;
+let Items_To_Show = 10;
 let prev_page_id = 1;
 class College {
   constructor(
@@ -664,7 +664,7 @@ function MultiFilter(
   if (Display_Search.value != "") {
     Items_To_Show = Display_Search.value;
   } else {
-    Items_To_Show = 20;
+    Items_To_Show = 10;
   }
   //console.log("showing items:" + Items_To_Show);
   var container = document.getElementById("List_of_University");
@@ -815,7 +815,7 @@ function sortbyGermanRanking() {
 
 function randomColor() {
   var color = '#';
-  var colorCode = ['D5F9F9','E7DDFA','DCE2FC','E4FCDC','F9FCDC','FCF2DC','FCE0DC']; // colors
+  var colorCode = ['D5F9F9','DCE2FC','E4FCDC','E7DDFA','F9FCDC','FCF2DC','FCE0DC','ff9966','33cccc','cc6699']; // colors
   color += colorCode[Math.floor(Math.random() * colorCode.length)];
   return color;
 }
