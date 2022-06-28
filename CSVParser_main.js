@@ -1,7 +1,6 @@
 const URL_TO_Check = "https://howtoabroad.github.io/SearchPage/sheetnew2.csv";
 const URL_Search_Parameter = new URLSearchParams(location.search);
 
-
 let Current_Index = 0;
 let PageSize = 1;
 let CollegeList = [];
@@ -449,10 +448,10 @@ function Fill_Value() {
 
 
   let uniqueListArray = [
-    Double_check_Unique(course_type_array.sort()),
-    Double_check_Unique(language_array.sort()),
-    Double_check_Unique(duration_array.sort()),
-    Double_check_Unique(semester_array.sort()),
+    Unique_value(course_type_array.sort()),
+    Remove_Space_Get_Unique_Value(language_array.sort()),
+    Unique_value(duration_array.sort()),
+    Remove_Space_Get_Unique_Value(semester_array.sort()),
     //tuition_fees.sort(),
   ];
 
@@ -485,14 +484,19 @@ function Fill_Value() {
 }
 
 // to get unique values again 
-function Double_check_Unique(list){
+function Remove_Space_Get_Unique_Value(list){
   let temp_string=list.join().replace(/ /g,'');
   
   list= temp_string.split(",");
-  list =   list.filter((x, i, a) => a.indexOf(x) === i);
+  list=Unique_value(list);
 
   return list;
 
+}
+
+function Unique_value(values)
+{
+  return   values.filter((x, i, a) => a.indexOf(x) === i);
 }
 
 //7 parameter for filtering
