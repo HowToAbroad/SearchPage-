@@ -1,6 +1,5 @@
-const URL_TO_Check = "./sheetnew2.csv";
+const URL_TO_Check = "./new_data_20k.csv";
 const URL_Search_Parameter = new URLSearchParams(location.search);
-
 
 let Current_Index = 0;
 let PageSize = 1;
@@ -105,7 +104,7 @@ function DataParser(data) {
   //console.log(table_head);
 
   table_body = data.split("\n").slice(1);
-  //console.log(table_body);
+  //console.log(table_body[1]);
 
   table_Length = table_body.length;
   //console.log(table_Length);
@@ -114,7 +113,29 @@ function DataParser(data) {
   table_body.forEach((row) => {
     //const rows = row.split(",");
     const rows = row.split(";");
-
+    //console.log("Row Number"+num);
+    // console.log(rows[1]);
+    // console.log(rows[2]);
+    // console.log(rows[3]);
+    // console.log(rows[4]);
+    // console.log(rows[5]);
+    // console.log(rows[6]);
+    // console.log(rows[7]);
+    // console.log(rows[8]);
+    // console.log(rows[9].replace(/ /g,''));
+    // console.log(rows[10]);
+    // console.log(rows[11]);
+    // console.log(rows[12]);
+    // console.log(rows[13]);
+    // console.log(rows[14]);
+    // console.log(rows[15].replace(/ /g,''));
+    // console.log(rows[16]);
+    // console.log(rows[17]);
+    // console.log(rows[18]);
+    // console.log(rows[19]);
+    // console.log(rows[20]);
+    // console.log(rows[21]);
+    // console.log(rows[24]);
     CollegeList[num] = new College(
       rows[1],
       rows[2],
@@ -143,7 +164,7 @@ function DataParser(data) {
     num++;
   });
 
-  // console.log(CollegeList);
+   console.log(CollegeList);
 }
 //datalist - whole data
 //current index-> page number 
@@ -436,13 +457,13 @@ function Fill_Value() {
   let language_array = [];
   let duration_array = [];
   let semester_array = [];
-  //let tuition_fees = [];
+  let tuition_fees = [];
   CollegeList.forEach((Element) => {
     course_type_array.push(Element.Course_Type);
     language_array.push(Element.Teaching_Language);
     duration_array.push(Element.Duration);
     semester_array.push(Element.Semester_Start);
-    //tuition_fees.push(Element.Tuition_Fee);
+    tuition_fees.push(Element.Tuition_Fee);
   });
 
   // changing the languages 
@@ -453,7 +474,7 @@ function Fill_Value() {
     Remove_Space_Get_Unique_Value(language_array.sort()),
     Unique_value(duration_array.sort()),
     Remove_Space_Get_Unique_Value(semester_array.sort()),
-    //tuition_fees.sort(),
+    Unique_value(tuition_fees.sort()),
   ];
 
   
@@ -462,7 +483,7 @@ function Fill_Value() {
     "Teaching_language",
     "Duration",
     "Beginning_semester",
-    // "Tuition_fee",
+     "Tuition_fee_dropdown",
   ];
 
   for (let i = 0; i < select_ids.length; i++) {
@@ -509,7 +530,7 @@ var Germany_Ranking_Finder = document.getElementById("germany_ranking_finder");
 var Search_Language_teaching = document.getElementById("Teaching_language");
 var Search_Start_semeter = document.getElementById("Beginning_semester");
 var Search_Duration = document.getElementById("Duration");
-//var Tuition = document.getElementById("Tuition_fee");
+var Tuition = document.getElementById("Tuition_fee_dropdown");
 var Display_Search = document.getElementById("display_size");
 var Search_sortByRanking = document.getElementById("Sort_by_Ranking");
 var Min_Tuition_fee = document.getElementById("min");
@@ -829,9 +850,13 @@ function randomColor() {
 
 function changecurrency(currency){
   // console.log(currency);
-  var newcurrency = currency.split( '\u20AC')[1];
-  // console.log(typeof(newcurrency));
+  if(currency.includes("\u20AC")){
+    var newcurrency = currency.split( '\u20AC')[1];
+     // console.log(typeof(newcurrency));
   newcurrency = newcurrency.replace(",", "");
+  }
+  
+ 
   
   newcurrency = parseInt(newcurrency) ;
   // console.log(new_currency);
