@@ -819,7 +819,7 @@ function sortbyGermanRanking() {
 
 function randomColor() {
   var color = '#';
-  var colorCode = ['D5F9F9','DCE2FC','E4FCDC','E7DDFA','F9FCDC','FCF2DC','FCE0DC','ff9966','33cccc','cc6699']; // colors
+  var colorCode = ['D5F9F9','DCE2FC','D9EFF7','9BBBFC','032149','F9CE69']; // colors
   color += colorCode[Math.floor(Math.random() * colorCode.length)];
   return color;
 }
