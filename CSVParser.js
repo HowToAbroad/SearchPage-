@@ -1,4 +1,4 @@
-const URL_TO_Check = "./sheetnew2.csv";
+const URL_TO_Check = "./newdata.json";
 const URL_Search_Parameter = new URLSearchParams(location.search);
 
 
@@ -100,50 +100,51 @@ async function GetData() {
 
 function DataParser(data) {
   //console.log(data + "More on this data");
-  const table = data.split("\n");
-  table_head = table[0].split(";");
+  // const table = data.split("\n");
+  // table_head = table[0].split(";");
   //console.log(table_head);
 
-  table_body = data.split("\n").slice(1);
+  // table_body = data.split("\n").slice(1);
   //console.log(table_body);
 
-  table_Length = table_body.length;
+  // table_Length = table_body.length;
   //console.log(table_Length);
 
-  let num = 0;
-  table_body.forEach((row) => {
+  // let num = 0;
+  // table_body.forEach((row) => {
     //const rows = row.split(",");
-    const rows = row.split(";");
+    // const rows = row.split(";");
 
-    CollegeList[num] = new College(
-      rows[1],
-      rows[2],
-      rows[3],
-      rows[4],
-      rows[5],
-      rows[6],
-      rows[7],
-      rows[8],
-      rows[9].replace(/ /g,''),
-      rows[10],
-      rows[11],
-      rows[12],
-      rows[13],
-      rows[14],
-      rows[15].replace(/ /g,''),
-      rows[16],
-      rows[17],
-      rows[18],
-      rows[19],
-      rows[20],
-      rows[21],
-      rows[24]
-    );
+    // CollegeList[num] = new College(
+    //   rows[1],
+    //   rows[2],
+    //   rows[3],
+    //   rows[4],
+    //   rows[5],
+    //   rows[6],
+    //   rows[7],
+    //   rows[8],
+    //   rows[9].replace(/ /g,''),
+    //   rows[10],
+    //   rows[11],
+    //   rows[12],
+    //   rows[13],
+    //   rows[14],
+    //   rows[15].replace(/ /g,''),
+    //   rows[16],
+    //   rows[17],
+    //   rows[18],
+    //   rows[19],
+    //   rows[20],
+    //   rows[21],
+    //   rows[24]
+    // );
 
-    num++;
-  });
+    // num++;
+    
+  CollegeList = JSON.parse(data);
 
-  // console.log(CollegeList);
+  console.log(CollegeList);
 }
 //datalist - whole data
 //current index-> page number 
