@@ -845,7 +845,7 @@ function sortbyGermanRanking() {
 
 function randomColor() {
   var color = '#';
-  vvar colorCode = ['F8F9F9','F2F3F4','E5E7E9','D7DBDD','F4F6F6','F2F4F4','E5E8E8','D0D3D4']; // colors
+  var colorCode = ['F8F9F9','F2F3F4','E5E7E9','D7DBDD','F4F6F6','F2F4F4','E5E8E8','D0D3D4']; // colors
   color += colorCode[Math.floor(Math.random() * colorCode.length)];
   return color;
 }
