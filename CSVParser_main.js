@@ -1,5 +1,6 @@
-const URL_TO_Check = "https://howtoabroad.github.io/SearchPage/sheetnew2.csv";
+const URL_TO_Check = "https://howtoabroad.github.io/SearchPage/yolo.json";
 const URL_Search_Parameter = new URLSearchParams(location.search);
+
 
 let Current_Index = 0;
 let PageSize = 1;
@@ -15,6 +16,7 @@ class College {
     Course_Type,
     City,
     Course_Name,
+    Course_Sub_Type,
     Course_Ranking,
     Teaching_Language,
     Language_Requirement,
@@ -45,6 +47,7 @@ class College {
     this.Course_Type = Course_Type == "" ? "NA" : Course_Type;
     this.City = City;
     this.Course_Name = Course_Name == "" ? "NA" : Course_Name;
+    this.Course_Sub_Type= Course_Sub_Type;
     this.Course_Ranking = Course_Ranking == "" ? "NA" : Course_Ranking;
     this.Teaching_Language = Teaching_Language == "" ? "NA" : Teaching_Language;
     this.Language_Requirement =
@@ -74,7 +77,7 @@ Execute();
 
 async function Execute() {
   const data = await GetData();
-  DataParser(data);
+  new_data_parser(data);
   Fill_Value();
   // after data is loaded
   if (URL_Search_Parameter != null) {
@@ -97,53 +100,128 @@ async function GetData() {
   return data;
 }
 
-function DataParser(data) {
-  //console.log(data + "More on this data");
-  const table = data.split("\n");
-  table_head = table[0].split(";");
-  //console.log(table_head);
 
-  table_body = data.split("\n").slice(1);
-  //console.log(table_body);
+function new_data_parser(data)
+{
+var datalist= JSON.parse(data);
+console.log(datalist);
+let num=0;
+for (const item of datalist) {
+ 
 
-  table_Length = table_body.length;
-  //console.log(table_Length);
-
-  let num = 0;
-  table_body.forEach((row) => {
-    //const rows = row.split(",");
-    const rows = row.split(";");
-
-    CollegeList[num] = new College(
-      rows[1],
-      rows[2],
-      rows[3],
-      rows[4],
-      rows[5],
-      rows[6],
-      rows[7],
-      rows[8],
-      rows[9].replace(/ /g,''),
-      rows[10],
-      rows[11],
-      rows[12],
-      rows[13],
-      rows[14],
-      rows[15].replace(/ /g,''),
-      rows[16],
-      rows[17],
-      rows[18],
-      rows[19],
-      rows[20],
-      rows[21],
-      rows[24]
-    );
-
-    num++;
-  });
-
-  // console.log(CollegeList);
+  CollegeList[num] = new College(
+    item.World_Ranking,
+    item.German_Ranking,
+    item.University_Name,
+    item.HTA_Uni_Link,
+    item.Course_Type,
+    item.City,
+    item.Course_Name,
+    item.Course_Sub_Type,
+    item.Course_Ranking,
+    item.Teaching_Language.replace(/ /g,''),
+    item.Language_Requirement,
+    item.Admission_IELTS_TOFEL,
+    item.Required_German_Grade,
+    item.GRE,
+    item.Tuition_Fee,
+    item.Semester_Start.replace(/ /g,''),
+    item.Application_Deadline_Winter,
+    item.Application_Deadline_Summer,
+    item.Duration,
+    item.Course_Link,
+    item.Application_Link,
+    item.Logo,
+    item.Updated
+  );
+  num++;
 }
+
+console.log(CollegeList);
+}
+
+
+// function DataParser(data) {
+//   //console.log(data + "More on this data");
+//   const table = data.split("\n");
+//   table_head = table[0].split(";");
+//   //console.log(table_head);
+
+//   table_body = data.split("\n").slice(1);
+//   //console.log(table_body);
+
+//   table_Length = table_body.length;
+//   //console.log(table_Length);
+
+//   let num = 0;
+//   table_body.forEach((row) => {
+//     //const rows = row.split(",");
+//     const rows = row.split(";");
+   
+//     try{
+
+   
+//     CollegeList[num] = new College(
+//       rows[1],
+//       rows[2],
+//       rows[3],
+//       rows[4],
+//       rows[5],
+//       rows[6],
+//       rows[7],
+//       rows[8],
+//       rows[9],
+//       rows[10].replace(/ /g,''),
+//       rows[11],
+//       rows[12],
+//       rows[13],
+//       rows[14],
+//       rows[15],
+//       rows[16].replace(/ /g,''),
+//       rows[17],
+//       rows[18],
+//       rows[19],
+//       rows[20],
+//       rows[21],
+//       rows[22],
+//       rows[25]
+//     );
+//     }catch(error)
+//     {
+//       console.log(num+2);
+//       console.log(error );
+//       console.log(CollegeList[num-1]); 
+//       console.log(rows[1]);
+//       console.log(rows[2]);
+//       console.log(rows[3]);
+//       console.log(rows[4]);
+//       console.log(rows[5]);
+//       console.log(rows[6]);
+//       console.log(rows[7]);
+//       console.log(rows[8]);
+//       console.log(rows[9]);
+//       console.log(rows[10]);
+//       console.log(rows[11]);
+//       console.log(rows[12]);
+//       console.log(rows[13]);
+//       console.log(rows[14]);
+//       console.log(rows[15]);
+//       console.log(rows[16]);
+//       console.log(rows[17]);
+//       console.log(rows[18]);
+//       console.log(rows[19]);
+//       console.log(rows[20]);
+//       console.log(rows[21]);
+//       console.log(rows[22]);
+//       console.log(rows[25]);
+//     }
+
+     
+//     num++;
+//   });
+
+//   // console.log(CollegeList);
+// }
 //datalist - whole data
 //current index-> page number 
 function Rendering(dataList, data_to_process) {
@@ -438,9 +516,9 @@ function Fill_Value() {
   //let tuition_fees = [];
   CollegeList.forEach((Element) => {
     course_type_array.push(Element.Course_Type);
-    language_array.push(Element.Teaching_Language);
+    language_array.push(Element.Teaching_Language.toUpperCase());
     duration_array.push(Element.Duration);
-    semester_array.push(Element.Semester_Start);
+    semester_array.push(Element.Semester_Start.toUpperCase());
     //tuition_fees.push(Element.Tuition_Fee);
   });
 
@@ -452,15 +530,16 @@ function Fill_Value() {
     Remove_Space_Get_Unique_Value(language_array.sort()),
     Unique_value(duration_array.sort()),
     Remove_Space_Get_Unique_Value(semester_array.sort()),
+    
     //tuition_fees.sort(),
   ];
-
+console.log(uniqueListArray[3]);
   
   let select_ids = [
     "Course_type",
     "Teaching_language",
     "Duration",
-    "Beginning_semester",
+    "Beginning_semester"
     // "Tuition_fee",
   ];
 
@@ -587,7 +666,7 @@ function check_Start_sem(){
   for (var option of Search_Start_semeter)
   {
       if (option.selected) {
-        start_sem.push(option.value);
+        start_sem.push(option.value.toLowerCase());
       }
   }
   return start_sem;
@@ -598,7 +677,7 @@ function check_Selected_Languages(){
   for (var option of Search_Language_teaching .options)
   {
       if (option.selected) {
-        lang.push(option.value);
+        lang.push(option.value.toLowerCase());
       }
   }
   console.log(lang);
@@ -819,7 +898,7 @@ function sortbyGermanRanking() {
 
 function randomColor() {
   var color = '#';
-  var colorCode = ['D5F9F9','DCE2FC','D9EFF7','9BBBFC','F9CE69','7BB4E3','FFCC33','45d7d7','9df2d9']; // colors
+  var colorCode = ['D5F9F9','DCE2FC','E4FCDC','E7DDFA','F9FCDC','FCF2DC','FCE0DC','ff9966','33cccc','cc6699']; // colors
   color += colorCode[Math.floor(Math.random() * colorCode.length)];
   return color;
 }
@@ -827,10 +906,22 @@ function randomColor() {
 
 
 function changecurrency(currency){
-  // console.log(currency);
-  var newcurrency = currency.split( '\u20AC')[1];
-  // console.log(typeof(newcurrency));
-  newcurrency = newcurrency.replace(",", "");
+   //console.log(currency);
+   //console.log(typeof(currency))
+   if(typeof(currency)==="number")
+   {
+    return currency;
+   }
+   var newcurrency=0;
+  if(currency.includes('€'))
+  {
+    newcurrency= currency.split( '\u20AC')[1];
+    // console.log(typeof(newcurrency));
+   
+  }
+  if(currency.includes(",")){
+    newcurrency = newcurrency.replace(",", "");
+  }
   
   newcurrency = parseInt(newcurrency) ;
   // console.log(new_currency);
