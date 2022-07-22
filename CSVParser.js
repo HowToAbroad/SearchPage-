@@ -906,7 +906,7 @@ function randomColor() {
 
 
 function changecurrency(currency){
-   //console.log(currency);
+   console.log(currency);
    //console.log(typeof(currency))
    if(typeof(currency)==="number")
    {
@@ -920,7 +920,13 @@ function changecurrency(currency){
    
   }
   if(currency.includes(",")){
-    newcurrency = newcurrency.replace(",", "");
+    if(newcurrency!=0)
+    {
+      newcurrency = newcurrency.replace(",", "");
+    }
+    else{
+      newcurrency = currency.replace(",", "");
+    }
   }
   
   newcurrency = parseInt(newcurrency) ;

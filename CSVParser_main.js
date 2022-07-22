@@ -906,26 +906,32 @@ function randomColor() {
 
 
 function changecurrency(currency){
-   //console.log(currency);
-   //console.log(typeof(currency))
-   if(typeof(currency)==="number")
-   {
-    return currency;
-   }
-   var newcurrency=0;
-  if(currency.includes('€'))
+  console.log(currency);
+  //console.log(typeof(currency))
+  if(typeof(currency)==="number")
   {
-    newcurrency= currency.split( '\u20AC')[1];
-    // console.log(typeof(newcurrency));
-   
+   return currency;
   }
-  if(currency.includes(",")){
-    newcurrency = newcurrency.replace(",", "");
-  }
+  var newcurrency=0;
+ if(currency.includes('€'))
+ {
+   newcurrency= currency.split( '\u20AC')[1];
+   // console.log(typeof(newcurrency));
   
-  newcurrency = parseInt(newcurrency) ;
-  // console.log(new_currency);
-  return newcurrency;
+ }
+ if(currency.includes(",")){
+   if(newcurrency!=0)
+   {
+     newcurrency = newcurrency.replace(",", "");
+   }
+   else{
+     newcurrency = currency.replace(",", "");
+   }
+ }
+ 
+ newcurrency = parseInt(newcurrency) ;
+ // console.log(new_currency);
+ return newcurrency;
 }
 
 function setcurrency(Tuition_Fee){
