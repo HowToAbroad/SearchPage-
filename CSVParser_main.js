@@ -847,14 +847,14 @@ function sortbyGermanRanking() {
   Sort_germany_Ranking.sort((a, b) => a.Rank_sort_germany - b.Rank_sort_germany);
   Pagination(Sort_germany_Ranking, Items_To_Show);
 }
-
 function randomColor() {
   var color = '#';
-  var colorCode = ['F8F9F9','F2F3F4','E5E7E9','D7DBDD','F4F6F6','F2F4F4','E5E8E8','D0D3D4']; // colors
+  var colorCode = ['F8F9F9','F2F3F4','E5E7E9','D7DBDD','F4F6F6','F2F4F4','E5E8E8','D0D3D4','f5e3b8','f5ebd3','c4d4ff','e6fac8']; // colors
   
   color += colorCode[Math.floor(Math.random() * colorCode.length)];
   return color;
 }
+
 
 
 
