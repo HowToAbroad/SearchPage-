@@ -331,7 +331,7 @@ function Rendering(dataList, data_to_process) {
     var e_41 = document.createElement("h6");
     //tution fee
     e_41.appendChild(
-      document.createTextNode("Tution Fee : " + dataList[i].Tuition_Fee)
+      document.createTextNode("Tuition Fee : " + dataList[i].Tuition_Fee)
     );
     e_40.appendChild(e_41);
     var e_42 = document.createElement("br");
