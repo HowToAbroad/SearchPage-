@@ -913,7 +913,7 @@ function changecurrency(currency){
     return currency;
    }
    
-   
+   newcurrency=0;
    if(currency.includes('€'))
   {
     newcurrency= currency.split( '\u20AC')[1];
