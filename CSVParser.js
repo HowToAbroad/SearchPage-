@@ -104,7 +104,7 @@ async function GetData() {
 function new_data_parser(data)
 {
 var datalist= JSON.parse(data);
-console.log(datalist);
+//console.log(datalist);
 let num=0;
 for (const item of datalist) {
  
@@ -137,7 +137,7 @@ for (const item of datalist) {
   num++;
 }
 
-console.log(CollegeList);
+//console.log(CollegeList);
 }
 
 
@@ -189,7 +189,8 @@ function Rendering(dataList, data_to_process) {
     var e_6 = document.createElement("img");
     e_6.setAttribute("class", "img-fluid img-responsive rounded product-image");
     //logo
-    e_6.setAttribute("src", dataList[i].Logo);
+    e_6.setAttribute("src", dataList[i].Logo); 
+    e_6.setAttribute("loading", "lazy");
     e_5.appendChild(e_6);
     e_4.appendChild(e_5);
     var e_7 = document.createElement("div");
@@ -414,24 +415,22 @@ function Rendering(dataList, data_to_process) {
     var e_45 = document.createElement("div");
     e_45.setAttribute("class", "d-flex flex-column mt-4 flex-row");
     e_45.setAttribute("bis_skin_checked", "1");
-    var e_46 = document.createElement("a");
+    if(dataList[i].Course_Link!="none"){
+      var e_46 = document.createElement("a");
     // Course website link
-    e_46.setAttribute("href", dataList[i].Course_Link);
-    e_46.setAttribute("target", "_blank");
-    e_46.setAttribute("rel", "nofollow");
+    e_46.addEventListener("click", urlResolver.bind(null, dataList[i].Course_Link)) 
     e_46.setAttribute("class", "btn btn-primary btn-sm");
-    e_46.setAttribute("type", "button");
     e_46.appendChild(document.createTextNode("\nCourse website"));
     e_45.appendChild(e_46);
-    var e_47 = document.createElement("a");
-    e_47.setAttribute("target", "_blank");
-    e_47.setAttribute("rel", "nofollow");
-    //portal link
-    e_47.setAttribute("href", dataList[i].Application_Link);
+
+    }
+    if(dataList[i].Application_Link!="none"){
+    var e_47 = document.createElement("button");
     e_47.setAttribute("class", "btn btn-outline-info btn-sm mt-2 flex-row");
-    e_47.setAttribute("type", "button");
+    e_47.addEventListener("click", urlResolver.bind(null, dataList[i].Application_Link)) 
     e_47.appendChild(document.createTextNode("Submit Application"));
-    e_45.appendChild(e_47);
+    e_45.appendChild(e_47);}
+    
     e_38.appendChild(e_45);
     e_4.appendChild(e_38);
     e_3.appendChild(e_4);
@@ -443,6 +442,12 @@ function Rendering(dataList, data_to_process) {
   //console.log(CollegeList[0]);
 }
 
+
+function urlResolver(url)
+{
+  console.log(url);
+  window.open(url, "_blank");
+}
 // https://stackoverflow.com/questions/1909441/how-to-delay-the-keyup-handler-until-the-user-stops-typing
 const delayKeyUp = (() => {
   let timer = null;
@@ -480,7 +485,7 @@ function Fill_Value() {
     
     //tuition_fees.sort(),
   ];
-console.log(uniqueListArray[3]);
+//console.log(uniqueListArray[3]);
   
   let select_ids = [
     "Course_type",
@@ -854,7 +859,7 @@ function randomColor() {
 
 
 function changecurrency(currency){
-   console.log(currency);
+   //console.log(currency);
    //console.log(typeof(currency))
    if(typeof(currency)==="number")
    {
