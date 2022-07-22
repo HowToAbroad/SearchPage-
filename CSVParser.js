@@ -446,7 +446,7 @@ function Rendering(dataList, data_to_process) {
     );
     e_51.appendChild(
       document.createTextNode(
-        "IELTS/TOFL : " + dataList[i].Admission_IELTS_TOFEL
+        "IELTS/TOEFL : " + dataList[i].Admission_IELTS_TOFEL
       )
     );
     e_52.appendChild(
@@ -912,8 +912,9 @@ function changecurrency(currency){
    {
     return currency;
    }
-   var newcurrency=0;
-  if(currency.includes('€'))
+   
+   
+   if(currency.includes('€'))
   {
     newcurrency= currency.split( '\u20AC')[1];
     // console.log(typeof(newcurrency));
