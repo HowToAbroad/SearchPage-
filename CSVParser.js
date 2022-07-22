@@ -362,6 +362,7 @@ function Rendering(dataList, data_to_process) {
     var e_52 = document.createElement("h6");
     var e_53 = document.createElement("h6");
     e_44.setAttribute("class", "text-danger");
+    e_50.setAttribute("class", "text-danger");
     //application deadline
     if(dataList[i].Application_Deadline_Summer!="NA" ){
     e_44.appendChild(
