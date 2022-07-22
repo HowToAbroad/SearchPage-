@@ -51,13 +51,13 @@ class College {
     this.Course_Ranking = Course_Ranking == "" ? "NA" : Course_Ranking;
     this.Teaching_Language = Teaching_Language == "" ? "NA" : Teaching_Language;
     this.Language_Requirement =
-      Language_Requirement == "" ? "Not Available" : Language_Requirement;
+      Language_Requirement == "" ? "NA" : Language_Requirement;
     this.Admission_IELTS_TOFEL =
-      Admission_IELTS_TOFEL == "" ? "Not Available" : Admission_IELTS_TOFEL;
+      Admission_IELTS_TOFEL == "" ? "NA" : Admission_IELTS_TOFEL;
     this.Required_German_Grade =
-      Required_German_Grade == "" ? "Not Available" : Required_German_Grade;
+      Required_German_Grade == "" ? "NA" : Required_German_Grade;
     this.GRE = GRE == "" ? "NA" : GRE;
-    this.Tuition_Fee = Tuition_Fee == "" ? "Not Available" : Tuition_Fee;
+    this.Tuition_Fee = Tuition_Fee == "" ? "NA" : Tuition_Fee;
     
     this.new_Tuition_Fee = setcurrency(Tuition_Fee);
 
@@ -141,87 +141,7 @@ console.log(CollegeList);
 }
 
 
-// function DataParser(data) {
-//   //console.log(data + "More on this data");
-//   const table = data.split("\n");
-//   table_head = table[0].split(";");
-//   //console.log(table_head);
 
-//   table_body = data.split("\n").slice(1);
-//   //console.log(table_body);
-
-//   table_Length = table_body.length;
-//   //console.log(table_Length);
-
-//   let num = 0;
-//   table_body.forEach((row) => {
-//     //const rows = row.split(",");
-//     const rows = row.split(";");
-   
-//     try{
-
-   
-//     CollegeList[num] = new College(
-//       rows[1],
-//       rows[2],
-//       rows[3],
-//       rows[4],
-//       rows[5],
-//       rows[6],
-//       rows[7],
-//       rows[8],
-//       rows[9],
-//       rows[10].replace(/ /g,''),
-//       rows[11],
-//       rows[12],
-//       rows[13],
-//       rows[14],
-//       rows[15],
-//       rows[16].replace(/ /g,''),
-//       rows[17],
-//       rows[18],
-//       rows[19],
-//       rows[20],
-//       rows[21],
-//       rows[22],
-//       rows[25]
-//     );
-//     }catch(error)
-//     {
-//       console.log(num+2);
-//       console.log(error );
-//       console.log(CollegeList[num-1]); 
-//       console.log(rows[1]);
-//       console.log(rows[2]);
-//       console.log(rows[3]);
-//       console.log(rows[4]);
-//       console.log(rows[5]);
-//       console.log(rows[6]);
-//       console.log(rows[7]);
-//       console.log(rows[8]);
-//       console.log(rows[9]);
-//       console.log(rows[10]);
-//       console.log(rows[11]);
-//       console.log(rows[12]);
-//       console.log(rows[13]);
-//       console.log(rows[14]);
-//       console.log(rows[15]);
-//       console.log(rows[16]);
-//       console.log(rows[17]);
-//       console.log(rows[18]);
-//       console.log(rows[19]);
-//       console.log(rows[20]);
-//       console.log(rows[21]);
-//       console.log(rows[22]);
-//       console.log(rows[25]);
-//     }
-
-     
-//     num++;
-//   });
-
-//   // console.log(CollegeList);
-// }
 //datalist - whole data
 //current index-> page number 
 function Rendering(dataList, data_to_process) {
@@ -255,7 +175,7 @@ function Rendering(dataList, data_to_process) {
     e_3.setAttribute("class", "col-md-10");
     e_3.setAttribute("bis_skin_checked", "1");
     // e_3.setAttribute("style","backgroundColor", randomColor());
-    e_3.setAttribute("style", `background-color : ${randomColor()} `);
+    //e_3.setAttribute("style", `background-color : ${randomColor()} `);
 
   
           
@@ -308,6 +228,7 @@ function Rendering(dataList, data_to_process) {
     var e_17 = document.createElement("h6");
     e_17.setAttribute("class", "text-primary");
     // world ranking and germany ranking
+    if(dataList[i].World_Ranking!="NA" ){
     e_17.appendChild(
       document.createTextNode("World Ranking : " + dataList[i].World_Ranking)
     );
@@ -319,6 +240,9 @@ function Rendering(dataList, data_to_process) {
       )
     );
     e_16.appendChild(e_17);
+    }
+    
+   
     var e_19 = document.createElement("hr");
     e_16.appendChild(e_19);
     var e_20 = document.createElement("h6");
@@ -356,12 +280,14 @@ function Rendering(dataList, data_to_process) {
     var e_27 = document.createElement("span");
     var e_28 = document.createElement("b");
     //course ranking in germany
+    if(dataList[i].Course_Ranking!="NA" ){
     e_28.appendChild(
       document.createTextNode(
         "Course Germany Ranking : " + dataList[i].Course_Ranking
       )
     );
-    e_27.appendChild(e_28);
+    e_27.appendChild(e_28);}
+
     e_25.appendChild(e_27);
     var e_29 = document.createElement("span");
     e_29.setAttribute("class", "dot");
@@ -414,15 +340,19 @@ function Rendering(dataList, data_to_process) {
     e_40.appendChild(e_41);
     var e_42 = document.createElement("br");
     e_40.appendChild(e_42);
+    
     var e_43 = document.createElement("h6");
     e_43.setAttribute("class", "text-success");
     //tution language
-    e_43.appendChild(
-      document.createTextNode(
-        "Teaching Language : " + dataList[i].Teaching_Language
-      )
-    );
-    e_40.appendChild(e_43);
+    if(dataList[i].Teaching_Language!="NA"){
+      e_43.appendChild(
+        document.createTextNode(
+          "Teaching Language : " + dataList[i].Teaching_Language
+        )
+      );
+      e_40.appendChild(e_43);
+    }  
+    
     e_39.appendChild(e_40);
     e_38.appendChild(e_39);
     var e_44 = document.createElement("h6");
@@ -432,38 +362,55 @@ function Rendering(dataList, data_to_process) {
     var e_53 = document.createElement("h6");
     e_44.setAttribute("class", "text-danger");
     //application deadline
+    if(dataList[i].Application_Deadline_Summer!="NA" ){
     e_44.appendChild(
       document.createTextNode(
         "Application Deadline Summer: " +
           dataList[i].Application_Deadline_Summer
       )
     );
+    e_38.appendChild(e_44);}
+
+    if(dataList[i].Application_Deadline_Winter!="NA" ){
     e_50.appendChild(
       document.createTextNode(
         "Application Deadline Winter: " +
           dataList[i].Application_Deadline_Winter
       )
     );
+    e_38.appendChild(e_50);}
+
+    if(dataList[i].Admission_IELTS_TOFEL!="NA" ){
     e_51.appendChild(
       document.createTextNode(
         "IELTS/TOEFL : " + dataList[i].Admission_IELTS_TOFEL
       )
     );
+    e_38.appendChild(e_51);
+  }
+
+    if(dataList[i].Language_Requirement!="NA" ){
     e_52.appendChild(
       document.createTextNode(
         "Language Requirement : " + dataList[i].Language_Requirement
       )
     );
-    e_53.appendChild(
-      document.createTextNode(
-        "German Grade Requirement : " + dataList[i].Required_German_Grade
-      )
-    );
-    e_38.appendChild(e_53);
     e_38.appendChild(e_52);
-    e_38.appendChild(e_51);
-    e_38.appendChild(e_50);
-    e_38.appendChild(e_44);
+  }
+
+    if(dataList[i].Required_German_Grade!="NA" ){
+      e_53.appendChild(
+        document.createTextNode(
+          "German Grade Requirement : " + dataList[i].Required_German_Grade
+        )
+      );
+      e_38.appendChild(e_53);
+    }
+    
+    
+    
+    
+    
     var e_45 = document.createElement("div");
     e_45.setAttribute("class", "d-flex flex-column mt-4 flex-row");
     e_45.setAttribute("bis_skin_checked", "1");
