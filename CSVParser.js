@@ -175,7 +175,7 @@ function Rendering(dataList, data_to_process) {
     e_3.setAttribute("class", "col-md-10");
     e_3.setAttribute("bis_skin_checked", "1");
     // e_3.setAttribute("style","backgroundColor", randomColor());
-    //e_3.setAttribute("style", `background-color : ${randomColor()} `);
+    e_3.setAttribute("style", `background-color : ${randomColor()} `);
 
   
           
@@ -845,7 +845,8 @@ function sortbyGermanRanking() {
 
 function randomColor() {
   var color = '#';
-  var colorCode = ['D5F9F9','DCE2FC','E4FCDC','E7DDFA','F9FCDC','FCF2DC','FCE0DC','ff9966','33cccc','cc6699']; // colors
+  var colorCode = ['F8F9F9','F2F3F4','E5E7E9','D7DBDD','F4F6F6','F2F4F4','E5E8E8','D0D3D4']; // colors
+  
   color += colorCode[Math.floor(Math.random() * colorCode.length)];
   return color;
 }
