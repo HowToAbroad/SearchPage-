@@ -446,7 +446,7 @@ function Rendering(dataList, data_to_process) {
     );
     e_51.appendChild(
       document.createTextNode(
-        "IELTS/TOFL : " + dataList[i].Admission_IELTS_TOFEL
+        "IELTS/TOEFL : " + dataList[i].Admission_IELTS_TOFEL
       )
     );
     e_52.appendChild(
@@ -906,21 +906,23 @@ function randomColor() {
 
 
 function changecurrency(currency){
-   //console.log(currency);
+   console.log(currency);
    //console.log(typeof(currency))
    if(typeof(currency)==="number")
    {
     return currency;
    }
-   var newcurrency=0;
-  if(currency.includes('€'))
+   
+   
+   if(currency.includes('€'))
   {
     newcurrency= currency.split( '\u20AC')[1];
     // console.log(typeof(newcurrency));
    
   }
   if(currency.includes(",")){
-    newcurrency = newcurrency.replace(",", "");
+    var newcurrency = currency.replace(/,/g,'');
+    console.log(typeof(newcurrency));
   }
   
   newcurrency = parseInt(newcurrency) ;
