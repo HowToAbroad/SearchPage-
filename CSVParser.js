@@ -137,7 +137,7 @@ for (const item of datalist) {
   num++;
 }
 
-console.log(CollegeList);
+//console.log(CollegeList);
 }
 
 
@@ -342,20 +342,11 @@ function Rendering(dataList, data_to_process) {
     var e_42 = document.createElement("br");
     e_40.appendChild(e_42);
     
-    var e_43 = document.createElement("h6");
-    e_43.setAttribute("class", "text-success");
-    //tution language
-    //if(dataList[i].Teaching_Language!="NA"){
-      e_43.appendChild(
-        document.createTextNode(
-          "Teaching Language : " + dataList[i].Teaching_Language
-        )
-      );
     
-    //}  
-    e_40.appendChild(e_43);
+ 
     e_39.appendChild(e_40);
     e_38.appendChild(e_39);
+    var e_43 = document.createElement("h6");   
     var e_44 = document.createElement("h6");
     var e_50 = document.createElement("h6");
     var e_51 = document.createElement("h6");
@@ -363,6 +354,18 @@ function Rendering(dataList, data_to_process) {
     var e_53 = document.createElement("h6");
     e_44.setAttribute("class", "text-danger");
     e_50.setAttribute("class", "text-danger");
+    e_43.setAttribute("class", "text-success");
+
+  //tution language
+   if(dataList[i].Teaching_Language!="NA"){
+        
+        e_43.appendChild(
+          document.createTextNode(
+            "Teaching Language: " + dataList[i].Teaching_Language
+          )
+        );
+        e_38.appendChild(e_43);} 
+         
     //application deadline
     if(dataList[i].Application_Deadline_Summer!="NA" ){
     e_44.appendChild(
