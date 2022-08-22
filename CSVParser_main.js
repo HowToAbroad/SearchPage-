@@ -1,7 +1,6 @@
 const URL_TO_Check = "https://howtoabroad.github.io/SearchPage/yolo.json";
 const URL_Search_Parameter = new URLSearchParams(location.search);
 
-
 let Current_Index = 0;
 let PageSize = 1;
 let CollegeList = [];
@@ -342,20 +341,11 @@ function Rendering(dataList, data_to_process) {
     var e_42 = document.createElement("br");
     e_40.appendChild(e_42);
     
-    var e_43 = document.createElement("h6");
-    e_43.setAttribute("class", "text-success");
-    //tution language
-    if(dataList[i].Teaching_Language!="NA"){
-      e_43.appendChild(
-        document.createTextNode(
-          "Teaching Language : " + dataList[i].Teaching_Language
-        )
-      );
-      e_40.appendChild(e_43);
-    }  
     
+ 
     e_39.appendChild(e_40);
     e_38.appendChild(e_39);
+    var e_43 = document.createElement("h6");   
     var e_44 = document.createElement("h6");
     var e_50 = document.createElement("h6");
     var e_51 = document.createElement("h6");
@@ -363,6 +353,18 @@ function Rendering(dataList, data_to_process) {
     var e_53 = document.createElement("h6");
     e_44.setAttribute("class", "text-danger");
     e_50.setAttribute("class", "text-danger");
+    e_43.setAttribute("class", "text-success");
+
+  //tution language
+   if(dataList[i].Teaching_Language!="NA"){
+        
+        e_43.appendChild(
+          document.createTextNode(
+            "Teaching Language: " + dataList[i].Teaching_Language
+          )
+        );
+        e_38.appendChild(e_43);} 
+         
     //application deadline
     if(dataList[i].Application_Deadline_Summer!="NA" ){
     e_44.appendChild(
@@ -546,6 +548,7 @@ var Search_sortByRanking = document.getElementById("Sort_by_Ranking");
 var Min_Tuition_fee = document.getElementById("min");
 var Max_Tuition_fee = document.getElementById("max");
 var Reset_Search = document.getElementById("reset");
+var Display_Selected_Filter = document.getElementById("Display_Selected_Filter");
 Reset_Search.addEventListener("click", Reset);
 let selected_lang=[];
 let start_sem=[];
@@ -654,7 +657,7 @@ function Search_Uni_Course() {
   var _sortbyRanking= Search_sortByRanking.value;
   var  _mintuitionfee = Min_Tuition_fee.value;
   var  _maxtuitionfee = Max_Tuition_fee.value;
-  // var _sortbyRanking = Sort_by_Ranking.value;
+
 
   // var _rank = Search_rank.toLowerCase();
   //input_type = document.getElementById("search_name").value.toLowerCase();
@@ -685,6 +688,24 @@ function Search_Uni_Course() {
 
 let resultarr = [];
 
+function DisplaySelectedFilters(_activeFilters){
+
+  Display_Selected_Filter.innerHTML = "";
+  const name=["University Name","Course Name","Course Type","German Ranking","Teaching Language","Semester Start","Duration","Min Tuition Fee","Max Tuition Fee"]
+  let i=0;
+  _activeFilters.forEach( element=>{
+    if(element!=""){
+    var e_0 = document.createElement("button");
+    e_0.setAttribute("type", "button");
+    e_0.setAttribute("class", "btn btn-success mr-1");
+    e_0.setAttribute("disabled", "");
+    e_0.appendChild(document.createTextNode( name[i] +": "+element.toUpperCase()));
+    Display_Selected_Filter.appendChild(e_0);
+    
+  } i++; })
+  
+}
+
 function MultiFilter(
   university_name,
   course_name,
@@ -697,14 +718,18 @@ function MultiFilter(
   _mintuitionfee,
   _maxtuitionfee
 ) {
+  var activeFilters=[university_name,course_name,course_type,_germany_ranking,teaching_language,start_semester,duration,_mintuitionfee,_maxtuitionfee]
   if (Display_Search.value != "") {
     Items_To_Show = Display_Search.value;
   } else {
     Items_To_Show = 10;
   }
+
+  DisplaySelectedFilters(activeFilters);
   //console.log("showing items:" + Items_To_Show);
   var container = document.getElementById("List_of_University");
   container.innerHTML = "";
+  
   let result = [] ;
   result = CollegeList.filter(
       (p) =>
@@ -848,6 +873,7 @@ function sortbyGermanRanking() {
   Sort_germany_Ranking.sort((a, b) => a.Rank_sort_germany - b.Rank_sort_germany);
   Pagination(Sort_germany_Ranking, Items_To_Show);
 }
+
 function randomColor() {
   var color = '#';
   var colorCode = ['F8F9F9','F2F3F4','E5E7E9','D7DBDD','F4F6F6','F2F4F4','E5E8E8','D0D3D4','f5e3b8','f5ebd3','c4d4ff','e6fac8']; // colors
@@ -855,7 +881,6 @@ function randomColor() {
   color += colorCode[Math.floor(Math.random() * colorCode.length)];
   return color;
 }
-
 
 
 
