@@ -85,6 +85,8 @@ async function Execute() {
     if (URL_Search_Parameter != null) {
       Search_Name_Uni.value = URL_Search_Parameter.get("uniName");
       Search_Name_Course.value = URL_Search_Parameter.get("course");
+      Search_Course_type.value = URL_Search_Parameter.get("courseType");
+      //Search_Language_teaching.values = URL_Search_Parameter.get("courseTypeLanguages");
       //console.log(URL_Search_Parameter.get('course'));
     }
     Search_Uni_Course();
@@ -117,14 +119,15 @@ function new_data_parser(data) {
       item.Course_Name,
       item.Course_Sub_Type,
       item.Course_Ranking,
-      item.Teaching_Language.replace(/ /g, ""),
-      item.Language_Requirement,
+      item.Teaching_Language,
+      RemoveWhiteSpaces(item.Language_Requirement),
       item.Admission_IELTS_TOFEL,
       item.Required_German_Grade,
       item.GRE,
       item.Tuition_Fee,
       item.Tuition_Fee_Per,
-      item.Semester_Start.replace(/ /g, ""),
+      //item.Semester_Start.replace(/ /g, ""),
+      RemoveWhiteSpaces(item.Semester_Start) ,
       item.Application_Deadline_Winter,
       item.Application_Deadline_Summer,
       item.Duration,
@@ -137,6 +140,19 @@ function new_data_parser(data) {
   }
 
   //console.log(CollegeList);
+}
+
+function RemoveWhiteSpaces(str)
+{
+  var list= str.split(",");
+  list.forEach((element)=>{
+    if(element.startsWith(" ")){
+      element=element.replace(/ /g, "");
+    }
+
+  }) 
+  return list.join();
+
 }
 
 //datalist - whole data
@@ -504,10 +520,19 @@ function Fill_Value() {
 
 // to get unique values again
 function Remove_Space_Get_Unique_Value(list) {
-  let temp_string = list.join().replace(/ /g, "");
+  let temp_string1 = list.join();//.replace(/ /g, "")
+  let temp_string = temp_string1.split(",");
+  for( let i=0; i<temp_string.length;i++)
+  {
+    console.log(temp_string[i]);   
+     if(temp_string[i].startsWith(" ")){
 
-  list = temp_string.split(",");
-  list = Unique_value(list);
+      temp_string[i]=temp_string[i].replace(/ /g, "");
+    }
+  }
+  list = Unique_value(temp_string);
+  
+
 
   return list;
 }
@@ -1098,3 +1123,4 @@ function toggleMenu() {
 }
 
 hamburger.addEventListener("click", toggleMenu);
+
