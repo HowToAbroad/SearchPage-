@@ -24,6 +24,7 @@ class College {
     Required_German_Grade,
     GRE,
     Tuition_Fee,
+    Tuition_Fee_Per,
     Semester_Start,
     Application_Deadline_Winter,
     Application_Deadline_Summer,
@@ -60,7 +61,7 @@ class College {
     this.Tuition_Fee = Tuition_Fee == "" ? "NA" : Tuition_Fee;
 
     this.new_Tuition_Fee = setcurrency(Tuition_Fee);
-
+    this.Tuition_Fee_Per=Tuition_Fee_Per;
     this.Semester_Start = Semester_Start == "" ? "NA" : Semester_Start;
     this.Application_Deadline_Winter =
       Application_Deadline_Winter == "" ? "NA" : Application_Deadline_Winter;
@@ -122,6 +123,7 @@ function new_data_parser(data) {
       item.Required_German_Grade,
       item.GRE,
       item.Tuition_Fee,
+      item.Tuition_Fee_Per,
       item.Semester_Start.replace(/ /g, ""),
       item.Application_Deadline_Winter,
       item.Application_Deadline_Summer,
@@ -206,7 +208,7 @@ function Rendering(dataList, data_to_process) {
     var e_11 = document.createElement("hr");
     e_4.appendChild(e_11);
     var e_12 = document.createElement("h6");
-    e_12.appendChild(document.createTextNode("City : " + dataList[i].City));
+    e_12.appendChild(document.createTextNode(dataList[i].City));
     e_4.appendChild(e_12);
     var e_13 = document.createElement("h6");
     e_13.appendChild(document.createTextNode("State : " + dataList[i].State));
@@ -333,6 +335,12 @@ function Rendering(dataList, data_to_process) {
     e_36.appendChild(
       document.createTextNode("Tuition Fee : " + dataList[i].Tuition_Fee)
     );
+    if(dataList[i].Tuition_Fee_Per!=""){
+      e_36.appendChild(
+        document.createTextNode("/" + dataList[i].Tuition_Fee_Per)
+      );
+    }
+   
     e_35.appendChild(e_36);
     var e_37 = document.createElement("br");
     e_35.appendChild(e_37);
@@ -348,7 +356,7 @@ function Rendering(dataList, data_to_process) {
       e_39.setAttribute("class", "text-info");
       e_39.appendChild(document.createTextNode("Application Deadline"));
       e_33.appendChild(e_39);
-      if (dataList[i].Application_Deadline_Summe != "NA") {
+      if (dataList[i].Application_Deadline_Summer != "NA") {
         var e_40 = document.createElement("h6");
         e_40.setAttribute("class", "text-danger");
         e_40.appendChild(
@@ -914,7 +922,7 @@ function setcurrency(Tuition_Fee) {
   } else if (Tuition_Fee == "None") {
     return 0;
   } else if (Tuition_Fee == "Varied") {
-    return 1;
+    return 500;
   } else {
     return changecurrency(Tuition_Fee);
   }
