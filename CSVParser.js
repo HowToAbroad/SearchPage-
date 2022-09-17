@@ -1,7 +1,6 @@
 const URL_TO_Check = "./yolo.json";
 const URL_Search_Parameter = new URLSearchParams(location.search);
 
-
 let Current_Index = 0;
 let PageSize = 1;
 let CollegeList = [];
@@ -15,6 +14,7 @@ class College {
     HTA_Uni_Link,
     Course_Type,
     City,
+    State,
     Course_Name,
     Course_Sub_Type,
     Course_Ranking,
@@ -32,22 +32,22 @@ class College {
     Application_Link,
     Logo,
     Updated
-    
   ) {
     this.World_Ranking = World_Ranking == "" ? "NA" : World_Ranking;
 
-    this.Rank_sort_world = World_Ranking=="NA"? 10000:World_Ranking;
-    
+    this.Rank_sort_world = World_Ranking == "NA" ? 10000 : World_Ranking;
+
     this.German_Ranking = German_Ranking == "" ? "NA" : German_Ranking;
 
-    this.Rank_sort_germany=German_Ranking=="NA"? 10000:German_Ranking;
+    this.Rank_sort_germany = German_Ranking == "NA" ? 10000 : German_Ranking;
 
     this.University_Name = University_Name == "" ? "NA" : University_Name;
     this.HTA_Uni_Link = HTA_Uni_Link == "" ? "none" : HTA_Uni_Link;
     this.Course_Type = Course_Type == "" ? "NA" : Course_Type;
     this.City = City;
+    this.State = State;
     this.Course_Name = Course_Name == "" ? "NA" : Course_Name;
-    this.Course_Sub_Type= Course_Sub_Type;
+    this.Course_Sub_Type = Course_Sub_Type;
     this.Course_Ranking = Course_Ranking == "" ? "NA" : Course_Ranking;
     this.Teaching_Language = Teaching_Language == "" ? "NA" : Teaching_Language;
     this.Language_Requirement =
@@ -58,7 +58,7 @@ class College {
       Required_German_Grade == "" ? "NA" : Required_German_Grade;
     this.GRE = GRE == "" ? "NA" : GRE;
     this.Tuition_Fee = Tuition_Fee == "" ? "NA" : Tuition_Fee;
-    
+
     this.new_Tuition_Fee = setcurrency(Tuition_Fee);
 
     this.Semester_Start = Semester_Start == "" ? "NA" : Semester_Start;
@@ -100,56 +100,50 @@ async function GetData() {
   return data;
 }
 
+function new_data_parser(data) {
+  var datalist = JSON.parse(data);
+  //console.log(datalist);
+  let num = 0;
+  for (const item of datalist) {
+    CollegeList[num] = new College(
+      item.World_Ranking,
+      item.German_Ranking,
+      item.University_Name,
+      item.HTA_Uni_Link,
+      item.Course_Type,
+      item.City,
+      item.State,
+      item.Course_Name,
+      item.Course_Sub_Type,
+      item.Course_Ranking,
+      item.Teaching_Language.replace(/ /g, ""),
+      item.Language_Requirement,
+      item.Admission_IELTS_TOFEL,
+      item.Required_German_Grade,
+      item.GRE,
+      item.Tuition_Fee,
+      item.Semester_Start.replace(/ /g, ""),
+      item.Application_Deadline_Winter,
+      item.Application_Deadline_Summer,
+      item.Duration,
+      item.Course_Link,
+      item.Application_Link,
+      item.Logo,
+      item.Updated
+    );
+    num++;
+  }
 
-function new_data_parser(data)
-{
-var datalist= JSON.parse(data);
-//console.log(datalist);
-let num=0;
-for (const item of datalist) {
- 
-
-  CollegeList[num] = new College(
-    item.World_Ranking,
-    item.German_Ranking,
-    item.University_Name,
-    item.HTA_Uni_Link,
-    item.Course_Type,
-    item.City,
-    item.Course_Name,
-    item.Course_Sub_Type,
-    item.Course_Ranking,
-    item.Teaching_Language.replace(/ /g,''),
-    item.Language_Requirement,
-    item.Admission_IELTS_TOFEL,
-    item.Required_German_Grade,
-    item.GRE,
-    item.Tuition_Fee,
-    item.Semester_Start.replace(/ /g,''),
-    item.Application_Deadline_Winter,
-    item.Application_Deadline_Summer,
-    item.Duration,
-    item.Course_Link,
-    item.Application_Link,
-    item.Logo,
-    item.Updated
-  );
-  num++;
+  //console.log(CollegeList);
 }
-
-//console.log(CollegeList);
-}
-
-
 
 //datalist - whole data
-//current index-> page number 
+//current index-> page number
 function Rendering(dataList, data_to_process) {
- 
   var display_number = document.getElementById("Display_number");
 
-  Display_Pagedata(data_to_process,Current_Index,display_number);
-  
+  Display_Pagedata(data_to_process, Current_Index, display_number);
+
   if (dataList == "") {
     display_number.innerHTML =
       "Data Not Available, Please choose other options from the filter";
@@ -159,285 +153,270 @@ function Rendering(dataList, data_to_process) {
   }
   let l = dataList.length;
   //console.log(CollegeList.length);
+  // e_3.setAttribute("style", `background-color : ${randomColor()} `);
+  //  e_46.addEventListener("click", urlResolver.bind(null, dataList[i].Course_Link))
+  //e_47.addEventListener("click", urlResolver.bind(null, dataList[i].Application_Link))
   for (let i = 0; i < l; i++) {
-    
     var container = document.getElementById("List_of_University");
     var e_0 = document.createElement("div");
 
+    e_0.setAttribute("class", "container mt-5 mb-5");
+    e_0.setAttribute("bis_skin_checked", "1");
     var e_1 = document.createElement("div");
-    // e_0.setAttribute("float right");
-    e_1.setAttribute("class", "container mt-5 mb-5");
+    e_1.setAttribute("class", "d-flex justify-content-center row");
     e_1.setAttribute("bis_skin_checked", "1");
     var e_2 = document.createElement("div");
-    e_2.setAttribute("class", "d-flex justify-content-center row");
+    e_2.setAttribute("class", "col-md-10");
     e_2.setAttribute("bis_skin_checked", "1");
+    e_2.setAttribute("style", "background-color: #e5e8e8");
     var e_3 = document.createElement("div");
-    e_3.setAttribute("class", "col-md-10");
+    e_3.setAttribute("class", "row p-2 border rounded");
     e_3.setAttribute("bis_skin_checked", "1");
-    // e_3.setAttribute("style","backgroundColor", randomColor());
-    e_3.setAttribute("style", `background-color : ${randomColor()} `);
-
-  
-          
     var e_4 = document.createElement("div");
-    e_4.setAttribute("class", "row p-2  border rounded");
+    e_4.setAttribute("class", "col-md-3 mt-1");
     e_4.setAttribute("bis_skin_checked", "1");
-    
-    var e_5 = document.createElement("div");
-    e_5.setAttribute("class", "col-md-3 mt-1");
-    e_5.setAttribute("bis_skin_checked", "1");
-    var e_6 = document.createElement("img");
-    e_6.setAttribute("class", "img-fluid img-responsive rounded product-image");
-    //logo
-    e_6.setAttribute("src", dataList[i].Logo); 
-    e_6.setAttribute("loading", "lazy");
-    e_5.appendChild(e_6);
+    var e_5 = document.createElement("img");
+    e_5.setAttribute("class", "img-fluid img-responsive rounded product-image");
+
+    e_5.setAttribute("src", dataList[i].Logo);
+
+    e_5.setAttribute("loading", "lazy");
     e_4.appendChild(e_5);
-    var e_7 = document.createElement("div");
-    e_7.setAttribute("class", "col-md-6 mt-1");
-    e_7.setAttribute("bis_skin_checked", "1");
-    var e_8 = document.createElement("a");
-    // URL for HTA
-    e_8.setAttribute("href", dataList[i].HTA_Uni_Link);
-    e_8.setAttribute("target", "_blank");
-    var e_9 = document.createElement("h5");
-    e_9.setAttribute("style", "color: black;");
-    // Name of the university
-    e_9.appendChild(document.createTextNode(dataList[i].University_Name));
-    e_8.appendChild(e_9);
+    var e_6 = document.createElement("hr");
+    e_4.appendChild(e_6);
+    var e_7 = document.createElement("a");
+    e_7.setAttribute("href", dataList[i].HTA_Uni_Link);
+    e_7.setAttribute("target", "_blank");
+    var e_8 = document.createElement("h5");
+    e_8.setAttribute("style", "color: black");
+    e_8.appendChild(document.createTextNode(dataList[i].University_Name));
     e_7.appendChild(e_8);
-    var e_10 = document.createElement("div");
-    e_10.setAttribute("class", "d-flex flex-row");
-    e_10.setAttribute("bis_skin_checked", "1");
-    var e_11 = document.createElement("div");
-    e_11.setAttribute("class", "ratings mr-2");
-    e_11.setAttribute("bis_skin_checked", "1");
-    /* var e_12 = document.createElement("i");
-    e_12.setAttribute("class", "fa fa-star");
-    e_11.appendChild(e_12);
-    var e_13 = document.createElement("i");
-    e_13.setAttribute("class", "fa fa-star");
-    e_11.appendChild(e_13);
-    var e_14 = document.createElement("i");
-    e_14.setAttribute("class", "fa fa-star");
-    e_11.appendChild(e_14);
-    var e_15 = document.createElement("i");
-    e_15.setAttribute("class", "fa fa-star");
-    e_11.appendChild(e_15);*/
-    e_10.appendChild(e_11);
-    var e_16 = document.createElement("span");
-    var e_17 = document.createElement("h6");
-    e_17.setAttribute("class", "text-primary");
-    // world ranking and germany ranking
-    if(dataList[i].World_Ranking!="NA" ){
-    e_17.appendChild(
+    e_4.appendChild(e_7);
+    var e_9 = document.createElement("h6");
+    e_9.setAttribute("class", "text-primary");
+    e_9.appendChild(
       document.createTextNode("World Ranking : " + dataList[i].World_Ranking)
     );
-    var e_18 = document.createElement("br");
+    var e_10 = document.createElement("br");
+    e_9.appendChild(e_10);
+    e_9.appendChild(
+      document.createTextNode("Germany Ranking : " + dataList[i].German_Ranking)
+    );
+    e_4.appendChild(e_9);
+    var e_11 = document.createElement("hr");
+    e_4.appendChild(e_11);
+    var e_12 = document.createElement("h6");
+    e_12.appendChild(document.createTextNode("City : " + dataList[i].City));
+    e_4.appendChild(e_12);
+    var e_13 = document.createElement("h6");
+    e_13.appendChild(document.createTextNode("State : " + dataList[i].State));
+    e_4.appendChild(e_13);
+    e_3.appendChild(e_4);
+    var e_14 = document.createElement("div");
+    e_14.setAttribute("class", "col-md-6 mt-1");
+    e_14.setAttribute("bis_skin_checked", "1");
+    var e_15 = document.createElement("div");
+    e_15.setAttribute("class", "d-flex flex-row");
+    e_15.setAttribute("bis_skin_checked", "1");
+    var e_16 = document.createElement("div");
+    e_16.setAttribute("class", "ratings mr-2");
+    e_16.setAttribute("bis_skin_checked", "1");
+    e_15.appendChild(e_16);
+    var e_17 = document.createElement("span");
+    var e_18 = document.createElement("h2");
+    e_18.setAttribute("class", "text-dark");
+    e_18.appendChild(document.createTextNode(dataList[i].Course_Name));
     e_17.appendChild(e_18);
-    e_17.appendChild(
-      document.createTextNode(
-        "\nGermany Ranking : " + dataList[i].German_Ranking
-      )
-    );
-    e_16.appendChild(e_17);
-    }
-    
-   
     var e_19 = document.createElement("hr");
-    e_16.appendChild(e_19);
-    var e_20 = document.createElement("h6");
+    e_17.appendChild(e_19);
+    var e_20 = document.createElement("h4");
     e_20.setAttribute("class", "text-dark");
-    //course type
     e_20.appendChild(
-      document.createTextNode("Course Type : " + dataList[i].Course_Type)
+      document.createTextNode("Degree : " + dataList[i].Course_Type)
+    );    
+    e_17.appendChild(e_20);
+    var e_88 = document.createElement("h4");
+    if(dataList[i].Course_Type != dataList[i].Course_Sub_Type){
+    e_88.appendChild(
+      document.createTextNode("Stream : " + dataList[i].Course_Sub_Type)
     );
-    e_16.appendChild(e_20);
-    var e_21 = document.createElement("h6");
-    e_21.setAttribute("class", "text-dark");
-    // course name
+    e_17.appendChild(e_88);
+  }
+    var e_21 = document.createElement("b");
+    e_21.setAttribute("class", "mt-1");
     e_21.appendChild(
-      document.createTextNode("Course Name : " + dataList[i].Course_Name)
-    );
-    e_16.appendChild(e_21);
-    var e_22 = document.createElement("b");
-    // Semeter when it starts
-    e_22.appendChild(
-      document.createTextNode("Semester Start : " + dataList[i].Semester_Start)
-    );
-    e_16.appendChild(e_22);
-    var e_23 = document.createElement("br");
-    e_16.appendChild(e_23);
-    var e_24 = document.createElement("hr");
-    e_16.appendChild(e_24);
-    e_10.appendChild(e_16);
-    e_7.appendChild(e_10);
-    var e_25 = document.createElement("div");
-    e_25.setAttribute("class", "mt-1 mb-1 spec-1");
-    e_25.setAttribute("bis_skin_checked", "1");
-    var e_26 = document.createElement("span");
-    e_26.setAttribute("class", "dot");
-    e_25.appendChild(e_26);
-    var e_27 = document.createElement("span");
-    var e_28 = document.createElement("b");
-    //course ranking in germany
-    if(dataList[i].Course_Ranking!="NA" ){
-    e_28.appendChild(
       document.createTextNode(
-        "Course Germany Ranking : " + dataList[i].Course_Ranking
+        "Beginning Semester : " + dataList[i].Semester_Start
       )
     );
-    e_27.appendChild(e_28);}
-
-    e_25.appendChild(e_27);
-    var e_29 = document.createElement("span");
-    e_29.setAttribute("class", "dot");
-    e_25.appendChild(e_29);
-    e_7.appendChild(e_25);
-    var e_30 = document.createElement("div");
-    e_30.setAttribute("class", "mt-1 mb-1 spec-1");
-    e_30.setAttribute("bis_skin_checked", "1");
-    var e_31 = document.createElement("span");
-    var e_32 = document.createElement("b");
-    //city
-    e_32.appendChild(document.createTextNode("City : " + dataList[i].City));
-    e_31.appendChild(e_32);
-    var e_33 = document.createElement("br");
-    e_31.appendChild(e_33);
-    e_30.appendChild(e_31);
-    var e_34 = document.createElement("span");
-    e_34.setAttribute("class", "dot");
-    e_30.appendChild(e_34);
-    e_7.appendChild(e_30);
-    var e_35 = document.createElement("p");
-    e_35.setAttribute("class", "text-justify text-truncate para mb-0");
-    e_7.appendChild(e_35);
-    var e_36 = document.createElement("h6");
-    e_36.setAttribute("class", "text-success");
-    // Duration
-    e_36.appendChild(
+    e_17.appendChild(e_21);
+    var e_22 = document.createElement("br");
+    e_17.appendChild(e_22);
+    var e_23 = document.createElement("p");
+    e_23.setAttribute("class", "text-justify text-truncate para mb-0");
+    e_17.appendChild(e_23);
+    var e_24 = document.createElement("h6");
+    e_24.setAttribute("class", "text-success mt-1");
+    e_24.appendChild(
       document.createTextNode("Duration : " + dataList[i].Duration)
     );
-    e_7.appendChild(e_36);
-    var e_37 = document.createElement("p");
-    e_7.appendChild(e_37);
-    e_4.appendChild(e_7);
-    var e_38 = document.createElement("div");
-    e_38.setAttribute(
-      "class",
-      "align-items-center align-content-center col-md-3 border-left mt-1"
-    );
-    e_38.setAttribute("bis_skin_checked", "1");
-    var e_39 = document.createElement("div");
-    e_39.setAttribute("class", "d-flex flex-row align-items-center");
-    e_39.setAttribute("bis_skin_checked", "1");
-    var e_40 = document.createElement("span");
-    e_40.setAttribute("class", "text-primary ");
-    var e_41 = document.createElement("h6");
-    //tution fee
-    e_41.appendChild(
-      document.createTextNode("Tuition Fee : " + dataList[i].Tuition_Fee)
-    );
-    e_40.appendChild(e_41);
-    var e_42 = document.createElement("br");
-    e_40.appendChild(e_42);
-    
-    
- 
-    e_39.appendChild(e_40);
-    e_38.appendChild(e_39);
-    var e_43 = document.createElement("h6");   
-    var e_44 = document.createElement("h6");
-    var e_50 = document.createElement("h6");
-    var e_51 = document.createElement("h6");
-    var e_52 = document.createElement("h6");
-    var e_53 = document.createElement("h6");
-    e_44.setAttribute("class", "text-danger");
-    e_50.setAttribute("class", "text-danger");
-    e_43.setAttribute("class", "text-success");
-
-  //tution language
-   if(dataList[i].Teaching_Language!="NA"){
-        
-        e_43.appendChild(
-          document.createTextNode(
-            "Teaching Language: " + dataList[i].Teaching_Language
-          )
-        );
-        e_38.appendChild(e_43);} 
-         
-    //application deadline
-    if(dataList[i].Application_Deadline_Summer!="NA" ){
-    e_44.appendChild(
+    e_17.appendChild(e_24);
+    var e_25 = document.createElement("h6");
+    e_25.setAttribute("class", "text-success mt-1");
+    e_25.appendChild(
       document.createTextNode(
-        "Application Deadline Summer: " +
-          dataList[i].Application_Deadline_Summer
+        "Teaching Language: " + dataList[i].Teaching_Language
       )
     );
-    e_38.appendChild(e_44);}
-
-    if(dataList[i].Application_Deadline_Winter!="NA" ){
-    e_50.appendChild(
-      document.createTextNode(
-        "Application Deadline Winter: " +
-          dataList[i].Application_Deadline_Winter
-      )
-    );
-    e_38.appendChild(e_50);}
-
-    if(dataList[i].Admission_IELTS_TOFEL!="NA" ){
-    e_51.appendChild(
-      document.createTextNode(
-        "IELTS/TOEFL : " + dataList[i].Admission_IELTS_TOFEL
-      )
-    );
-    e_38.appendChild(e_51);
-  }
-
-    if(dataList[i].Language_Requirement!="NA" ){
-    e_52.appendChild(
-      document.createTextNode(
-        "Language Requirement : " + dataList[i].Language_Requirement
-      )
-    );
-    e_38.appendChild(e_52);
-  }
-
-    if(dataList[i].Required_German_Grade!="NA" ){
-      e_53.appendChild(
+    e_17.appendChild(e_25);
+    if (dataList[i].Required_German_Grade != "NA") {
+      var e_26 = document.createElement("h6");
+      e_26.appendChild(
         document.createTextNode(
           "German Grade Requirement : " + dataList[i].Required_German_Grade
         )
       );
-      e_38.appendChild(e_53);
+      e_17.appendChild(e_26);
     }
-    
-    
-    
-    
-    
-    var e_45 = document.createElement("div");
-    e_45.setAttribute("class", "d-flex flex-column mt-4 flex-row");
-    e_45.setAttribute("bis_skin_checked", "1");
-    if(dataList[i].Course_Link!="none"){
-      var e_46 = document.createElement("a");
-    // Course website link
-    e_46.addEventListener("click", urlResolver.bind(null, dataList[i].Course_Link)) 
-    e_46.setAttribute("class", "btn btn-primary btn-sm");
-    e_46.appendChild(document.createTextNode("\nCourse website"));
-    e_45.appendChild(e_46);
+    var e_27 = document.createElement("hr");
+    e_17.appendChild(e_27);
+    var e_28 = document.createElement("span");
+    if (dataList[i].Course_Ranking != "NA") {
+      var e_29 = document.createElement("h6");
 
+      e_29.appendChild(
+        document.createTextNode(
+          "Course Germany Ranking : " + dataList[i].Course_Ranking
+        )
+      );
+      e_28.appendChild(e_29);
     }
-    if(dataList[i].Application_Link!="none"){
-    var e_47 = document.createElement("button");
-    e_47.setAttribute("class", "btn btn-outline-info btn-sm mt-2 flex-row");
-    e_47.addEventListener("click", urlResolver.bind(null, dataList[i].Application_Link)) 
-    e_47.appendChild(document.createTextNode("Submit Application"));
-    e_45.appendChild(e_47);}
-    
-    e_38.appendChild(e_45);
-    e_4.appendChild(e_38);
-    e_3.appendChild(e_4);
+    if (dataList[i].Admission_IELTS_TOFEL != "NA") {
+      var e_30 = document.createElement("h6");
+      e_30.appendChild(
+        document.createTextNode(
+          "Mandatory IELTS/TOEFL : " + dataList[i].Admission_IELTS_TOFEL
+        )
+      );
+      e_28.appendChild(e_30);
+    }
+    if (dataList[i].Language_Requirement != "NA") {
+      var e_31 = document.createElement("h6");
+      e_31.appendChild(
+        document.createTextNode(
+          "Language Requirement : " + dataList[i].Language_Requirement
+        )
+      );
+      e_28.appendChild(e_31);
+    }
+    if (dataList[i].GRE != "NA") {
+      var e_32 = document.createElement("h6");
+      e_32.appendChild(document.createTextNode("GRE : " + dataList[i].GRE));
+      e_28.appendChild(e_32);
+    }
+    e_17.appendChild(e_28);
+    e_15.appendChild(e_17);
+    e_14.appendChild(e_15);
+    e_3.appendChild(e_14);
+    var e_33 = document.createElement("div");
+    e_33.setAttribute(
+      "class",
+      "align-items-center align-content-center col-md-3 border-left mt-1"
+    );
+    e_33.setAttribute("bis_skin_checked", "1");
+    var e_34 = document.createElement("div");
+    e_34.setAttribute("class", "d-flex flex-row align-items-center");
+    e_34.setAttribute("bis_skin_checked", "1");
+    var e_35 = document.createElement("span");
+    e_35.setAttribute("class", "text-primary");
+    var e_36 = document.createElement("h6");
+    e_36.appendChild(
+      document.createTextNode("Tuition Fee : " + dataList[i].Tuition_Fee)
+    );
+    e_35.appendChild(e_36);
+    var e_37 = document.createElement("br");
+    e_35.appendChild(e_37);
+    e_34.appendChild(e_35);
+    e_33.appendChild(e_34);
+    var e_38 = document.createElement("hr");
+    e_33.appendChild(e_38);
+    if (
+      dataList[i].Application_Deadline_Summe != "NA" &&
+      dataList[i].Application_Deadline_Winter != "NA"
+    ) {
+      var e_39 = document.createElement("h6");
+      e_39.setAttribute("class", "text-info");
+      e_39.appendChild(document.createTextNode("Application Deadline"));
+      e_33.appendChild(e_39);
+      if (dataList[i].Application_Deadline_Summe != "NA") {
+        var e_40 = document.createElement("h6");
+        e_40.setAttribute("class", "text-danger");
+        e_40.appendChild(
+          document.createTextNode(
+            "Summer : " + dataList[i].Application_Deadline_Summer
+          )
+        );
+        e_33.appendChild(e_40);
+      }
+      if (dataList[i].Application_Deadline_Winter != "NA") {
+        var e_41 = document.createElement("h6");
+        e_41.setAttribute("class", "text-danger");
+        e_41.appendChild(
+          document.createTextNode(
+            "Winter : " + dataList[i].Application_Deadline_Winter
+          )
+        );
+        e_33.appendChild(e_41);
+      }
+
+      var e_42 = document.createElement("hr");
+      e_33.appendChild(e_42);
+    }
+    var e_43 = document.createElement("div");
+    e_43.setAttribute("class", "d-flex flex-column mt-4 flex-row");
+    e_43.setAttribute("bis_skin_checked", "1");
+
+    if (dataList[i].Course_Link != "none" && dataList[i].Course_Link != "NA") {
+      var e_44 = document.createElement("a");
+      e_44.setAttribute("class", "btn btn-primary btn-sm");
+      e_44.addEventListener(
+        "click",
+        urlResolver.bind(null, dataList[i].Course_Link)
+      );
+      e_44.appendChild(document.createTextNode(" Course website"));
+      e_43.appendChild(e_44);
+    }
+    if (
+      !dataList[i].Application_Link.includes("@") &&
+      dataList[i].Application_Link != "none" &&
+      dataList[i].Application_Link != "NA"
+    ) {
+      var e_45 = document.createElement("button");
+      e_45.setAttribute("class", "btn btn-outline-info btn-sm mt-2 flex-row");
+      e_45.addEventListener(
+        "click",
+        urlResolver.bind(null, dataList[i].Application_Link)
+      );
+      e_45.appendChild(document.createTextNode("\nSubmit Application\n"));
+      e_43.appendChild(e_45);
+    }
+    if (dataList[i].Application_Link.includes("@")) {
+      var e_46 = document.createElement("button");
+      e_46.setAttribute("class", "btn btn-outline-info btn-sm mt-2 flex-row");
+      e_46.appendChild(document.createTextNode("\nEmail\n"));
+      e_43.appendChild(e_46);
+    }
+    e_33.appendChild(e_43);
+    if (dataList[i].Updated != "") {
+      var e_47 = document.createElement("p");
+      e_47.setAttribute("class", "mt-5");
+      e_47.appendChild(
+        document.createTextNode("Last Updated on : " + dataList[i].Updated)
+      );
+      e_33.appendChild(e_47);
+    }
+
+    e_3.appendChild(e_33);
     e_2.appendChild(e_3);
     e_1.appendChild(e_2);
     e_0.appendChild(e_1);
@@ -446,9 +425,7 @@ function Rendering(dataList, data_to_process) {
   //console.log(CollegeList[0]);
 }
 
-
-function urlResolver(url)
-{
+function urlResolver(url) {
   console.log(url);
   window.open(url, "_blank");
 }
@@ -478,24 +455,23 @@ function Fill_Value() {
     //tuition_fees.push(Element.Tuition_Fee);
   });
 
-  // changing the languages 
-
+  // changing the languages
 
   let uniqueListArray = [
     Unique_value(course_type_array.sort()),
     Remove_Space_Get_Unique_Value(language_array.sort()),
     Unique_value(duration_array.sort()),
     Remove_Space_Get_Unique_Value(semester_array.sort()),
-    
+
     //tuition_fees.sort(),
   ];
-//console.log(uniqueListArray[3]);
-  
+  //console.log(uniqueListArray[3]);
+
   let select_ids = [
     "Course_type",
     "Teaching_language",
     "Duration",
-    "Beginning_semester"
+    "Beginning_semester",
     // "Tuition_fee",
   ];
 
@@ -505,7 +481,7 @@ function Fill_Value() {
     //creating options
     var options = [];
     var option = document.createElement("option");
-  
+
     //fethcing unique list from uniqueListarray
     uniqueListArray[i].forEach((ele) => {
       //var data = '<option value="' + escapeHTML(i) +'">" + escapeHTML(i) + "</option>';
@@ -518,20 +494,18 @@ function Fill_Value() {
   }
 }
 
-// to get unique values again 
-function Remove_Space_Get_Unique_Value(list){
-  let temp_string=list.join().replace(/ /g,'');
-  
-  list= temp_string.split(",");
-  list=Unique_value(list);
+// to get unique values again
+function Remove_Space_Get_Unique_Value(list) {
+  let temp_string = list.join().replace(/ /g, "");
+
+  list = temp_string.split(",");
+  list = Unique_value(list);
 
   return list;
-
 }
 
-function Unique_value(values)
-{
-  return   values.filter((x, i, a) => a.indexOf(x) === i);
+function Unique_value(values) {
+  return values.filter((x, i, a) => a.indexOf(x) === i);
 }
 
 //7 parameter for filtering
@@ -549,10 +523,12 @@ var Search_sortByRanking = document.getElementById("Sort_by_Ranking");
 var Min_Tuition_fee = document.getElementById("min");
 var Max_Tuition_fee = document.getElementById("max");
 var Reset_Search = document.getElementById("reset");
-var Display_Selected_Filter = document.getElementById("Display_Selected_Filter");
+var Display_Selected_Filter = document.getElementById(
+  "Display_Selected_Filter"
+);
 Reset_Search.addEventListener("click", Reset);
-let selected_lang=[];
-let start_sem=[];
+let selected_lang = [];
+let start_sem = [];
 Search_Name_Uni.addEventListener("keyup", (e) => {
   delayKeyUp(() => {
     Search_Uni_Course();
@@ -575,8 +551,7 @@ Germany_Ranking_Finder.addEventListener("keyup", (e) => {
 });
 Search_Language_teaching.addEventListener("change", (e) => {
   delayKeyUp(() => {
-    
-    selected_lang=check_Selected_Languages();
+    selected_lang = check_Selected_Languages();
 
     Search_Uni_Course();
   }, 400);
@@ -589,7 +564,6 @@ Search_Start_semeter.addEventListener("change", (e) => {
 });
 Search_Duration.addEventListener("change", (e) => {
   delayKeyUp(() => {
-    
     Search_Uni_Course();
   }, 400);
 });
@@ -617,29 +591,24 @@ Search_sortByRanking.addEventListener("change", (e) => {
   }, 400);
 });
 
-function check_Start_sem(){
-
-  let start_sem=[];
-  for (var option of Search_Start_semeter)
-  {
-      if (option.selected) {
-        start_sem.push(option.value.toLowerCase());
-      }
+function check_Start_sem() {
+  let start_sem = [];
+  for (var option of Search_Start_semeter) {
+    if (option.selected) {
+      start_sem.push(option.value.toLowerCase());
+    }
   }
   return start_sem;
-
 }
-function check_Selected_Languages(){
-  let lang=[]
-  for (var option of Search_Language_teaching .options)
-  {
-      if (option.selected) {
-        lang.push(option.value.toLowerCase());
-      }
+function check_Selected_Languages() {
+  let lang = [];
+  for (var option of Search_Language_teaching.options) {
+    if (option.selected) {
+      lang.push(option.value.toLowerCase());
+    }
   }
   console.log(lang);
   return lang;
-
 }
 function Reset() {
   document.location.reload(true);
@@ -649,16 +618,15 @@ function Search_Uni_Course() {
   var _Uni_name = Search_Name_Uni.value.toLowerCase();
   var _course_name = Search_Name_Course.value.toLowerCase();
   var _course_type = Search_Course_type.value.toLowerCase();
-  var _germany_ranking= Germany_Ranking_Finder.value.toLocaleLowerCase();
+  var _germany_ranking = Germany_Ranking_Finder.value.toLocaleLowerCase();
   var _teaching_Language = selected_lang.join(",").toLocaleLowerCase();
   var _start_semester = start_sem.join(",").toLocaleLowerCase();
   //Search_Start_semeter.value.toLowerCase();
   var _duration = Search_Duration.value.toLowerCase();
   // var _fee = Tuition.value.toLowerCase();
-  var _sortbyRanking= Search_sortByRanking.value;
-  var  _mintuitionfee = Min_Tuition_fee.value;
-  var  _maxtuitionfee = Max_Tuition_fee.value;
-
+  var _sortbyRanking = Search_sortByRanking.value;
+  var _mintuitionfee = Min_Tuition_fee.value;
+  var _maxtuitionfee = Max_Tuition_fee.value;
 
   // var _rank = Search_rank.toLowerCase();
   //input_type = document.getElementById("search_name").value.toLowerCase();
@@ -671,9 +639,9 @@ function Search_Uni_Course() {
     _teaching_Language,
     _start_semester,
     _duration,
-   _sortbyRanking,
-   _mintuitionfee,
-   _maxtuitionfee
+    _sortbyRanking,
+    _mintuitionfee,
+    _maxtuitionfee
   );
 }
 /*function Filter(name){
@@ -689,22 +657,33 @@ function Search_Uni_Course() {
 
 let resultarr = [];
 
-function DisplaySelectedFilters(_activeFilters){
-
+function DisplaySelectedFilters(_activeFilters) {
   Display_Selected_Filter.innerHTML = "";
-  const name=["University Name","Course Name","Course Type","German Ranking","Teaching Language","Semester Start","Duration","Min Tuition Fee","Max Tuition Fee"]
-  let i=0;
-  _activeFilters.forEach( element=>{
-    if(element!=""){
-    var e_0 = document.createElement("button");
-    e_0.setAttribute("type", "button");
-    e_0.setAttribute("class", "btn btn-success mr-1");
-    e_0.setAttribute("disabled", "");
-    e_0.appendChild(document.createTextNode( name[i] +": "+element.toUpperCase()));
-    Display_Selected_Filter.appendChild(e_0);
-    
-  } i++; })
-  
+  const name = [
+    "University Name",
+    "Course Name",
+    "Course Type",
+    "German Ranking",
+    "Teaching Language",
+    "Semester Start",
+    "Duration",
+    "Min Tuition Fee",
+    "Max Tuition Fee",
+  ];
+  let i = 0;
+  _activeFilters.forEach((element) => {
+    if (element != "") {
+      var e_0 = document.createElement("button");
+      e_0.setAttribute("type", "button");
+      e_0.setAttribute("class", "btn btn-success mr-1");
+      e_0.setAttribute("disabled", "");
+      e_0.appendChild(
+        document.createTextNode(name[i] + ": " + element.toUpperCase())
+      );
+      Display_Selected_Filter.appendChild(e_0);
+    }
+    i++;
+  });
 }
 
 function MultiFilter(
@@ -719,7 +698,17 @@ function MultiFilter(
   _mintuitionfee,
   _maxtuitionfee
 ) {
-  var activeFilters=[university_name,course_name,course_type,_germany_ranking,teaching_language,start_semester,duration,_mintuitionfee,_maxtuitionfee]
+  var activeFilters = [
+    university_name,
+    course_name,
+    course_type,
+    _germany_ranking,
+    teaching_language,
+    start_semester,
+    duration,
+    _mintuitionfee,
+    _maxtuitionfee,
+  ];
   if (Display_Search.value != "") {
     Items_To_Show = Display_Search.value;
   } else {
@@ -730,26 +719,27 @@ function MultiFilter(
   //console.log("showing items:" + Items_To_Show);
   var container = document.getElementById("List_of_University");
   container.innerHTML = "";
-  
-  let result = [] ;
+
+  let result = [];
   result = CollegeList.filter(
-      (p) =>
+    (p) =>
       p.University_Name.toLowerCase().includes(university_name) &&
       p.Course_Name.toLowerCase().includes(course_name) &&
       p.Course_Type.toLowerCase().includes(course_type) &&
-      (_germany_ranking=="" ?  true:p.Rank_sort_germany===_germany_ranking) &&
+      (_germany_ranking == ""
+        ? true
+        : p.Rank_sort_germany === _germany_ranking) &&
       p.Teaching_Language.toLowerCase().includes(teaching_language) &&
       p.Semester_Start.toLowerCase().includes(start_semester) &&
-      p.Duration.toLowerCase().includes(duration)&&
-      (p.new_Tuition_Fee >= _mintuitionfee && p.new_Tuition_Fee <=_maxtuitionfee)
-  )
+      p.Duration.toLowerCase().includes(duration) &&
+      p.new_Tuition_Fee >= _mintuitionfee &&
+      p.new_Tuition_Fee <= _maxtuitionfee
+  );
   resultarr = result;
- 
-  
+
   if (result != "") {
-    sortbyRanking(_sortbyRanking);    
-  } 
-  else {
+    sortbyRanking(_sortbyRanking);
+  } else {
     Rendering("", "");
   }
   // console.log(resultarr);
@@ -847,234 +837,244 @@ function Active_Deactive(Page_ID) {
 ////Sorting via Ranking
 
 function sortbyRanking(value) {
-  
-  if(value==0){
-    Pagination(resultarr,Items_To_Show);
+  if (value == 0) {
+    Pagination(resultarr, Items_To_Show);
+  } else if (value == 1) {
+    sortbyWorldRanking();
+  } else if (value == 2) {
+    sortbyGermanRanking();
   }
-  else if (value == 1) {
-    sortbyWorldRanking(); 
-  }
-  else if (value == 2) {
-    sortbyGermanRanking(); 
-  } 
-  }
-
-
+}
 
 function sortbyWorldRanking() {
-  Sort_world_Ranking= [].concat(resultarr);
-  
+  Sort_world_Ranking = [].concat(resultarr);
+
   Sort_world_Ranking.sort((a, b) => a.Rank_sort_world - b.Rank_sort_world);
   Pagination(Sort_world_Ranking, Items_To_Show);
 }
 
 function sortbyGermanRanking() {
-  Sort_germany_Ranking= [].concat(resultarr);
+  Sort_germany_Ranking = [].concat(resultarr);
 
-  Sort_germany_Ranking.sort((a, b) => a.Rank_sort_germany - b.Rank_sort_germany);
+  Sort_germany_Ranking.sort(
+    (a, b) => a.Rank_sort_germany - b.Rank_sort_germany
+  );
   Pagination(Sort_germany_Ranking, Items_To_Show);
 }
 
 function randomColor() {
-  var color = '#';
-  var colorCode = ['F8F9F9','F2F3F4','E5E7E9','D7DBDD','F4F6F6','F2F4F4','E5E8E8','D0D3D4','f5e3b8','f5ebd3','c4d4ff','e6fac8']; // colors
-  
+  var color = "#";
+  var colorCode = [
+    "F8F9F9",
+    "F2F3F4",
+    "E5E7E9",
+    "D7DBDD",
+    "F4F6F6",
+    "F2F4F4",
+    "E5E8E8",
+    "D0D3D4",
+    "f5e3b8",
+    "f5ebd3",
+    "c4d4ff",
+    "e6fac8",
+  ]; // colors
+
   color += colorCode[Math.floor(Math.random() * colorCode.length)];
   return color;
 }
 
-
-
-function changecurrency(currency){
-   //console.log(currency);
-   //console.log(typeof(currency))
-   if(typeof(currency)==="number")
-   {
+function changecurrency(currency) {
+  //console.log(currency);
+  //console.log(typeof(currency))
+  if (typeof currency === "number") {
     return currency;
-   }
-   
-   newcurrency=0;
-   if(currency.includes('€'))
-  {
-    newcurrency= currency.split( '\u20AC')[1];
-    // console.log(typeof(newcurrency));
-   
   }
-  if(currency.includes(",")){
-    if(newcurrency!=0)
-    {
+
+  newcurrency = 0;
+  if (currency.includes("€")) {
+    newcurrency = currency.split("\u20AC")[1];
+    // console.log(typeof(newcurrency));
+  }
+  if (currency.includes(",")) {
+    if (newcurrency != 0) {
       newcurrency = newcurrency.replace(",", "");
-    }
-    else{
+    } else {
       newcurrency = currency.replace(",", "");
     }
   }
-  
-  newcurrency = parseInt(newcurrency) ;
+
+  newcurrency = parseInt(newcurrency);
   // console.log(new_currency);
   return newcurrency;
 }
 
-function setcurrency(Tuition_Fee){
-  if(Tuition_Fee == 'Not Available' || Tuition_Fee == ''){
+function setcurrency(Tuition_Fee) {
+  if (Tuition_Fee == "NA" || Tuition_Fee == "") {
     return 99999;
-  }
-  else if(Tuition_Fee == 'None'){
+  } else if (Tuition_Fee == "None") {
     return 0;
-  }
-  else if(Tuition_Fee == 'Varied'){
+  } else if (Tuition_Fee == "Varied") {
     return 1;
-  }
-  else{
+  } else {
     return changecurrency(Tuition_Fee);
   }
 }
 
+function Display_Pagedata(data_to_process, Current_Index, display_number) {
+  var CheckCurrent_Index = parseInt(data_to_process.length / Items_To_Show) + 1;
 
-function Display_Pagedata(data_to_process,Current_Index,display_number){
-  var CheckCurrent_Index = (parseInt(data_to_process.length / Items_To_Show)+1);
- 
-  if(Current_Index == CheckCurrent_Index){
-        display_number.innerHTML =
-    "Displaying " +
-    (Items_To_Show * (Current_Index - 1) + 1) +
-    "-" +
-    (data_to_process.length) +
-    " Universities/Hochshule out of " +
-    data_to_process.length;
-  }
-  else{
-    
+  if (Current_Index == CheckCurrent_Index) {
     display_number.innerHTML =
-    "Displaying " +
-    (Items_To_Show * (Current_Index - 1) + 1) +
-    "-" +
-    Items_To_Show * Current_Index +
-    " Universities/Hochshule out of " +
-    data_to_process.length;
+      "Displaying " +
+      (Items_To_Show * (Current_Index - 1) + 1) +
+      "-" +
+      data_to_process.length +
+      " Universities/Hochshule out of " +
+      data_to_process.length;
+  } else {
+    display_number.innerHTML =
+      "Displaying " +
+      (Items_To_Show * (Current_Index - 1) + 1) +
+      "-" +
+      Items_To_Show * Current_Index +
+      " Universities/Hochshule out of " +
+      data_to_process.length;
   }
 }
 
-//slider js 
+//slider js
 
 var thumbsize = 14;
 
-function draw(slider,splitvalue) {
+function draw(slider, splitvalue) {
+  /* set function vars */
+  var min = slider.querySelector(".min");
+  var max = slider.querySelector(".max");
+  var lower = slider.querySelector(".lower");
+  var upper = slider.querySelector(".upper");
+  var legend = slider.querySelector(".legend");
+  var thumbsize = parseInt(slider.getAttribute("data-thumbsize"));
+  var rangewidth = parseInt(slider.getAttribute("data-rangewidth"));
+  var rangemin = parseInt(slider.getAttribute("data-rangemin"));
+  var rangemax = parseInt(slider.getAttribute("data-rangemax"));
 
-    /* set function vars */
-    var min = slider.querySelector('.min');
-    var max = slider.querySelector('.max');
-    var lower = slider.querySelector('.lower');
-    var upper = slider.querySelector('.upper');
-    var legend = slider.querySelector('.legend');
-    var thumbsize = parseInt(slider.getAttribute('data-thumbsize'));
-    var rangewidth = parseInt(slider.getAttribute('data-rangewidth'));
-    var rangemin = parseInt(slider.getAttribute('data-rangemin'));
-    var rangemax = parseInt(slider.getAttribute('data-rangemax'));
+  /* set min and max attributes */
+  min.setAttribute("max", splitvalue);
+  max.setAttribute("min", splitvalue);
 
-    /* set min and max attributes */
-    min.setAttribute('max',splitvalue);
-    max.setAttribute('min',splitvalue);
+  /* set css */
+  min.style.width =
+    parseInt(
+      thumbsize +
+        ((splitvalue - rangemin) / (rangemax - rangemin)) *
+          (rangewidth - 2 * thumbsize)
+    ) + "px";
+  max.style.width =
+    parseInt(
+      thumbsize +
+        ((rangemax - splitvalue) / (rangemax - rangemin)) *
+          (rangewidth - 2 * thumbsize)
+    ) + "px";
+  min.style.left = "0px";
+  max.style.left = parseInt(min.style.width) + "px";
+  min.style.top = lower.offsetHeight + "px";
+  max.style.top = lower.offsetHeight + "px";
+  legend.style.marginTop = min.offsetHeight + "px";
+  slider.style.height =
+    lower.offsetHeight + min.offsetHeight + legend.offsetHeight + "px";
 
-    /* set css */
-    min.style.width = parseInt(thumbsize + ((splitvalue - rangemin)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
-    max.style.width = parseInt(thumbsize + ((rangemax - splitvalue)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
-    min.style.left = '0px';
-    max.style.left = parseInt(min.style.width)+'px';
-    min.style.top = lower.offsetHeight+'px';
-    max.style.top = lower.offsetHeight+'px';
-    legend.style.marginTop = min.offsetHeight+'px';
-    slider.style.height = (lower.offsetHeight + min.offsetHeight + legend.offsetHeight)+'px';
-    
-    /* correct for 1 off at the end */
-    if(max.value>(rangemax - 1)) max.setAttribute('data-value',rangemax);
+  /* correct for 1 off at the end */
+  if (max.value > rangemax - 1) max.setAttribute("data-value", rangemax);
 
-    /* write value and labels */
-    max.value = max.getAttribute('data-value'); 
-    min.value = min.getAttribute('data-value');
-    lower.innerHTML = min.getAttribute('data-value');
-    upper.innerHTML = max.getAttribute('data-value');
-
+  /* write value and labels */
+  max.value = max.getAttribute("data-value");
+  min.value = min.getAttribute("data-value");
+  lower.innerHTML = min.getAttribute("data-value");
+  upper.innerHTML = max.getAttribute("data-value");
 }
 
 function init(slider) {
-    /* set function vars */
-    var min = slider.querySelector('.min');
-    var max = slider.querySelector('.max');
-    var rangemin = parseInt(min.getAttribute('min'));
-    var rangemax = parseInt(max.getAttribute('max'));
-    var avgvalue = (rangemin + rangemax)/2;
-    var legendnum = slider.getAttribute('data-legendnum');
+  /* set function vars */
+  var min = slider.querySelector(".min");
+  var max = slider.querySelector(".max");
+  var rangemin = parseInt(min.getAttribute("min"));
+  var rangemax = parseInt(max.getAttribute("max"));
+  var avgvalue = (rangemin + rangemax) / 2;
+  var legendnum = slider.getAttribute("data-legendnum");
 
-    /* set data-values */
-    min.setAttribute('data-value',rangemin);
-    max.setAttribute('data-value',rangemax);
-    
-    /* set data vars */
-    slider.setAttribute('data-rangemin',rangemin); 
-    slider.setAttribute('data-rangemax',rangemax); 
-    slider.setAttribute('data-thumbsize',thumbsize); 
-    slider.setAttribute('data-rangewidth',slider.offsetWidth);
+  /* set data-values */
+  min.setAttribute("data-value", rangemin);
+  max.setAttribute("data-value", rangemax);
 
-    /* write labels */
-    var lower = document.createElement('span');
-    var upper = document.createElement('span');
-    lower.classList.add('lower','value');
-    upper.classList.add('upper','value');
-    lower.appendChild(document.createTextNode(rangemin));
-    upper.appendChild(document.createTextNode(rangemax));
-    slider.insertBefore(lower,min.previousElementSibling);
-    slider.insertBefore(upper,min.previousElementSibling);
-    
-    /* write legend */
-    var legend = document.createElement('div');
-    legend.classList.add('legend');
-    var legendvalues = [];
-    for (var i = 0; i < legendnum; i++) {
-        legendvalues[i] = document.createElement('div');
-        var val = Math.round(rangemin+(i/(legendnum-1))*(rangemax - rangemin));
-        legendvalues[i].appendChild(document.createTextNode(val));
-        legend.appendChild(legendvalues[i]);
+  /* set data vars */
+  slider.setAttribute("data-rangemin", rangemin);
+  slider.setAttribute("data-rangemax", rangemax);
+  slider.setAttribute("data-thumbsize", thumbsize);
+  slider.setAttribute("data-rangewidth", slider.offsetWidth);
 
-    } 
-    slider.appendChild(legend);
+  /* write labels */
+  var lower = document.createElement("span");
+  var upper = document.createElement("span");
+  lower.classList.add("lower", "value");
+  upper.classList.add("upper", "value");
+  lower.appendChild(document.createTextNode(rangemin));
+  upper.appendChild(document.createTextNode(rangemax));
+  slider.insertBefore(lower, min.previousElementSibling);
+  slider.insertBefore(upper, min.previousElementSibling);
 
-    /* draw */
-    draw(slider,avgvalue);
+  /* write legend */
+  var legend = document.createElement("div");
+  legend.classList.add("legend");
+  var legendvalues = [];
+  for (var i = 0; i < legendnum; i++) {
+    legendvalues[i] = document.createElement("div");
+    var val = Math.round(
+      rangemin + (i / (legendnum - 1)) * (rangemax - rangemin)
+    );
+    legendvalues[i].appendChild(document.createTextNode(val));
+    legend.appendChild(legendvalues[i]);
+  }
+  slider.appendChild(legend);
 
-    /* events */
-    min.addEventListener("input", function() {update(min);});
-    max.addEventListener("input", function() {update(max);});
+  /* draw */
+  draw(slider, avgvalue);
+
+  /* events */
+  min.addEventListener("input", function () {
+    update(min);
+  });
+  max.addEventListener("input", function () {
+    update(max);
+  });
 }
 
-function update(el){
-    /* set function vars */
-    var slider = el.parentElement;
-    var min = slider.querySelector('#min');
-    var max = slider.querySelector('#max');
-    var minvalue = Math.floor(min.value);
-    var maxvalue = Math.floor(max.value);
-    
-    /* set inactive values before draw */
-    min.setAttribute('data-value',minvalue);
-    max.setAttribute('data-value',maxvalue);
+function update(el) {
+  /* set function vars */
+  var slider = el.parentElement;
+  var min = slider.querySelector("#min");
+  var max = slider.querySelector("#max");
+  var minvalue = Math.floor(min.value);
+  var maxvalue = Math.floor(max.value);
 
-    var avgvalue = (minvalue + maxvalue)/2;
+  /* set inactive values before draw */
+  min.setAttribute("data-value", minvalue);
+  max.setAttribute("data-value", maxvalue);
 
-    /* draw */
-    draw(slider,avgvalue);
+  var avgvalue = (minvalue + maxvalue) / 2;
+
+  /* draw */
+  draw(slider, avgvalue);
 }
 
-var sliders = document.querySelectorAll('.min-max-slider');
-sliders.forEach( function(slider) {
-    init(slider);
+var sliders = document.querySelectorAll(".min-max-slider");
+sliders.forEach(function (slider) {
+  init(slider);
 });
-
 
 const menu = document.querySelector(".search_menu");
 const menuItems = document.querySelectorAll(".menuItem");
-const hamburger= document.querySelector(".search_hamburger");
-const closeIcon= document.querySelector(".closeIcon");
+const hamburger = document.querySelector(".search_hamburger");
+const closeIcon = document.querySelector(".closeIcon");
 const menuIcon = document.querySelector(".menuIcon");
 
 function toggleMenu() {
