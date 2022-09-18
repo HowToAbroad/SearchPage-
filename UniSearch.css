@@ -4,7 +4,10 @@
   margin: 0;
 }
 
-
+hr{
+  background-color: #000000;
+  display: flex;
+}
 /*CSS for different classes*/
 .center {
   text-align: center;
