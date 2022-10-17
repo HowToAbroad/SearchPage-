@@ -6,6 +6,8 @@ let PageSize = 1;
 let CollegeList = [];
 let Items_To_Show = 10;
 let prev_page_id = 1;
+let minumum_tuition=0;
+let maximum_tuition=0;
 class College {
   constructor(
     World_Ranking,
@@ -72,9 +74,20 @@ class College {
     this.Application_Link = Application_Link == "" ? "none" : Application_Link;
     this.Logo = Logo;
     this.Updated = Updated;
+    Maximum_Fee(this.new_Tuition_Fee);
   }
 }
 Execute();
+
+function Maximum_Fee(value){
+  //console.log("maxfee- "+maximum_tuition);
+  //console.log("current vallue-"+value);
+  if (maximum_tuition<value){
+
+    maximum_tuition=value
+  }
+
+}
 
 async function Execute() {
   const data = await GetData();
@@ -138,7 +151,10 @@ function new_data_parser(data) {
     );
     num++;
   }
-
+  sliders.forEach(function (slider) {
+    init(slider);
+  });
+  set_min_max_tuition_fee();
   //console.log(CollegeList);
 }
 
@@ -533,27 +549,7 @@ function Fill_Value() {
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
-// to get unique values again
-/*function Remove_Space_Get_Unique_Value(list) {
-  let temp_string1 = list.join(); //.replace(/ /g, "")
-  let temp_string = temp_string1.split(",");
-  for (let i = 0; i < temp_string.length; i++) {
-    if (temp_string[i].startsWith(" ")) {
-      temp_string[i] = temp_string[i].replace(/ /g, "");
-    }
-  }
-  list = Unique_value(temp_string);
 
-  return list;
-}
-
-function Unique_value(values) {
-  return values.filter((x, i, a) => {
-    a.indexOf(x) === i;
-  });
-}*/
-
-//7 parameter for filtering
 
 var Search_Name_Uni = document.getElementById("search_name");
 var Search_Name_Course = document.getElementById("search_course");
@@ -567,6 +563,8 @@ var Display_Search = document.getElementById("display_size");
 var Search_sortByRanking = document.getElementById("Sort_by_Ranking");
 var Min_Tuition_fee = document.getElementById("min");
 var Max_Tuition_fee = document.getElementById("max");
+var Min_Tuition_fee_input = document.getElementById("min_field");
+var Max_Tuition_fee_input = document.getElementById("max_field");
 var Reset_Search = document.getElementById("reset");
 var Display_Selected_Filter = document.getElementById(
   "Display_Selected_Filter"
@@ -615,15 +613,28 @@ Search_Duration.addEventListener("change", (e) => {
 
 Min_Tuition_fee.addEventListener("change", (e) => {
   delayKeyUp(() => {
+    set_min_max_tuition_fee();
     Search_Uni_Course();
   }, 400);
 });
 Max_Tuition_fee.addEventListener("change", (e) => {
   delayKeyUp(() => {
+    set_min_max_tuition_fee();
     Search_Uni_Course();
   }, 400);
 });
-
+Min_Tuition_fee_input.addEventListener("keyup", (e) => {
+  delayKeyUp(() => {
+    set_min_max_tuition_fee_input();
+    Search_Uni_Course();
+  }, 400);
+});
+Max_Tuition_fee_input.addEventListener("keyup", (e) => {
+  delayKeyUp(() => {
+    set_min_max_tuition_fee_input();
+    Search_Uni_Course();
+  }, 400);
+});
 Display_Search.addEventListener("change", (e) => {
   delayKeyUp(() => {
     Search_Uni_Course();
@@ -673,8 +684,8 @@ function Search_Uni_Course() {
   var _duration = Search_Duration.value.toLowerCase();
   // var _fee = Tuition.value.toLowerCase();
   var _sortbyRanking = Search_sortByRanking.value;
-  var _mintuitionfee = Min_Tuition_fee.value;
-  var _maxtuitionfee = Max_Tuition_fee.value;
+  var _mintuitionfee = (Min_Tuition_fee.value); 
+  var _maxtuitionfee = parseInt(Max_Tuition_fee.value);
 
   // var _rank = Search_rank.toLowerCase();
   //input_type = document.getElementById("search_name").value.toLowerCase();
@@ -715,8 +726,8 @@ function DisplaySelectedFilters(_activeFilters) {
     "Teaching Language",
     "Semester Start",
     "Duration",
-    "Min Tuition Fee",
-    "Max Tuition Fee",
+    "Min-Tuition-Fee",
+    "Max-Tuition-Fee",
   ];
   let i = 0;
   _activeFilters.forEach((element) => {
@@ -725,9 +736,11 @@ function DisplaySelectedFilters(_activeFilters) {
       e_0.setAttribute("type", "button");
       e_0.setAttribute("class", "btn btn-success mr-1");
       e_0.setAttribute("disabled", "");
+      console.log(name[i]);
       e_0.appendChild(
-        document.createTextNode(name[i] + ": " + element.toUpperCase())
-      );
+          document.createTextNode(name[i] + ": " + element)
+        );
+    
       Display_Selected_Filter.appendChild(e_0);
     }
     i++;
@@ -1020,7 +1033,7 @@ function Display_Pagedata(data_to_process, Current_Index, display_number) {
 
 var thumbsize = 14;
 
-function draw(slider, splitvalue) {
+function draw(slider, splitvalue,min,max) {
   /* set function vars */
   var min = slider.querySelector(".min");
   var max = slider.querySelector(".max");
@@ -1071,8 +1084,9 @@ function init(slider) {
   /* set function vars */
   var min = slider.querySelector(".min");
   var max = slider.querySelector(".max");
-  var rangemin = parseInt(min.getAttribute("min"));
-  var rangemax = parseInt(max.getAttribute("max"));
+  var rangemin = minumum_tuition;//parseInt(min.getAttribute("min"));
+  console.log(maximum_tuition);
+  var rangemax = maximum_tuition;//parseInt(max.getAttribute("max"));
   var avgvalue = (rangemin + rangemax) / 2;
   var legendnum = slider.getAttribute("data-legendnum");
 
@@ -1141,9 +1155,7 @@ function update(el) {
 }
 
 var sliders = document.querySelectorAll(".min-max-slider");
-sliders.forEach(function (slider) {
-  init(slider);
-});
+
 
 const menu = document.querySelector(".search_menu");
 const menuItems = document.querySelectorAll(".menuItem");
@@ -1164,3 +1176,38 @@ function toggleMenu() {
 }
 
 hamburger.addEventListener("click", toggleMenu);
+
+function set_min_max_tuition_fee_input(){
+
+  console.log("set_min_max_tuition_fee_input()");
+  console.log(Max_Tuition_fee.value);
+  console.log(maximum_tuition);
+  if(Max_Tuition_fee.value!=Max_Tuition_fee_input.value && Max_Tuition_fee_input.value!="" && Max_Tuition_fee_input.value>Min_Tuition_fee_input.value && Max_Tuition_fee_input.value<=maximum_tuition)  
+  {
+    console.log("maxmimum value"+Max_Tuition_fee.value);
+    console.log("input value maximum="+Max_Tuition_fee_input.value);
+    Max_Tuition_fee.value="abc";
+    console.log("after the change"+Max_Tuition_fee.value);
+  }
+  if(Min_Tuition_fee.value!=Min_Tuition_fee_input.value && Min_Tuition_fee_input.value!="" &&Min_Tuition_fee_input.value>=minumum_tuition) 
+  {
+    Min_Tuition_fee.value=Min_Tuition_fee_input.value
+    console.log(Min_Tuition_fee.value);
+  }
+}
+
+function set_min_max_tuition_fee(){
+  console.log("set_min_max_tuition_fee()");
+  console.log(Max_Tuition_fee.value);
+
+  if(Max_Tuition_fee_input.value!=Max_Tuition_fee.value)
+  {
+    Max_Tuition_fee_input.value=Math.floor(Max_Tuition_fee.value);
+    console.log("max-"+Max_Tuition_fee_input.value);
+  }
+  if(Min_Tuition_fee_input.value!=Min_Tuition_fee.value)
+  {
+    Min_Tuition_fee_input.value=Math.floor(Min_Tuition_fee.value);
+    console.log("min-"+Min_Tuition_fee_input.value);
+  }
+}
