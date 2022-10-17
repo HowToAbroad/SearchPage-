@@ -10,8 +10,8 @@ let minumum_tuition=0;
 let maximum_tuition=0;
 class College {
   constructor(
-    World_Ranking,
-    German_Ranking,
+    World_Rank,
+    German_Rank,
     University_Name,
     HTA_Uni_Link,
     Course_Type,
@@ -36,14 +36,10 @@ class College {
     Logo,
     Updated
   ) {
-    this.World_Ranking = World_Ranking == "" ? "NA" : World_Ranking;
-
-    this.Rank_sort_world = World_Ranking == "NA" ? 10000 : World_Ranking;
-
-    this.German_Ranking = German_Ranking == "" ? "NA" : German_Ranking;
-
-    this.Rank_sort_germany = German_Ranking == "NA" ? 10000 : German_Ranking;
-
+    this.World_Ranking = ranking(World_Rank); 
+    this.Rank_sort_world = sort_ranking_setter(World_Rank); 
+    this.German_Ranking = ranking(German_Rank);
+    this.Rank_sort_germany = sort_ranking_setter(German_Rank); 
     this.University_Name = University_Name == "" ? "NA" : University_Name;
     this.HTA_Uni_Link = HTA_Uni_Link == "" ? "none" : HTA_Uni_Link;
     this.Course_Type = Course_Type == "" ? "NA" : Course_Type;
@@ -79,15 +75,24 @@ class College {
 }
 Execute();
 
-function Maximum_Fee(value){
-  //console.log("maxfee- "+maximum_tuition);
-  //console.log("current vallue-"+value);
-  if (maximum_tuition<value){
+function ranking(ranking){
 
-    maximum_tuition=value
-  }
-
+  if(ranking == "" || ranking == "NA") {
+    return"NA" ;
+  
+   } 
+    return ranking;
 }
+
+function sort_ranking_setter(ranking){
+
+  if(ranking == "NA" ||ranking == "" ) {
+    return 10000 ;
+  
+   } 
+    return ranking;
+}
+
 
 async function Execute() {
   const data = await GetData();
