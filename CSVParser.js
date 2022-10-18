@@ -58,7 +58,7 @@ class College {
     this.GRE = GRE == "" ? "NA" : GRE;
     this.Tuition_Fee = Tuition_Fee == "" ? "NA" : Tuition_Fee;
 
-    this.new_Tuition_Fee = Tuition_Fee == "" ? parseInt(setcurrency("NA")) : parseInt(setcurrency(Tuition_Fee));
+    this.new_Tuition_Fee = setcurrency(this.Tuition_Fee);
     this.Tuition_Fee_Per = Tuition_Fee_Per;
     this.Semester_Start = Semester_Start == "" ? "NA" : Semester_Start;
     this.Application_Deadline_Winter =
@@ -78,7 +78,7 @@ Execute();
 function Maximum_Fee(value){
   //console.log("maxfee- "+maximum_tuition);
   //console.log("current vallue-"+value);
-  if (maximum_tuition<value){
+  if (maximum_tuition<=value){
 
     maximum_tuition=value
   }
@@ -382,9 +382,7 @@ function Rendering(dataList, data_to_process) {
     e_36.appendChild(
       document.createTextNode("Tuition Fee : " + dataList[i].Tuition_Fee+"")
     );
-    e_36.appendChild(
-      document.createTextNode("Tuition Fee_currency : " + dataList[i].new_Tuition_Fee)
-    );
+
     if (dataList[i].Tuition_Fee_Per != "") {
       e_36.appendChild(
         document.createTextNode("/" + dataList[i].Tuition_Fee_Per)
@@ -967,14 +965,34 @@ function sortbyRanking(value) {
   } else if (value == 2) {
     sortbyGermanRanking();
   }
+  else if (value == 3) {
+    Tuition_fee_ascending();
+  }
+  else if (value == 4) {
+    Tuition_fee_descending();
+  }
 }
 
+function Tuition_fee_ascending() {
+  Sort_world_Ranking = [].concat(resultarr);
+
+  Sort_world_Ranking.sort((a, b) => a.new_Tuition_Fee - b.new_Tuition_Fee);
+  Pagination(Sort_world_Ranking, Items_To_Show);
+}
+
+function Tuition_fee_descending() {
+  Sort_world_Ranking = [].concat(resultarr);
+
+  Sort_world_Ranking.sort((a, b) => b.new_Tuition_Fee - a.new_Tuition_Fee);
+  Pagination(Sort_world_Ranking, Items_To_Show);
+}
 function sortbyWorldRanking() {
   Sort_world_Ranking = [].concat(resultarr);
 
   Sort_world_Ranking.sort((a, b) => a.Rank_sort_world - b.Rank_sort_world);
   Pagination(Sort_world_Ranking, Items_To_Show);
 }
+
 
 function sortbyGermanRanking() {
   Sort_germany_Ranking = [].concat(resultarr);
@@ -1007,18 +1025,20 @@ function randomColor() {
 }
 
 function changecurrency(currency) {
-  console.log(currency);
-  console.log(typeof(currency))
+  //console.log("setting tuition fee of "+ currency);
+  //console.log(typeof(currency))
   if (typeof currency === "number") {
     return currency;
   }
 
-  newcurrency = 0;
-  if (currency.includes("€")) {
+  var newcurrency = Number(currency.replace(/[^0-9\.]+/g,""));
+
+  /*newcurrency = 0;
+  if (typeof currency === "string" && currency.includes("€")) {
     newcurrency = currency.split("\u20AC")[1];
     // console.log(typeof(newcurrency));
   }
-  if (currency.includes(",")) {
+  if (typeof currency === "string" && currency.includes(",")) {
     if (newcurrency != 0) {
       newcurrency = newcurrency.replace(",", "");
     } else {
@@ -1026,15 +1046,17 @@ function changecurrency(currency) {
     }
   }
 
-  newcurrency = parseInt(newcurrency);
-  // console.log(new_currency);
+  newcurrency = parseInt(newcurrency);*/
+  //console.log("Currency set to "+newcurrency);
   return newcurrency;
 }
 
 function setcurrency(Tuition_Fee) {
+ 
   if (Tuition_Fee === "NA" || Tuition_Fee === "" ||Tuition_Fee===" " ){
     return 99999;
   } else if (Tuition_Fee === "None") {
+ 
     return 0;
   } else if (Tuition_Fee === "Varied") {
     return 500;
@@ -1107,7 +1129,7 @@ function draw(slider, splitvalue) {
     lower.offsetHeight + min.offsetHeight + legend.offsetHeight + "px";
 
   /* correct for 1 off at the end */
- // if (max.value > rangemax - 1) max.setAttribute("data-value", rangemax);
+  //if (max.value > rangemax - 1) max.setAttribute("data-value", rangemax);
 
   /* write value and labels */
   max.value = max.getAttribute("data-value");
@@ -1224,7 +1246,7 @@ function set_min_max_tuition_fee_input(){
     var max = Max_Tuition_fee;
     update(max);
   }
-  if(Min_Tuition_fee.value!=Min_Tuition_fee_input.value && Min_Tuition_fee_input.value!="" && Min_Tuition_fee_input.value>=minumum_tuition) 
+  if(Min_Tuition_fee.value!=Min_Tuition_fee_input.value && Min_Tuition_fee_input.value!="" && Min_Tuition_fee_input.value>=minumum_tuition && Min_Tuition_fee_input.value<=Max_Tuition_fee_input.value  ) 
   {
     Min_Tuition_fee.value=Min_Tuition_fee_input.value
     //console.log(Min_Tuition_fee.value);
