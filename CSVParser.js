@@ -596,7 +596,7 @@ var Search_Duration = document.getElementById("Duration");
 var Display_Search = document.getElementById("display_size");
 var Search_sortByRanking = document.getElementById("Sort_by_Ranking");
 var Min_Tuition_fee = document.getElementById("min");
-let Max_Tuition_fee = document.getElementById("max");
+var Max_Tuition_fee = document.getElementById("max");
 var Min_Tuition_fee_input = document.getElementById("min_field");
 var Max_Tuition_fee_input = document.getElementById("max_field");
 var Reset_Search = document.getElementById("reset");
@@ -1062,7 +1062,7 @@ function Display_Pagedata(data_to_process, Current_Index, display_number) {
   }
 }
 
-//slider js
+//slider js->https://stackoverflow.com/questions/4753946/html5-slider-with-two-inputs-possible/64612997#64612997
 
 var thumbsize = 14;
 
@@ -1079,8 +1079,8 @@ function draw(slider, splitvalue) {
   var rangemax = parseInt(slider.getAttribute("data-rangemax"));
 
   /* set min and max attributes */
-  min.setAttribute("max", splitvalue);
-  max.setAttribute("min", splitvalue);
+ // min.setAttribute("max", splitvalue);
+ // max.setAttribute("min", splitvalue);
 
   /* set css */
   min.style.width =
@@ -1115,8 +1115,8 @@ function draw(slider, splitvalue) {
 
 function init(slider) {
   /* set function vars */
-  var min = slider.querySelector(".min");
-  var max = slider.querySelector(".max");
+  var min = Min_Tuition_fee;
+  var max = Max_Tuition_fee;
   var rangemin = minumum_tuition;//parseInt(min.getAttribute("min"));
   var rangemax = maximum_tuition;//parseInt(max.getAttribute("max"));
   var avgvalue = (rangemin + rangemax) / 2;
@@ -1211,54 +1211,42 @@ hamburger.addEventListener("click", toggleMenu);
 
 
 function set_min_max_tuition_fee_input(){
-
-  console.log("set_min_max_tuition_fee_input()");
-  console.log(Max_Tuition_fee.value);
-  console.log(maximum_tuition);
-  console.log(Max_Tuition_fee_input.value);
-  console.log(Min_Tuition_fee_input.value);
-
   if(
     (Max_Tuition_fee.value!=parseInt(Max_Tuition_fee_input.value)) && 
     Max_Tuition_fee_input.value!="" && 
     (parseInt(Max_Tuition_fee_input.value)>=parseInt(Min_Tuition_fee_input.value) )&& 
     parseInt(Max_Tuition_fee_input.value)<=maximum_tuition)  
   {
-    console.log("maxmimum value"+Max_Tuition_fee.value);
-    console.log("input value maximum="+Max_Tuition_fee_input.value);
     changeValue(parseInt(Max_Tuition_fee_input.value));
-    console.log("after the change---"+Max_Tuition_fee.value);
-    console.log("to copy ---"+parseInt(Max_Tuition_fee_input.value)); 
     var max = Max_Tuition_fee;
     update(max);
   }
-  if(Min_Tuition_fee.value!=Min_Tuition_fee_input.value && Min_Tuition_fee_input.value!="" &&Min_Tuition_fee_input.value>=minumum_tuition) 
+  if(Min_Tuition_fee.value!=Min_Tuition_fee_input.value && Min_Tuition_fee_input.value!="" && Min_Tuition_fee_input.value>=minumum_tuition) 
   {
     Min_Tuition_fee.value=Min_Tuition_fee_input.value
-    console.log(Min_Tuition_fee.value);
+    //console.log(Min_Tuition_fee.value);
     var min = Min_Tuition_fee;
     update(min);
   }
 }
 
 function set_min_max_tuition_fee(){
-  console.log("set_min_max_tuition_fee()");
-  console.log(Max_Tuition_fee.value);
+
 
   if(Max_Tuition_fee_input.value!=Max_Tuition_fee.value)
   {
     Max_Tuition_fee_input.value=Math.floor(Max_Tuition_fee.value);
-    console.log("max-"+Max_Tuition_fee_input.value);
+    //console.log("max-"+Max_Tuition_fee_input.value);
   }
   if(Min_Tuition_fee_input.value!=Min_Tuition_fee.value)
   {
     Min_Tuition_fee_input.value=Math.floor(Min_Tuition_fee.value);
-    console.log("min-"+Min_Tuition_fee_input.value);
+    //console.log("min-"+Min_Tuition_fee_input.value);
   }
 }
 
 function changeValue(value)
 {
   Max_Tuition_fee.value=value;
-
 }
+
