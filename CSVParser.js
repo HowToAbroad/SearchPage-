@@ -1236,23 +1236,31 @@ hamburger.addEventListener("click", toggleMenu);
 
 
 function set_min_max_tuition_fee_input(){
+
   if(
     (Max_Tuition_fee.value!=parseInt(Max_Tuition_fee_input.value)) && 
     Max_Tuition_fee_input.value!="" && 
     (parseInt(Max_Tuition_fee_input.value)>=parseInt(Min_Tuition_fee_input.value) )&& 
     parseInt(Max_Tuition_fee_input.value)<=maximum_tuition)  
   {
-    changeValue(parseInt(Max_Tuition_fee_input.value));
+
+    Max_Tuition_fee.value=Max_Tuition_fee_input.value;
     var max = Max_Tuition_fee;
     update(max);
+    
   }
-  if(Min_Tuition_fee.value!=Min_Tuition_fee_input.value && Min_Tuition_fee_input.value!="" && Min_Tuition_fee_input.value>=minumum_tuition && Min_Tuition_fee_input.value<=Max_Tuition_fee_input.value  ) 
+  if(Min_Tuition_fee.value!=Min_Tuition_fee_input.value && 
+    Min_Tuition_fee_input.value!="" && 
+    parseInt(Min_Tuition_fee_input.value)>=minumum_tuition &&
+    parseInt( Min_Tuition_fee_input.value)<=parseInt(Max_Tuition_fee_input.value )) 
   {
     Min_Tuition_fee.value=Min_Tuition_fee_input.value
-    //console.log(Min_Tuition_fee.value);
+    console.log(Min_Tuition_fee.value);
     var min = Min_Tuition_fee;
     update(min);
   }
+
+
 }
 
 function set_min_max_tuition_fee(){
@@ -1270,8 +1278,4 @@ function set_min_max_tuition_fee(){
   }
 }
 
-function changeValue(value)
-{
-  Max_Tuition_fee.value=value;
-}
 
