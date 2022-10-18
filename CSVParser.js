@@ -58,7 +58,7 @@ class College {
     this.GRE = GRE == "" ? "NA" : GRE;
     this.Tuition_Fee = Tuition_Fee == "" ? "NA" : Tuition_Fee;
 
-    this.new_Tuition_Fee = setcurrency(Tuition_Fee);
+    this.new_Tuition_Fee = Tuition_Fee == "" ? parseInt(setcurrency("NA")) : parseInt(setcurrency(Tuition_Fee));
     this.Tuition_Fee_Per = Tuition_Fee_Per;
     this.Semester_Start = Semester_Start == "" ? "NA" : Semester_Start;
     this.Application_Deadline_Winter =
@@ -380,7 +380,10 @@ function Rendering(dataList, data_to_process) {
     e_35.setAttribute("class", "text-primary");
     var e_36 = document.createElement("h6");
     e_36.appendChild(
-      document.createTextNode("Tuition Fee : " + dataList[i].Tuition_Fee)
+      document.createTextNode("Tuition Fee : " + dataList[i].Tuition_Fee+"")
+    );
+    e_36.appendChild(
+      document.createTextNode("Tuition Fee_currency : " + dataList[i].new_Tuition_Fee)
     );
     if (dataList[i].Tuition_Fee_Per != "") {
       e_36.appendChild(
@@ -828,8 +831,8 @@ function MultiFilter(
       MultiAnswerSelector(start_sem, p.Semester_Start) &&
       //p.Semester_Start.toLowerCase().includes(start_semester) &&
       p.Duration.toLowerCase().includes(duration) &&
-      p.new_Tuition_Fee >= _mintuitionfee &&
-      p.new_Tuition_Fee <= _maxtuitionfee
+      p.new_Tuition_Fee >= parseInt(_mintuitionfee) &&
+      p.new_Tuition_Fee <= parseInt(_maxtuitionfee)
   );
   resultarr = result;
 
@@ -1004,8 +1007,8 @@ function randomColor() {
 }
 
 function changecurrency(currency) {
-  //console.log(currency);
-  //console.log(typeof(currency))
+  console.log(currency);
+  console.log(typeof(currency))
   if (typeof currency === "number") {
     return currency;
   }
@@ -1029,11 +1032,11 @@ function changecurrency(currency) {
 }
 
 function setcurrency(Tuition_Fee) {
-  if (Tuition_Fee == "NA" || Tuition_Fee == "") {
+  if (Tuition_Fee === "NA" || Tuition_Fee === "" ||Tuition_Fee===" " ){
     return 99999;
-  } else if (Tuition_Fee == "None") {
+  } else if (Tuition_Fee === "None") {
     return 0;
-  } else if (Tuition_Fee == "Varied") {
+  } else if (Tuition_Fee === "Varied") {
     return 500;
   } else {
     return changecurrency(Tuition_Fee);
@@ -1079,8 +1082,8 @@ function draw(slider, splitvalue) {
   var rangemax = parseInt(slider.getAttribute("data-rangemax"));
 
   /* set min and max attributes */
- // min.setAttribute("max", splitvalue);
- // max.setAttribute("min", splitvalue);
+  //min.setAttribute("max", splitvalue);
+  //max.setAttribute("min", splitvalue);
 
   /* set css */
   min.style.width =
