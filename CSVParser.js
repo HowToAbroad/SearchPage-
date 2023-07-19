@@ -200,7 +200,7 @@ function Rendering(dataList, data_to_process) {
     container.innerHTML = "";
     return;
   }
-  let l = dataList.length;
+  let l = dataList.length;  
   //console.log(CollegeList.length);
   // e_3.setAttribute("style", `background-color : ${randomColor()} `);
   //  e_46.addEventListener("click", urlResolver.bind(null, dataList[i].Course_Link))
