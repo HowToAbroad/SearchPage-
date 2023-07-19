@@ -201,6 +201,7 @@ function Rendering(dataList, data_to_process) {
     return;
   }
   let l = dataList.length;
+  // Adding a new comment 19- july line 204 by prakas
   //console.log(CollegeList.length);
   // e_3.setAttribute("style", `background-color : ${randomColor()} `);
   //  e_46.addEventListener("click", urlResolver.bind(null, dataList[i].Course_Link))
