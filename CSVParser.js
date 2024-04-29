@@ -1,4 +1,5 @@
-const URL_TO_Check = "./yolo.json";
+const URL_TO_Check = "http://localhost:7071/api/search";
+// const URL_TO_Check = "/yolo.json";
 const URL_Search_Parameter = new URLSearchParams(location.search);
 
 let Current_Index = 0;
@@ -86,7 +87,7 @@ function Maximum_Fee(value){
 }
 function ranking(ranking){
 
-  if(ranking == "" || ranking == "NA") {
+  if(!ranking || ranking == "" || ranking == "NA") {
     return"NA" ;
   
    } 
@@ -95,7 +96,7 @@ function ranking(ranking){
 
 function sort_ranking_setter(ranking){
 
-  if(ranking == "NA" ||ranking == "" ) {
+  if(!ranking || ranking == "NA" ||ranking == "" ) {
     return 10000 ;
   
    } 
@@ -513,6 +514,7 @@ function Fill_Value() {
       language_array.push(element.toUpperCase());
     });
     duration_array.push(Element.Duration);
+    if (typeof(Element.Semester_Start) == 'string') Element.Semester_Start=Element.Semester_Start.split();
     Element.Semester_Start.forEach((element) => {
       if (element.startsWith(" ")) {
         element = element.substring(1);
