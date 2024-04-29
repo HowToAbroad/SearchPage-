@@ -1,4 +1,4 @@
-const URL_TO_Check = "http://localhost:7071/api/search";
+// const URL_TO_Check = "http://localhost:7071/api/search";
 // const URL_TO_Check = "/yolo.json";
 const URL_Search_Parameter = new URLSearchParams(location.search);
 
@@ -125,15 +125,31 @@ async function Execute() {
 }
 
 async function GetData() {
-  const response = await fetch(URL_TO_Check);
-  const data = await response.text();
-  //console.log(data);
-  return data;
+  // const response = await fetch(URL_TO_Check);
+  // const data = await response.text();
+  var json;
+  $.ajax({
+    url: 'fetch_api.php', // Replace with the path to your PHP script
+    type: 'GET', // You can use 'GET' or 'POST' method based on your PHP script
+    dataType: 'json', // Specify the expected data type
+    async: false,
+    success: function(response) {
+        // Process the response data
+        json = response;
+        return response;
+    },
+    error: function(xhr, status, error) {
+        // Handle errors
+        console.error('Error fetching data:', error);
+    }
+  });
+  // console.log(json);
+  return json;
 }
 
-function new_data_parser(data) {
-  var datalist = JSON.parse(data);
-  //console.log(datalist);
+function new_data_parser(datalist) {
+  //var datalist = JSON.parse(data);
+  // console.log(datalist);
   let num = 0;
   for (const item of datalist) {
     CollegeList[num] = new College(
